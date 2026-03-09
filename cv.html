@@ -6,12 +6,11 @@
   <title>Francisco Silva — Front-End Developer & Creative</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #080810;
       --bg2: #0e0e1a;
-      --bg3: #13131f;
       --purple: #7c3aed;
       --purple-light: #a855f7;
       --purple-glow: #9333ea;
@@ -21,1075 +20,793 @@
       --border: rgba(124,58,237,0.18);
       --card: rgba(20,18,35,0.85);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* NOISE OVERLAY */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.35;
+      pointer-events: none; z-index: 9999; opacity: 0.35;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 1.2rem 5vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(8,8,16,0.8);
-      backdrop-filter: blur(16px);
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(8,8,16,0.85); backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
-
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 0 5vw;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-    }
-    .orb1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(124,58,237,0.25) 0%, transparent 70%);
-      top: -150px; right: -100px;
-      animation: float1 8s ease-in-out infinite;
-    }
-    .orb2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
-      bottom: 50px; left: -100px;
-      animation: float2 10s ease-in-out infinite;
-    }
-
-    @keyframes float1 {
-      0%,100% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(-30px, 40px) scale(1.05); }
-    }
-    @keyframes float2 {
-      0%,100% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(20px, -30px) scale(1.08); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      border: 1px solid rgba(192,132,252,0.35);
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 1.8rem;
-      animation: fadeUp 0.8s ease both;
-    }
-
-    .hero-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #fff;
-      animation: fadeUp 0.8s 0.1s ease both;
-    }
-
-    .hero-name span {
-      background: linear-gradient(135deg, var(--purple-light), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: var(--muted);
-      margin-top: 1.2rem;
-      font-weight: 300;
-      max-width: 520px;
-      line-height: 1.7;
-      animation: fadeUp 0.8s 0.2s ease both;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2.5rem;
-      flex-wrap: wrap;
-      animation: fadeUp 0.8s 0.3s ease both;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      background: linear-gradient(135deg, var(--purple), var(--purple-light));
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 0.9rem;
-      border-radius: 8px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: opacity 0.3s, transform 0.2s, box-shadow 0.3s;
-      box-shadow: 0 0 30px rgba(124,58,237,0.35);
-    }
-    .btn-primary:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-      box-shadow: 0 0 50px rgba(124,58,237,0.55);
-    }
-
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      background: transparent;
-      color: var(--accent);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 0.9rem;
-      border-radius: 8px;
-      text-decoration: none;
-      border: 1px solid rgba(192,132,252,0.35);
-      cursor: pointer;
-      transition: background 0.3s, border-color 0.3s, transform 0.2s;
-    }
-    .btn-ghost:hover {
-      background: rgba(192,132,252,0.08);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── SECTIONS ── */
-    section { padding: 6rem 5vw; }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--purple-light);
-      margin-bottom: 0.6rem;
-    }
-
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: #fff;
-      line-height: 1.1;
-    }
-
-    .divider {
-      width: 48px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--purple), var(--accent));
-      border-radius: 99px;
-      margin: 1.2rem 0 2.5rem;
-    }
-
-    /* ── ABOUT ── */
-    #about {
-      background: var(--bg2);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-      margin-top: 3rem;
-    }
-
-    .about-text p {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.85;
-      margin-bottom: 1.2rem;
-    }
-
-    .about-text p strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .stat-card:hover {
-      border-color: rgba(168,85,247,0.4);
-      transform: translateY(-4px);
-    }
-
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 0.4rem;
-    }
-
-    /* ── EXPERIENCE ── */
-    #experience { background: var(--bg); }
-
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-      margin-top: 3rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 6px;
-      bottom: 6px;
-      width: 1px;
-      background: linear-gradient(180deg, var(--purple), transparent);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2.5rem;
-      padding-left: 1.5rem;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -2rem;
-      top: 6px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--purple-light);
-      box-shadow: 0 0 12px var(--purple-glow);
-    }
-
-    .timeline-year {
-      font-size: 0.78rem;
-      color: var(--purple-light);
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-role {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .timeline-company {
-      font-size: 0.88rem;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-    }
-
-    .timeline-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .timeline-desc li {
-      list-style: none;
-      padding-left: 1rem;
-      position: relative;
-      margin-bottom: 0.3rem;
-    }
-
-    .timeline-desc li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--purple-light);
-      font-size: 0.8rem;
-    }
-
-    /* ── SKILLS ── */
-    #skills { background: var(--bg2); }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.2rem;
-      margin-top: 3rem;
-    }
-
-    .skill-group {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.8rem;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-
-    .skill-group:hover {
-      border-color: rgba(168,85,247,0.5);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(124,58,237,0.15);
-    }
-
-    .skill-group-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      font-size: 0.8rem;
-      font-weight: 500;
-      padding: 0.3rem 0.8rem;
-      border-radius: 100px;
-      background: rgba(124,58,237,0.12);
-      border: 1px solid rgba(124,58,237,0.25);
-      color: var(--text);
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .tag:hover {
-      background: rgba(168,85,247,0.2);
-      border-color: var(--purple-light);
-    }
-
-    /* ── PROJECTS ── */
-    #projects { background: var(--bg); }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--purple), var(--accent));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .project-card:hover {
-      border-color: rgba(168,85,247,0.4);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(124,58,237,0.18);
-    }
-
-    .project-card:hover::before { opacity: 1; }
-
-    .project-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(168,85,247,0.2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      margin-bottom: 1.2rem;
-      border: 1px solid var(--border);
-    }
-
-    .project-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 1.2rem;
-    }
-
-    .project-link {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--accent);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: gap 0.2s;
-    }
-
-    .project-link:hover { gap: 0.6rem; }
-
-    /* ── EDUCATION ── */
-    #education { background: var(--bg2); }
-
-    .edu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.2rem;
-      margin-top: 3rem;
-    }
-
-    .edu-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.8rem;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .edu-card:hover {
-      border-color: rgba(168,85,247,0.45);
-      transform: translateY(-4px);
-    }
-
-    .edu-year {
-      font-size: 0.78rem;
-      color: var(--purple-light);
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.4rem;
-    }
-
-    .edu-degree {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.2rem;
-    }
-
-    .edu-school {
-      font-size: 0.88rem;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-
-    .edu-topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .edu-tag {
-      font-size: 0.75rem;
-      padding: 0.2rem 0.65rem;
-      border-radius: 100px;
-      background: rgba(124,58,237,0.1);
-      border: 1px solid rgba(124,58,237,0.2);
-      color: var(--muted);
-    }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--bg); }
-
-    .contact-wrapper {
-      max-width: 640px;
-      margin-top: 3rem;
-    }
-
-    .contact-intro {
-      font-size: 1.05rem;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 2.5rem;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.2rem 1.5rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-
-    .contact-link:hover {
-      border-color: rgba(168,85,247,0.5);
-      transform: translateX(6px);
-      box-shadow: 0 4px 24px rgba(124,58,237,0.15);
-    }
-
-    .contact-link-icon {
-      width: 40px; height: 40px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgba(124,58,237,0.25), rgba(168,85,247,0.15));
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-
-    .contact-link-text strong {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 0.15rem;
-    }
-
-    .contact-link-text span {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      padding: 2rem 5vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    footer .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      color: var(--accent);
-      font-size: 1rem;
-    }
-
-    footer p {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* ── AWARDS STRIP ── */
-    .awards-strip {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-    }
-
-    .award-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: rgba(124,58,237,0.1);
-      border: 1px solid rgba(124,58,237,0.25);
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--accent);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .nav-links { display: none; }
-      .hero-name { font-size: clamp(2.5rem, 12vw, 3.5rem); }
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .nav-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.1rem; letter-spacing:0.05em; color:var(--accent); text-decoration:none; }
+    .nav-links { display:flex; gap:2rem; list-style:none; align-items:center; }
+    .nav-links a { color:var(--muted); text-decoration:none; font-size:0.83rem; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; transition:color 0.3s; }
+    .nav-links a:hover { color:var(--accent); }
+    .lang-toggle { display:flex; align-items:center; background:rgba(124,58,237,0.1); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-left:0.5rem; }
+    .lang-btn { font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.06em; padding:0.35rem 0.75rem; background:none; border:none; cursor:pointer; transition:background 0.2s,color 0.2s; color:var(--muted); }
+    .lang-btn.active { background:var(--purple); color:#fff; }
+    .lang-btn:hover:not(.active) { color:var(--accent); }
+
+    /* HERO */
+    #hero { min-height:100vh; display:flex; align-items:center; padding:0 5vw; position:relative; overflow:hidden; }
+    .orb { position:absolute; border-radius:50%; filter:blur(120px); pointer-events:none; }
+    .orb1 { width:600px;height:600px; background:radial-gradient(circle,rgba(124,58,237,0.25) 0%,transparent 70%); top:-150px;right:-100px; animation:float1 8s ease-in-out infinite; }
+    .orb2 { width:400px;height:400px; background:radial-gradient(circle,rgba(168,85,247,0.15) 0%,transparent 70%); bottom:50px;left:-100px; animation:float2 10s ease-in-out infinite; }
+    @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-30px,40px) scale(1.05)} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(20px,-30px) scale(1.08)} }
+    .hero-content { position:relative; z-index:2; max-width:800px; }
+    .hero-badge { display:inline-block; font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); border:1px solid rgba(192,132,252,0.35); padding:0.4rem 1rem; border-radius:100px; margin-bottom:1.8rem; animation:fadeUp 0.8s ease both; }
+    .hero-name { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(3rem,8vw,6.5rem); line-height:1; letter-spacing:-0.02em; color:#fff; animation:fadeUp 0.8s 0.1s ease both; }
+    .hero-name span { background:linear-gradient(135deg,var(--purple-light),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-sub { font-size:clamp(1rem,2.5vw,1.2rem); color:var(--muted); margin-top:1.2rem; font-weight:300; max-width:520px; line-height:1.75; animation:fadeUp 0.8s 0.2s ease both; }
+    .hero-ctas { display:flex; gap:1rem; margin-top:2.5rem; flex-wrap:wrap; animation:fadeUp 0.8s 0.3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .btn-primary { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; background:linear-gradient(135deg,var(--purple),var(--purple-light)); color:#fff; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.9rem; border-radius:8px; text-decoration:none; border:none; cursor:pointer; transition:opacity 0.3s,transform 0.2s,box-shadow 0.3s; box-shadow:0 0 30px rgba(124,58,237,0.35); }
+    .btn-primary:hover { opacity:0.9; transform:translateY(-2px); box-shadow:0 0 50px rgba(124,58,237,0.55); }
+    .btn-ghost { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; background:transparent; color:var(--accent); font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.9rem; border-radius:8px; text-decoration:none; border:1px solid rgba(192,132,252,0.35); cursor:pointer; transition:background 0.3s,border-color 0.3s,transform 0.2s; }
+    .btn-ghost:hover { background:rgba(192,132,252,0.08); border-color:var(--accent); transform:translateY(-2px); }
+
+    /* MATRIX */
+    #matrix-section { position:relative; height:200px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+    #matrix-canvas { position:absolute; inset:0; width:100%; height:100%; }
+    .matrix-fade { position:absolute; left:0; right:0; height:90px; pointer-events:none; z-index:2; }
+    .matrix-fade.top { top:0; background:linear-gradient(to bottom,var(--bg2),transparent); }
+    .matrix-fade.bot { bottom:0; background:linear-gradient(to top,var(--bg),transparent); }
+    .matrix-label { position:relative; z-index:3; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:rgba(74,222,128,0.55); letter-spacing:0.18em; text-transform:uppercase; text-align:center; }
+
+    /* SECTIONS */
+    section { padding:6rem 5vw; }
+    .section-label { font-size:0.75rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--purple-light); margin-bottom:0.6rem; }
+    .section-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(1.8rem,4vw,2.8rem); color:#fff; line-height:1.1; }
+    .divider { width:48px; height:3px; background:linear-gradient(90deg,var(--purple),var(--accent)); border-radius:99px; margin:1.2rem 0 2.5rem; }
+
+    /* ABOUT */
+    #about { background:var(--bg2); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; margin-top:3rem; }
+    .about-text p { color:var(--muted); font-size:1rem; line-height:1.85; margin-bottom:1.2rem; }
+    .about-text p strong { color:var(--accent); font-weight:500; }
+    .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .stat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; transition:border-color 0.3s,transform 0.3s; }
+    .stat-card:hover { border-color:rgba(168,85,247,0.4); transform:translateY(-4px); }
+    .stat-num { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; color:var(--accent); line-height:1; }
+    .stat-label { font-size:0.82rem; color:var(--muted); margin-top:0.4rem; }
+    .awards-strip { display:flex; gap:0.8rem; flex-wrap:wrap; margin-top:1.5rem; }
+    .award-badge { display:inline-flex; align-items:center; gap:0.4rem; padding:0.45rem 1rem; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.25); border-radius:100px; font-size:0.78rem; font-weight:500; color:var(--accent); }
+
+    /* EXPERIENCE */
+    #experience { background:var(--bg); }
+    .timeline { position:relative; padding-left:2.5rem; margin-top:3rem; display:flex; flex-direction:column; gap:1.5rem; }
+    .timeline::before { content:''; position:absolute; left:0; top:12px; bottom:12px; width:1px; background:linear-gradient(180deg,var(--purple),transparent); }
+    .timeline-item { position:relative; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.8rem 2rem; transition:border-color 0.3s,transform 0.3s; }
+    .timeline-item:hover { border-color:rgba(168,85,247,0.4); transform:translateX(4px); }
+    .timeline-item::before { content:''; position:absolute; left:-2.85rem; top:1.6rem; width:12px; height:12px; border-radius:50%; background:var(--purple-light); box-shadow:0 0 14px var(--purple-glow); border:2px solid var(--bg); }
+    .timeline-year { font-size:0.75rem; color:var(--purple-light); font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; }
+    .timeline-role { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:0.1rem; }
+    .timeline-company { font-size:0.88rem; color:var(--accent); margin-bottom:1rem; }
+    .timeline-desc { font-size:0.88rem; color:var(--muted); line-height:1.75; }
+    .timeline-desc li { list-style:none; padding-left:1.1rem; position:relative; margin-bottom:0.4rem; }
+    .timeline-desc li:last-child { margin-bottom:0; }
+    .timeline-desc li::before { content:'→'; position:absolute; left:0; color:var(--purple-light); font-size:0.78rem; top:0.05rem; }
+
+    /* SKILLS */
+    #skills { background:var(--bg2); }
+    .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.2rem; margin-top:3rem; }
+    .skill-group { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.8rem; transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s; }
+    .skill-group:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-4px); box-shadow:0 12px 40px rgba(124,58,237,0.15); }
+    .skill-group-title { font-family:'Syne',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:0.5rem; }
+    .tag { font-size:0.8rem; font-weight:500; padding:0.3rem 0.8rem; border-radius:100px; background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.25); color:var(--text); transition:background 0.2s,border-color 0.2s; }
+    .tag:hover { background:rgba(168,85,247,0.2); border-color:var(--purple-light); }
+    .lang-row { display:flex; align-items:center; gap:0.55rem; font-size:0.85rem; color:var(--text); padding:0.2rem 0; }
+    .lang-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+    /* PROJECTS */
+    #projects { background:var(--bg); }
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; margin-top:3rem; }
+    .project-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:2rem; position:relative; overflow:hidden; transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s; cursor:pointer; }
+    .project-card::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg,var(--purple),var(--accent)); opacity:0; transition:opacity 0.3s; }
+    .project-card:hover { border-color:rgba(168,85,247,0.4); transform:translateY(-6px); box-shadow:0 20px 60px rgba(124,58,237,0.18); }
+    .project-card:hover::before { opacity:1; }
+    .project-icon { width:44px;height:44px; border-radius:10px; background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(168,85,247,0.2)); display:flex;align-items:center;justify-content:center; margin-bottom:1.2rem; border:1px solid var(--border); }
+    .project-icon svg { width:20px;height:20px; stroke:var(--accent); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+    .project-name { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:0.3rem; }
+    .project-role-tag { font-size:0.75rem; font-weight:500; color:var(--purple-light); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.6rem; }
+    .project-desc { font-size:0.87rem; color:var(--muted); line-height:1.65; margin-bottom:1.2rem; }
+    .project-btn { font-size:0.82rem; font-weight:500; color:var(--accent); background:none; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:0.3rem; padding:0; transition:gap 0.2s; font-family:'DM Sans',sans-serif; }
+    .project-btn:hover { gap:0.6rem; }
+
+    /* MODAL */
+    .modal-overlay { position:fixed; inset:0; z-index:500; background:rgba(5,5,12,0.82); backdrop-filter:blur(14px); display:flex; align-items:center; justify-content:center; padding:2rem; opacity:0; pointer-events:none; transition:opacity 0.35s ease; }
+    .modal-overlay.open { opacity:1; pointer-events:all; }
+    .modal { background:#13121e; border:1px solid rgba(168,85,247,0.3); border-radius:20px; max-width:620px; width:100%; max-height:85vh; overflow-y:auto; padding:2.5rem; position:relative; transform:translateY(30px) scale(0.97); transition:transform 0.35s ease; scrollbar-width:thin; scrollbar-color:rgba(124,58,237,0.3) transparent; }
+    .modal-overlay.open .modal { transform:translateY(0) scale(1); }
+    .modal-close { position:absolute; top:1.2rem; right:1.2rem; background:rgba(124,58,237,0.12); border:1px solid var(--border); border-radius:8px; width:36px;height:36px; display:flex;align-items:center;justify-content:center; cursor:pointer; color:var(--muted); font-size:1rem; transition:background 0.2s,color 0.2s; }
+    .modal-close:hover { background:rgba(168,85,247,0.2); color:var(--accent); }
+    .modal-tag { font-size:0.72rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--purple-light); margin-bottom:0.5rem; }
+    .modal-title { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; color:#fff; margin-bottom:0.25rem; }
+    .modal-role { font-size:0.85rem; color:var(--accent); margin-bottom:1.5rem; }
+    .modal-hr { height:1px; background:var(--border); margin-bottom:1.5rem; }
+    .modal-body { font-size:0.93rem; color:var(--muted); line-height:1.8; }
+    .modal-body p { margin-bottom:1rem; }
+    .modal-body strong { color:var(--text); }
+    .modal-body ul { padding-left:1.2rem; margin-bottom:1rem; }
+    .modal-body ul li { margin-bottom:0.4rem; }
+    .modal-tech { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.5rem; }
+    .modal-tech-tag { font-size:0.78rem; padding:0.25rem 0.75rem; border-radius:100px; background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.22); color:var(--text); }
+    .modal-link { display:inline-flex; align-items:center; gap:0.5rem; margin-top:2rem; padding:0.75rem 1.5rem; background:linear-gradient(135deg,var(--purple),var(--purple-light)); color:#fff; font-size:0.88rem; font-weight:500; border-radius:8px; text-decoration:none; transition:opacity 0.2s,transform 0.2s; box-shadow:0 0 24px rgba(124,58,237,0.3); }
+    .modal-link:hover { opacity:0.9; transform:translateY(-2px); }
+
+    /* EDUCATION */
+    #education { background:var(--bg2); }
+    .edu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.2rem; margin-top:3rem; }
+    .edu-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.8rem; transition:border-color 0.3s,transform 0.3s; }
+    .edu-card:hover { border-color:rgba(168,85,247,0.45); transform:translateY(-4px); }
+    .edu-year { font-size:0.78rem; color:var(--purple-light); font-weight:500; letter-spacing:0.08em; margin-bottom:0.4rem; }
+    .edu-degree { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:0.2rem; }
+    .edu-school { font-size:0.88rem; color:var(--accent); margin-bottom:0.8rem; }
+    .edu-school-link { display:inline-flex; align-items:center; gap:0.35rem; font-size:0.88rem; color:var(--accent); text-decoration:none; transition:color 0.2s, gap 0.2s; margin-bottom:0.8rem; }
+    .edu-school-link svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; opacity:0.7; transition:opacity 0.2s, transform 0.2s; flex-shrink:0; }
+    .edu-school-link:hover { color:#fff; gap:0.55rem; }
+    .edu-school-link:hover svg { opacity:1; transform:translate(2px,-2px); }
+    .edu-topics { display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .edu-tag { font-size:0.75rem; padding:0.2rem 0.65rem; border-radius:100px; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); color:var(--muted); }
+
+    /* CONTACT */
+    #contact { background:var(--bg); }
+    .contact-wrapper { max-width:640px; margin-top:3rem; }
+    .contact-intro { font-size:1.05rem; color:var(--muted); line-height:1.75; margin-bottom:2.5rem; }
+    .contact-links { display:flex; flex-direction:column; gap:1rem; }
+    .contact-link { display:flex; align-items:center; gap:1rem; padding:1.2rem 1.5rem; background:var(--card); border:1px solid var(--border); border-radius:12px; text-decoration:none; color:var(--text); transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s; }
+    .contact-link:hover { border-color:rgba(168,85,247,0.5); transform:translateX(6px); box-shadow:0 4px 24px rgba(124,58,237,0.15); }
+    .contact-icon { width:42px;height:42px; border-radius:8px; background:linear-gradient(135deg,rgba(124,58,237,0.25),rgba(168,85,247,0.15)); border:1px solid var(--border); display:flex;align-items:center;justify-content:center; flex-shrink:0; }
+    .contact-icon svg { width:18px;height:18px; stroke:var(--accent); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+    .contact-link-text strong { display:block; font-size:0.8rem; font-weight:600; color:var(--accent); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.15rem; }
+    .contact-link-text span { font-size:0.9rem; color:var(--muted); }
+    .protected-value { display:block; font-size:0.9rem; color:var(--muted); transition:filter 0.4s ease, color 0.4s ease; letter-spacing:0.05em; }
+    .protected-value.blurred { filter:blur(5px); user-select:none; color:var(--muted); }
+    .protected-value.revealed { filter:blur(0); color:var(--text); }
+    .reveal-hint { display:block; font-size:0.72rem; color:var(--purple-light); letter-spacing:0.08em; margin-top:0.15rem; opacity:0.8; transition:opacity 0.3s; }
+    .reveal-hint.hidden { display:none; }
+    .protected-field.done { cursor:default; }
+
+    /* FOOTER */
+    footer { background:var(--bg); border-top:1px solid var(--border); padding:2rem 5vw; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    footer .logo { font-family:'Syne',sans-serif; font-weight:800; color:var(--accent); font-size:1rem; }
+    footer p { font-size:0.8rem; color:var(--muted); }
+
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media (max-width:768px) {
+      .about-grid { grid-template-columns:1fr; gap:2rem; }
+      .nav-links { display:none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#hero" class="nav-logo">FS.</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experiência</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projetos</a></li>
-      <li><a href="#education">Formação</a></li>
-      <li><a href="#contact">Contacto</a></li>
-    </ul>
-  </nav>
+<nav>
+  <a href="#hero" class="nav-logo">FS.</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav.about">Sobre</a></li>
+    <li><a href="#experience" data-i18n="nav.experience">Experiência</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects" data-i18n="nav.projects">Projetos</a></li>
+    <li><a href="#education" data-i18n="nav.education">Formação</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
+    <li>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg-orb orb1"></div>
-    <div class="hero-bg-orb orb2"></div>
-    <div class="hero-content">
-      <div class="hero-badge">✦ Disponível para novos projetos</div>
-      <h1 class="hero-name">Francisco<br /><span>Silva</span></h1>
-      <p class="hero-sub">
-        Desenvolvedor Front-End criativo com paixão por transformar ideias em
-        experiências digitais funcionais e visualmente apelativas.
-      </p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn-primary">Entrar em contacto →</a>
-        <a href="#projects" class="btn-ghost">Ver projetos</a>
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Disponível para novos projetos</div>
+    <h1 class="hero-name">Francisco<br><span>Silva</span></h1>
+    <p class="hero-sub">Desenvolvedor Front-End criativo com paixão por transformar ideias em experiências digitais funcionais e visualmente apelativas.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Entrar em contacto &rarr;</a>
+      <a href="#projects" class="btn-ghost">Ver projetos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label" data-i18n="about.label">Quem sou</p>
+    <h2 class="section-title" data-i18n="about.title">Sobre mim</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p data-i18n="about.p1">Sou um desenvolvedor front-end com experiência prática em <strong>HTML, CSS, SASS, TypeScript</strong> e frameworks como <strong>Angular e React</strong>. Aplico design responsivo e otimização de código para criar produtos digitais eficientes e sustentáveis.</p>
+      <p data-i18n="about.p2">Paralelamente ao desenvolvimento web, trabalho com <strong>fotografia desde 2016</strong> (retratos, produto e eventos) e <strong>animação e renderização 3D com Blender desde 2015</strong>, tendo participado em diversas equipas de animação e pós-produção.</p>
+      <p data-i18n="about.p3">Também tenho experiência em <strong>edição de vídeo e motion design</strong> com Adobe After Effects, bem como em tratamento fotográfico com Lightroom. Valorizo ambientes colaborativos que unam tecnologia, arte e sustentabilidade.</p>
+      <div class="awards-strip">
+        <span class="award-badge">MSI Creator Awards 2020 &mdash; 2.&ordm;</span>
+        <span class="award-badge">MSI Creator Awards 2021 &mdash; 3.&ordm;</span>
+        <span class="award-badge">MSI Creator Awards 2022 &mdash; 2.&ordm;</span>
       </div>
     </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="reveal">
-      <p class="section-label">Quem sou</p>
-      <h2 class="section-title">Sobre mim</h2>
-      <div class="divider"></div>
+    <div class="about-stats">
+      <div class="stat-card"><div class="stat-num">9+</div><div class="stat-label" data-i18n="about.stat1">Anos de fotografia &amp; 3D</div></div>
+      <div class="stat-card"><div class="stat-num">3&times;</div><div class="stat-label" data-i18n="about.stat2">Nomeado MSI Creator Awards</div></div>
+      <div class="stat-card"><div class="stat-num">XR</div><div class="stat-label" data-i18n="about.stat3">Realidade Aumentada &amp; Virtual</div></div>
+      <div class="stat-card"><div class="stat-num">CO&#8322;</div><div class="stat-label" data-i18n="about.stat4">Web Design Sustentável</div></div>
     </div>
-    <div class="about-grid reveal">
-      <div class="about-text">
-        <p>
-          Sou um desenvolvedor front-end com experiência prática em <strong>HTML, CSS, SASS, TypeScript</strong>
-          e frameworks como <strong>Angular e React</strong>. Aplico design responsivo e otimização de código
-          para criar produtos digitais eficientes e sustentáveis.
-        </p>
-        <p>
-          Paralelamente ao desenvolvimento web, trabalho com <strong>fotografia desde 2016</strong> (retratos,
-          produto e eventos) e <strong>animação e renderização 3D com Blender desde 2015</strong>, tendo
-          participado em diversas equipas de animação e pós-produção.
-        </p>
-        <p>
-          Também tenho experiência em <strong>edição de vídeo e motion design</strong> com Adobe After Effects,
-          bem como em tratamento fotográfico com Lightroom. Valorizo ambientes colaborativos que unam
-          tecnologia, arte e sustentabilidade.
-        </p>
-        <div class="awards-strip">
-          <span class="award-badge">🏆 MSI Creator Awards 2020 — 2º</span>
-          <span class="award-badge">🏆 MSI Creator Awards 2021 — 3º</span>
-          <span class="award-badge">🏆 MSI Creator Awards 2022 — 2º</span>
-        </div>
-      </div>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">9+</div>
-          <div class="stat-label">Anos de fotografia &amp; 3D</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3×</div>
-          <div class="stat-label">Nomeado MSI Creator Awards</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">XR</div>
-          <div class="stat-label">Realidade Aumentada &amp; Virtual</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">🌱</div>
-          <div class="stat-label">Web Design Sustentável</div>
-        </div>
-      </div>
+  </div>
+</section>
+
+<!-- MATRIX -->
+<div id="matrix-section">
+  <canvas id="matrix-canvas"></canvas>
+  <div class="matrix-fade top"></div>
+  <div class="matrix-fade bot"></div>
+  <div class="matrix-label" id="matrix-label">// a construir o futuro, uma linha de cada vez</div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <p class="section-label" data-i18n="exp.label">Carreira</p>
+    <h2 class="section-title" data-i18n="exp.title">Experiência Profissional</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-year">2024 &ndash; 2025</div>
+      <div class="timeline-role" data-i18n="exp.job1.role">Desenvolvedor Front-End &amp; Criativo</div>
+      <div class="timeline-company">Venga Digital</div>
+      <ul class="timeline-desc">
+        <li data-i18n="exp.job1.li1">Desenvolvimento de websites com foco em eficiência energética e redução da pegada de carbono digital.</li>
+        <li data-i18n="exp.job1.li2">Otimização de código para minimizar consumo de recursos e melhorar desempenho ambiental.</li>
+        <li data-i18n="exp.job1.li3">Desenvolvimento de uma Calculadora de CO&#8322; para avaliar o impacto ambiental de websites.</li>
+      </ul>
     </div>
-  </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="reveal">
-      <p class="section-label">Carreira</p>
-      <h2 class="section-title">Experiência Profissional</h2>
-      <div class="divider"></div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-role" data-i18n="exp.job3.role">Atendimento ao Cliente</div>
+      <div class="timeline-company">Chiptec Informática</div>
+      <ul class="timeline-desc">
+        <li data-i18n="exp.job3.li1">Venda e atendimento ao cliente de equipamentos informáticos.</li>
+        <li data-i18n="exp.job3.li2">Gestão de armazém, produtos e reposição de artigos.</li>
+      </ul>
     </div>
-    <div class="timeline reveal">
 
-      <div class="timeline-item">
-        <div class="timeline-year">2024 – 2025</div>
-        <div class="timeline-role">Desenvolvedor Front-End &amp; Criativo</div>
-        <div class="timeline-company">Venga Digital</div>
-        <ul class="timeline-desc">
-          <li>Desenvolvimento de websites com foco em eficiência energética e redução da pegada de carbono digital.</li>
-          <li>Otimização de código para minimizar consumo de recursos e melhorar desempenho ambiental.</li>
-          <li>Participação no desenvolvimento de uma Calculadora de CO₂ para avaliar o impacto ambiental de websites.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-year">2022</div>
-        <div class="timeline-role">Estágio Profissional</div>
-        <div class="timeline-company">IT PEOPLE — Next Reality (nextreality.com)</div>
-        <ul class="timeline-desc">
-          <li>Desenvolvimento de protótipos de realidade aumentada e virtual.</li>
-          <li>Participação no projeto WasteApp, promovendo sustentabilidade ambiental e tecnológica.</li>
-          <li>Trabalho remoto e presencial em equipa multidisciplinar com foco em inovação e usabilidade.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-year">2023</div>
-        <div class="timeline-role">Atendimento ao Cliente</div>
-        <div class="timeline-company">Chiptec Informática (Chiptec.net)</div>
-        <ul class="timeline-desc">
-          <li>Venda e atendimento ao cliente de equipamentos informáticos.</li>
-          <li>Gestão de armazém, produtos e reposição de artigos.</li>
-        </ul>
-      </div>
-
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-role" data-i18n="exp.job2.role">Estágio Profissional</div>
+      <div class="timeline-company">IT PEOPLE &mdash; Next Reality</div>
+      <ul class="timeline-desc">
+        <li data-i18n="exp.job2.li1">Desenvolvimento completo do frontend da WasteApp e lógica de backend, incluindo admin page.</li>
+        <li data-i18n="exp.job2.li2">Participação no frontend e na vertente criativa do projeto EPAL H2O Quality.</li>
+        <li data-i18n="exp.job2.li3">Integração na equipa criativa do projeto Banco Best &mdash; brainstorming e UI Design.</li>
+        <li data-i18n="exp.job2.li4">Trabalho em equipa multidisciplinar com foco em inovação, realidade aumentada e usabilidade.</li>
+      </ul>
     </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="reveal">
-      <p class="section-label">O que sei fazer</p>
-      <h2 class="section-title">Competências Técnicas</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="skills-grid reveal">
-      <div class="skill-group">
-        <div class="skill-group-title">Linguagens</div>
-        <div class="skill-tags">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS / SASS</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">PHP</span>
-          <span class="tag">C#</span>
-          <span class="tag">C++</span>
-          <span class="tag">SQL</span>
-          <span class="tag">ASP</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Frameworks &amp; Libs</div>
-        <div class="skill-tags">
-          <span class="tag">Angular</span>
-          <span class="tag">PrimeNG</span>
-          <span class="tag">React</span>
-          <span class="tag">Responsive Design</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Ferramentas &amp; Programas</div>
-        <div class="skill-tags">
-          <span class="tag">Blender</span>
-          <span class="tag">Figma</span>
-          <span class="tag">Photoshop</span>
-          <span class="tag">After Effects</span>
-          <span class="tag">Lightroom</span>
-          <span class="tag">Visual Studio</span>
-          <span class="tag">Git</span>
-          <span class="tag">MS Office</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Áreas de Especialização</div>
-        <div class="skill-tags">
-          <span class="tag">Web Sustentável</span>
-          <span class="tag">Realidade Aumentada</span>
-          <span class="tag">Animação 3D</span>
-          <span class="tag">Fotografia</span>
-          <span class="tag">Motion Design</span>
-          <span class="tag">Otimização de Código</span>
-          <span class="tag">IA</span>
-          <span class="tag">Redes</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Línguas</div>
-        <div class="skill-tags">
-          <span class="tag">🇵🇹 Português — Nativo</span>
-          <span class="tag">🇬🇧 Inglês — Fluente</span>
-          <span class="tag">🇫🇷 Francês — Básico</span>
-          <span class="tag">🇪🇸 Espanhol — Básico</span>
-          <span class="tag">🇮🇹 Italiano — Básico</span>
-        </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label" data-i18n="skills.label">O que sei fazer</p>
+    <h2 class="section-title" data-i18n="skills.title">Competências Técnicas</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title" data-i18n="skills.g1">Linguagens</div>
+      <div class="skill-tags">
+        <span class="tag">HTML</span><span class="tag">CSS / SASS</span><span class="tag">TypeScript</span>
+        <span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">C#</span>
+        <span class="tag">C++</span><span class="tag">SQL</span><span class="tag">ASP</span>
       </div>
     </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="reveal">
-      <p class="section-label">O que construí</p>
-      <h2 class="section-title">Projetos</h2>
-      <div class="divider"></div>
+    <div class="skill-group">
+      <div class="skill-group-title">Frameworks &amp; Libs</div>
+      <div class="skill-tags">
+        <span class="tag">Angular</span><span class="tag">PrimeNG</span><span class="tag">React</span><span class="tag">Responsive Design</span>
+      </div>
     </div>
-    <div class="projects-grid reveal">
-
-      <div class="project-card">
-        <div class="project-icon">🗑️</div>
-        <div class="project-name">WasteApp</div>
-        <p class="project-desc">
-          Aplicação de sustentabilidade ambiental e tecnológica desenvolvida durante o estágio na Next Reality.
-          Promove a gestão responsável de resíduos com tecnologia XR.
-        </p>
-        <a href="https://wasteapp.pt" target="_blank" class="project-link">wasteapp.pt →</a>
+    <div class="skill-group">
+      <div class="skill-group-title" data-i18n="skills.g3">Ferramentas &amp; Programas</div>
+      <div class="skill-tags">
+        <span class="tag">Blender</span><span class="tag">Figma</span><span class="tag">Photoshop</span>
+        <span class="tag">After Effects</span><span class="tag">Lightroom</span>
+        <span class="tag">Visual Studio</span><span class="tag">Git</span><span class="tag">MS Office</span>
       </div>
-
-      <div class="project-card">
-        <div class="project-icon">🎨</div>
-        <div class="project-name">Remechido.com</div>
-        <p class="project-desc">
-          Portfolio de design pessoal onde apresento projetos visuais, fotografia, animação 3D
-          e trabalhos criativos desenvolvidos ao longo dos anos.
-        </p>
-        <a href="https://remechido.com" target="_blank" class="project-link">remechido.com →</a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon">🌱</div>
-        <div class="project-name">Calculadora de CO₂</div>
-        <p class="project-desc">
-          Ferramenta web desenvolvida na Venga Digital para avaliar o impacto ambiental de websites,
-          com foco em eficiência energética e redução da pegada de carbono digital.
-        </p>
-        <a href="#" class="project-link">Ver projeto →</a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon">🖼️</div>
-        <div class="project-name">ProFolio.pt</div>
-        <p class="project-desc">
-          Galeria de arte online construída durante a formação em Gestão de Sistemas Informáticos,
-          com programação em PHP, HTML, CSS e SQL.
-        </p>
-        <a href="#" class="project-link">Ver projeto →</a>
-      </div>
-
     </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="reveal">
-      <p class="section-label">Percurso académico</p>
-      <h2 class="section-title">Formação</h2>
-      <div class="divider"></div>
+    <div class="skill-group">
+      <div class="skill-group-title" data-i18n="skills.g4">Áreas de Especialização</div>
+      <div class="skill-tags">
+        <span class="tag" data-i18n="skills.t1">Web Sustentável</span><span class="tag" data-i18n="skills.t2">Realidade Aumentada</span>
+        <span class="tag" data-i18n="skills.t3">Animação 3D</span><span class="tag" data-i18n="skills.t4">Fotografia</span>
+        <span class="tag">Motion Design</span><span class="tag" data-i18n="skills.t5">Otimização de Código</span>
+        <span class="tag">IA</span><span class="tag" data-i18n="skills.t6">Redes</span>
+      </div>
     </div>
-    <div class="edu-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title" data-i18n="skills.g5">Línguas</div>
+      <div style="display:flex;flex-direction:column;gap:0.6rem;margin-top:0.2rem;">
+        <div class="lang-row"><div class="lang-dot" style="background:#c084fc;"></div><span data-i18n="skills.lang1">Português &mdash; Nativo</span></div>
+        <div class="lang-row"><div class="lang-dot" style="background:#a855f7;"></div><span data-i18n="skills.lang2">Inglês &mdash; Fluente</span></div>
+        <div class="lang-row"><div class="lang-dot" style="background:#7c3aed;opacity:0.8"></div><span data-i18n="skills.lang3">Francês &mdash; Básico</span></div>
+        <div class="lang-row"><div class="lang-dot" style="background:#7c3aed;opacity:0.8"></div><span data-i18n="skills.lang4">Espanhol &mdash; Básico</span></div>
 
-      <div class="edu-card">
-        <div class="edu-year">2024 – Presente</div>
-        <div class="edu-degree">Engenharia Informática</div>
-        <div class="edu-school">Instituto Superior de Tecnologias Avançadas de Lisboa (ISTEC)</div>
-        <div class="edu-topics">
-          <span class="edu-tag">Redes e Comunicações</span>
-          <span class="edu-tag">Algoritmos</span>
-          <span class="edu-tag">Programação</span>
-          <span class="edu-tag">Inteligência Artificial</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-label" data-i18n="proj.label">O que construí</p>
+    <h2 class="section-title" data-i18n="proj.title">Projetos</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="projects-grid reveal">
+
+    <div class="project-card" onclick="openModal('wasteapp')">
+      <div class="project-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
+      <div class="project-name">WasteApp</div>
+      <div class="project-role-tag">Frontend Lead &amp; Backend</div>
+      <p class="project-desc" data-i18n="proj.wasteapp.desc">Plataforma de gestão de resíduos e sustentabilidade ambiental. Desenvolvi todo o frontend e lógica de backend, incluindo a admin page.</p>
+      <button class="project-btn" data-i18n="proj.view">Ver projeto &rarr;</button>
+    </div>
+
+    <div class="project-card" onclick="openModal('epal')">
+      <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="project-name">EPAL H2O Quality</div>
+      <div class="project-role-tag">Frontend &amp; Criativo</div>
+      <p class="project-desc" data-i18n="proj.epal.desc">App de monitorização da qualidade da água da EPAL. Participei no desenvolvimento frontend e na vertente criativa do projeto.</p>
+      <button class="project-btn" data-i18n="proj.view">Ver projeto &rarr;</button>
+    </div>
+
+    <div class="project-card" onclick="openModal('bancobest')">
+      <div class="project-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+      <div class="project-name">Banco Best</div>
+      <div class="project-role-tag" data-i18n="proj.bancobest.role">Equipa Criativa &amp; UI Design</div>
+      <p class="project-desc" data-i18n="proj.bancobest.desc">Nova app do Banco Best. Integrei a equipa criativa, participei em brainstorming e contribuí diretamente para o desenho da interface.</p>
+      <button class="project-btn" data-i18n="proj.view">Ver projeto &rarr;</button>
+    </div>
+
+    <div class="project-card" onclick="openModal('remechido')">
+      <div class="project-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></div>
+      <div class="project-name">Remechido.com</div>
+      <div class="project-role-tag" data-i18n="proj.remechido.role">Design &amp; Desenvolvimento</div>
+      <p class="project-desc" data-i18n="proj.remechido.desc">Portfolio de design criativo desenvolvido para um cliente. Inclui fotografia, animação 3D e trabalhos visuais.</p>
+      <button class="project-btn" data-i18n="proj.view">Ver projeto &rarr;</button>
+    </div>
+
+    <div class="project-card" onclick="openModal('co2')">
+      <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+      <div class="project-name">Calculadora de CO&#8322;</div>
+      <div class="project-role-tag" data-i18n="proj.co2.role">Frontend &amp; Desenvolvimento</div>
+      <p class="project-desc" data-i18n="proj.co2.desc">Ferramenta para avaliar o impacto ambiental de websites, com foco em eficiência energética e redução da pegada de carbono digital.</p>
+      <button class="project-btn" data-i18n="proj.view">Ver projeto &rarr;</button>
+    </div>
+
+    <div class="project-card" onclick="openModal('profolio')">
+      <div class="project-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <div class="project-name">ProFolio.pt</div>
+      <div class="project-role-tag" data-i18n="proj.profolio.role">Desenvolvimento Full Stack</div>
+      <p class="project-desc" data-i18n="proj.profolio.desc">Galeria de arte online desenvolvida com PHP, HTML, CSS e SQL, como projeto prático de desenvolvimento web.</p>
+      <button class="project-btn" data-i18n="proj.view">Ver projeto &rarr;</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <p class="section-label" data-i18n="edu.label">Percurso académico</p>
+    <h2 class="section-title" data-i18n="edu.title">Formação</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid reveal">
+
+    <div class="edu-card">
+      <div class="edu-year">2019 &ndash; 2022</div>
+      <div class="edu-degree" data-i18n="edu.d1">Gestão de Sistemas Informáticos e Programação</div>
+      <a href="https://www.esmoita.pt" target="_blank" rel="noopener" class="edu-school-link">
+        Escola Secundária da Moita
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <div class="edu-topics">
+        <span class="edu-tag">C++ / C# / PHP</span><span class="edu-tag">HTML / CSS</span>
+        <span class="edu-tag">SQL / ASP</span><span class="edu-tag" data-i18n="edu.net">Redes</span>
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-year">2023 &ndash; 2024</div>
+      <div class="edu-degree" data-i18n="edu.d2">Design e Desenvolvimento Web</div>
+      <a href="https://www.lsd.pt" target="_blank" rel="noopener" class="edu-school-link">
+        Lisbon School of Design
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <div class="edu-topics">
+        <span class="edu-tag" data-i18n="edu.webdesign">Design Web</span><span class="edu-tag" data-i18n="edu.webprog">Programação Web</span>
+        <span class="edu-tag" data-i18n="edu.marketing">Marketing Digital</span><span class="edu-tag">Photoshop</span>
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-year">2024 &ndash; <span data-i18n="edu.present">Presente</span></div>
+      <div class="edu-degree" data-i18n="edu.d3">Engenharia Informática</div>
+      <a href="https://www.istec.pt" target="_blank" rel="noopener" class="edu-school-link">
+        Instituto Superior de Tecnologias Avançadas de Lisboa (ISTEC)
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <div class="edu-topics">
+        <span class="edu-tag" data-i18n="edu.nets">Redes e Comunicações</span><span class="edu-tag" data-i18n="edu.algo">Algoritmos</span>
+        <span class="edu-tag" data-i18n="edu.prog">Programação</span><span class="edu-tag" data-i18n="edu.ai">Inteligência Artificial</span>
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-year">2025</div>
+      <div class="edu-degree">Extended Reality (XR)</div>
+      <a href="https://www.virtualinnovationconsortium.com" target="_blank" rel="noopener" class="edu-school-link">
+        Virtual Innovation Consortium (VIC)
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <div class="edu-topics">
+        <span class="edu-tag" data-i18n="edu.ar">Realidade Aumentada</span><span class="edu-tag" data-i18n="edu.vr">Realidade Virtual</span><span class="edu-tag" data-i18n="edu.proto">Prototipagem XR</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-label" data-i18n="contact.label">Vamos falar</p>
+    <h2 class="section-title" data-i18n="contact.title">Contacto</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-wrapper reveal">
+    <p class="contact-intro" data-i18n="contact.intro">Tens um projeto interessante ou uma oportunidade em mente? Estou disponível para colaborações, freelance ou posições full-time. Não hesites em entrar em contacto!</p>
+    <div class="contact-links">
+
+      <!-- EMAIL: assembled in JS, never in HTML source -->
+      <div class="contact-link protected-field" id="email-field" onclick="revealField('email')" style="cursor:pointer;">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <strong>Email</strong>
+          <span class="protected-value blurred" id="email-value">&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</span>
+          <span class="reveal-hint" id="email-hint" data-i18n="contact.reveal">Clique para revelar</span>
         </div>
       </div>
 
-      <div class="edu-card">
-        <div class="edu-year">2023 – 2024</div>
-        <div class="edu-degree">Design e Desenvolvimento Web</div>
-        <div class="edu-school">Lisbon School of Design</div>
-        <div class="edu-topics">
-          <span class="edu-tag">Design Web</span>
-          <span class="edu-tag">Programação Web</span>
-          <span class="edu-tag">Marketing Digital</span>
-          <span class="edu-tag">Photoshop</span>
+      <!-- PHONE: same technique -->
+      <div class="contact-link protected-field" id="phone-field" onclick="revealField('phone')" style="cursor:pointer;">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <strong>Telefone</strong>
+          <span class="protected-value blurred" id="phone-value">&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</span>
+          <span class="reveal-hint" id="phone-hint" data-i18n="contact.reveal">Clique para revelar</span>
         </div>
       </div>
 
-      <div class="edu-card">
-        <div class="edu-year">2019 – 2022</div>
-        <div class="edu-degree">Gestão de Sistemas Informáticos e Programação</div>
-        <div class="edu-school">Escola Secundária da Moita</div>
-        <div class="edu-topics">
-          <span class="edu-tag">C++ / C# / PHP</span>
-          <span class="edu-tag">HTML / CSS</span>
-          <span class="edu-tag">SQL / ASP</span>
-          <span class="edu-tag">Redes</span>
+      <a href="https://www.linkedin.com/in/francisco-silva-59747619b/" target="_blank" class="contact-link">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </div>
-      </div>
-
-      <div class="edu-card">
-        <div class="edu-year">2025</div>
-        <div class="edu-degree">Extended Reality (XR)</div>
-        <div class="edu-school">Virtual Innovation Consortium (VIC)</div>
-        <div class="edu-topics">
-          <span class="edu-tag">Realidade Aumentada</span>
-          <span class="edu-tag">Realidade Virtual</span>
-          <span class="edu-tag">Prototipagem XR</span>
+        <div class="contact-link-text">
+          <strong>LinkedIn</strong>
+          <span>francisco-silva-59747619b</span>
         </div>
-      </div>
+      </a>
+
+      <a href="https://github.com/xico1920" target="_blank" class="contact-link">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <strong>GitHub</strong>
+          <span>github.com/xico1920</span>
+        </div>
+      </a>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="reveal">
-      <p class="section-label">Vamos falar</p>
-      <h2 class="section-title">Contacto</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="contact-wrapper reveal">
-      <p class="contact-intro">
-        Tens um projeto interessante ou uma oportunidade em mente? Estou disponível para colaborações,
-        freelance ou posições full-time. Não hesites em entrar em contacto!
-      </p>
-      <div class="contact-links">
-        <a href="mailto:franciscosantanasilva17@gmail.com" class="contact-link">
-          <div class="contact-link-icon">✉️</div>
-          <div class="contact-link-text">
-            <strong>Email</strong>
-            <span>franciscosantanasilva17@gmail.com</span>
-          </div>
-        </a>
-        <a href="tel:+351912965377" class="contact-link">
-          <div class="contact-link-icon">📞</div>
-          <div class="contact-link-text">
-            <strong>Telefone</strong>
-            <span>+351 912 965 377</span>
-          </div>
-        </a>
-        <a href="https://remechido.com" target="_blank" class="contact-link">
-          <div class="contact-link-icon">🎨</div>
-          <div class="contact-link-text">
-            <strong>Portfolio de Design</strong>
-            <span>remechido.com</span>
-          </div>
-        </a>
-        <a href="https://wasteapp.pt" target="_blank" class="contact-link">
-          <div class="contact-link-icon">🌐</div>
-          <div class="contact-link-text">
-            <strong>WasteApp</strong>
-            <span>wasteapp.pt</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
+<!-- FOOTER -->
+<footer>
+  <span class="logo">Francisco Silva</span>
+  <p>&copy; 2026 &middot; Costa da Caparica, Almada</p>
+</footer>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="logo">Francisco Silva</span>
-    <p>© 2025 · Costa da Caparica, Almada</p>
-  </footer>
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-box">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
 
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
+<script>
+/* ── REVEAL ── */
+const revEls = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+revEls.forEach(el => revObs.observe(el));
+
+/* ── MATRIX ── */
+(function(){
+  const canvas = document.getElementById('matrix-canvas');
+  const ctx = canvas.getContext('2d');
+  const chars = 'アイウエオカキクケコabcdefghijklmnopqrstuvwxyz0123456789{}[]();=></#@'.split('');
+  let cols, drops;
+  function resize(){
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    cols = Math.floor(canvas.width / 16);
+    drops = Array(cols).fill(1);
+  }
+  function draw(){
+    ctx.fillStyle = 'rgba(8,8,16,0.18)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    for(let i=0;i<cols;i++){
+      const char = chars[Math.floor(Math.random()*chars.length)];
+      const alpha = 0.25 + Math.random()*0.55;
+      ctx.font = '13px JetBrains Mono, monospace';
+      ctx.fillStyle = `rgba(74,222,128,${alpha})`;
+      ctx.fillText(char, i*16, drops[i]*16);
+      if(drops[i]*16 > canvas.height && Math.random()>0.975) drops[i]=0;
+      drops[i]++;
+    }
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  setInterval(draw, 60);
+})();
+
+/* ── PROTECTED CONTACT FIELDS ──
+   Data split across arrays — never a plain string in source.
+   Bots scraping HTML or JS strings won't easily reconstruct these. */
+(function(){
+  // Email: parts joined at runtime
+  const ep = ['francisco','santana','silva17','@','gmail','.','com'];
+  // Phone: digits stored separately
+  const pp = ['+','3','5','1',' ','9','1','2',' ','9','6','5',' ','3','7','7'];
+
+  window._cf = {
+    email: ep.join(''),
+    phone: pp.join('')
+  };
+})();
+
+function revealField(type) {
+  if (type === 'email') {
+    const val = document.getElementById('email-value');
+    const hint = document.getElementById('email-hint');
+    const field = document.getElementById('email-field');
+    if (val.classList.contains('revealed')) return;
+    val.textContent = window._cf.email;
+    val.classList.remove('blurred');
+    val.classList.add('revealed');
+    hint.classList.add('hidden');
+    field.classList.add('done');
+    // Make it a real mailto link after reveal
+    field.addEventListener('click', () => { window.location.href = 'mailto:' + window._cf.email; }, { once: true });
+  } else if (type === 'phone') {
+    const val = document.getElementById('phone-value');
+    const hint = document.getElementById('phone-hint');
+    const field = document.getElementById('phone-field');
+    if (val.classList.contains('revealed')) return;
+    val.textContent = window._cf.phone;
+    val.classList.remove('blurred');
+    val.classList.add('revealed');
+    hint.classList.add('hidden');
+    field.classList.add('done');
+    field.addEventListener('click', () => { window.location.href = 'tel:' + window._cf.phone.replace(/\s/g,''); }, { once: true });
+  }
+}
+
+// Patch setLang to also update reveal hints
+const _origSetLang = window.setLang || setLang;
+window.setLang = function(lang) {
+  _origSetLang(lang);
+  document.querySelectorAll('.reveal-hint:not(.hidden)').forEach(h => {
+    h.textContent = lang === 'en' ? 'Click to reveal' : 'Clique para revelar';
+  });
+};
+const translations = {
+  pt: {
+    'nav.about':'Sobre','nav.experience':'Experiência','nav.projects':'Projetos','nav.education':'Formação','nav.contact':'Contacto',
+    'about.label':'Quem sou','about.title':'Sobre mim',
+    'about.p1':'Sou um desenvolvedor front-end com experiência prática em <strong>HTML, CSS, SASS, TypeScript</strong> e frameworks como <strong>Angular e React</strong>. Aplico design responsivo e otimização de código para criar produtos digitais eficientes e sustentáveis.',
+    'about.p2':'Paralelamente ao desenvolvimento web, trabalho com <strong>fotografia desde 2016</strong> (retratos, produto e eventos) e <strong>animação e renderização 3D com Blender desde 2015</strong>, tendo participado em diversas equipas de animação e pós-produção.',
+    'about.p3':'Também tenho experiência em <strong>edição de vídeo e motion design</strong> com Adobe After Effects, bem como em tratamento fotográfico com Lightroom. Valorizo ambientes colaborativos que unam tecnologia, arte e sustentabilidade.',
+    'about.stat1':'Anos de fotografia & 3D','about.stat2':'Nomeado MSI Creator Awards','about.stat3':'Realidade Aumentada & Virtual','about.stat4':'Web Design Sustentável',
+    'exp.label':'Carreira','exp.title':'Experiência Profissional',
+    'exp.job1.role':'Desenvolvedor Front-End & Criativo',
+    'exp.job1.li1':'Desenvolvimento de websites com foco em eficiência energética e redução da pegada de carbono digital.',
+    'exp.job1.li2':'Otimização de código para minimizar consumo de recursos e melhorar desempenho ambiental.',
+    'exp.job1.li3':'Desenvolvimento de uma Calculadora de CO₂ para avaliar o impacto ambiental de websites.',
+    'exp.job2.role':'Estágio Profissional',
+    'exp.job2.li1':'Desenvolvimento completo do frontend da WasteApp e lógica de backend, incluindo admin page.',
+    'exp.job2.li2':'Participação no frontend e na vertente criativa do projeto EPAL H2O Quality.',
+    'exp.job2.li3':'Integração na equipa criativa do projeto Banco Best — brainstorming e UI Design.',
+    'exp.job2.li4':'Trabalho em equipa multidisciplinar com foco em inovação, realidade aumentada e usabilidade.',
+    'exp.job3.role':'Atendimento ao Cliente',
+    'exp.job3.li1':'Venda e atendimento ao cliente de equipamentos informáticos.',
+    'exp.job3.li2':'Gestão de armazém, produtos e reposição de artigos.',
+    'skills.label':'O que sei fazer','skills.title':'Competências Técnicas',
+    'skills.g1':'Linguagens','skills.g3':'Ferramentas & Programas','skills.g4':'Áreas de Especialização','skills.g5':'Línguas',
+    'skills.t1':'Web Sustentável','skills.t2':'Realidade Aumentada','skills.t3':'Animação 3D','skills.t4':'Fotografia','skills.t5':'Otimização de Código','skills.t6':'Redes',
+    'skills.lang1':'Português — Nativo','skills.lang2':'Inglês — Fluente','skills.lang3':'Francês — Básico','skills.lang4':'Espanhol — Básico','skills.lang5':'Italiano — Básico',
+    'proj.label':'O que construí','proj.title':'Projetos','proj.view':'Ver projeto →',
+    'proj.wasteapp.desc':'Plataforma de gestão de resíduos e sustentabilidade ambiental. Desenvolvi todo o frontend e lógica de backend, incluindo a admin page.',
+    'proj.epal.desc':'App de monitorização da qualidade da água da EPAL. Participei no desenvolvimento frontend e na vertente criativa do projeto.',
+    'proj.bancobest.role':'Equipa Criativa & UI Design','proj.bancobest.desc':'Nova app do Banco Best. Integrei a equipa criativa, participei em brainstorming e contribuí diretamente para o desenho da interface.',
+    'proj.remechido.role':'Design & Desenvolvimento','proj.remechido.desc':'Portfolio de design criativo desenvolvido para um cliente. Inclui fotografia, animação 3D e trabalhos visuais.',
+    'proj.co2.role':'Frontend & Desenvolvimento','proj.co2.desc':'Ferramenta para avaliar o impacto ambiental de websites, com foco em eficiência energética e redução da pegada de carbono digital.',
+    'proj.profolio.role':'Desenvolvimento Full Stack','proj.profolio.desc':'Galeria de arte online desenvolvida com PHP, HTML, CSS e SQL, como projeto prático de desenvolvimento web.',
+    'edu.label':'Percurso académico','edu.title':'Formação','edu.present':'Presente',
+    'edu.d1':'Gestão de Sistemas Informáticos e Programação','edu.d2':'Design e Desenvolvimento Web','edu.d3':'Engenharia Informática',
+    'edu.net':'Redes','edu.webdesign':'Design Web','edu.webprog':'Programação Web','edu.marketing':'Marketing Digital',
+    'edu.nets':'Redes e Comunicações','edu.algo':'Algoritmos','edu.prog':'Programação','edu.ai':'Inteligência Artificial',
+    'edu.ar':'Realidade Aumentada','edu.vr':'Realidade Virtual','edu.proto':'Prototipagem XR',
+    'contact.label':'Vamos falar','contact.title':'Contacto',
+    'contact.intro':'Tens um projeto fixe ou uma oportunidade em mente? Estou disponível para colaborações, freelance, part-time ou full-time — fala comigo, adorava ouvir!',
+    'contact.reveal':'Clique para revelar',
+  },
+  en: {
+    'nav.about':'About','nav.experience':'Experience','nav.projects':'Projects','nav.education':'Education','nav.contact':'Contact',
+    'about.label':'Who I am','about.title':'About me',
+    'about.p1':'I\'m a front-end developer with hands-on experience in <strong>HTML, CSS, SASS, TypeScript</strong> and frameworks like <strong>Angular and React</strong>. I apply responsive design and code optimisation to build efficient, sustainable digital products.',
+    'about.p2':'Alongside web development, I\'ve been working with <strong>photography since 2016</strong> (portraits, product and events) and <strong>3D animation & rendering with Blender since 2015</strong>, collaborating with animation and post-production teams.',
+    'about.p3':'I also have experience in <strong>video editing and motion design</strong> with Adobe After Effects, and photo post-production with Lightroom. I value collaborative environments that blend technology, art and sustainability.',
+    'about.stat1':'Years of photography & 3D','about.stat2':'MSI Creator Awards nominee','about.stat3':'Augmented & Virtual Reality','about.stat4':'Sustainable Web Design',
+    'exp.label':'Career','exp.title':'Professional Experience',
+    'exp.job1.role':'Front-End Developer & Creative',
+    'exp.job1.li1':'Built websites focused on energy efficiency and reducing digital carbon footprint.',
+    'exp.job1.li2':'Code optimisation to minimise resource consumption and improve environmental performance.',
+    'exp.job1.li3':'Developed a CO₂ Calculator to assess the environmental impact of websites.',
+    'exp.job2.role':'Professional Internship',
+    'exp.job2.li1':'Full frontend development of the WasteApp and backend logic, including the admin dashboard.',
+    'exp.job2.li2':'Contributed to the frontend and creative direction of the EPAL H2O Quality project.',
+    'exp.job2.li3':'Part of the creative team for the Banco Best app — brainstorming and UI Design.',
+    'exp.job2.li4':'Remote and on-site work in a multidisciplinary team focused on innovation, AR and usability.',
+    'exp.job3.role':'Customer Support',
+    'exp.job3.li1':'Sales and customer service for IT equipment.',
+    'exp.job3.li2':'Warehouse management, stock control and product restocking.',
+    'skills.label':'What I do','skills.title':'Technical Skills',
+    'skills.g1':'Languages','skills.g3':'Tools & Software','skills.g4':'Areas of Expertise','skills.g5':'Languages spoken',
+    'skills.t1':'Sustainable Web','skills.t2':'Augmented Reality','skills.t3':'3D Animation','skills.t4':'Photography','skills.t5':'Code Optimisation','skills.t6':'Networking',
+    'skills.lang1':'Portuguese — Native','skills.lang2':'English — Fluent','skills.lang3':'French — Basic','skills.lang4':'Spanish — Basic','skills.lang5':'Italian — Basic',
+    'proj.label':'What I\'ve built','proj.title':'Projects','proj.view':'View project →',
+    'proj.wasteapp.desc':'Waste management and environmental sustainability platform. I built the entire frontend and contributed to backend logic, including the admin page.',
+    'proj.epal.desc':'EPAL water quality monitoring app. I worked on the frontend and contributed to the creative direction of the project.',
+    'proj.bancobest.role':'Creative Team & UI Design','proj.bancobest.desc':'New Banco Best app. Joined the creative team, took part in brainstorming and contributed directly to the UI design.',
+    'proj.remechido.role':'Design & Development','proj.remechido.desc':'Creative design portfolio built for a client. Features photography, 3D animation and visual work.',
+    'proj.co2.role':'Frontend & Development','proj.co2.desc':'Web tool to assess the environmental impact of websites, focused on energy efficiency and reducing digital carbon footprint.',
+    'proj.profolio.role':'Full Stack Development','proj.profolio.desc':'Online art gallery built with PHP, HTML, CSS and SQL as a practical web development project.',
+    'edu.label':'Academic background','edu.title':'Education','edu.present':'Present',
+    'edu.d1':'IT Systems Management & Programming','edu.d2':'Web Design & Development','edu.d3':'Computer Engineering',
+    'edu.net':'Networking','edu.webdesign':'Web Design','edu.webprog':'Web Programming','edu.marketing':'Digital Marketing',
+    'edu.nets':'Networks & Communications','edu.algo':'Algorithms','edu.prog':'Programming','edu.ai':'Artificial Intelligence',
+    'edu.ar':'Augmented Reality','edu.vr':'Virtual Reality','edu.proto':'XR Prototyping',
+    'contact.label':'Let\'s talk','contact.title':'Contact',
+    'contact.intro':'Got a cool project or opportunity in mind? I\'m open to collaborations, freelance, part-time or full-time — just reach out, I\'d love to hear from you!',
+    'contact.reveal':'Click to reveal',
+  }
+};
+
+let currentLang = 'pt';
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-pt').classList.toggle('active', lang==='pt');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.documentElement.lang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // Hero (no data-i18n on these to keep it simple)
+  const heroMap = {'.hero-badge':'hero.badge','.hero-sub':'hero.sub'};
+  const heroCta = {'.hero-ctas .btn-primary':'hero.cta1','.hero-ctas .btn-ghost':'hero.cta2'};
+  const heroText = {pt:{badge:'Disponível para novos projetos',sub:'Desenvolvedor Front-End criativo com paixão por transformar ideias em experiências digitais funcionais e visualmente apelativas.',cta1:'Entrar em contacto →',cta2:'Ver projetos'},en:{badge:'Available for new opportunities',sub:'Creative Front-End Developer passionate about turning ideas into functional and visually compelling digital experiences.',cta1:'Get in touch →',cta2:'View projects'}};
+  const matrixText = { pt: '// a construir o futuro, uma linha de cada vez', en: '// building the future, one line at a time' };
+  document.getElementById('matrix-label').textContent = matrixText[lang];
+  const h = heroText[lang];
+  document.querySelector('.hero-badge').textContent = h.badge;
+  document.querySelector('.hero-sub').textContent = h.sub;
+  document.querySelector('.hero-ctas .btn-primary').textContent = h.cta1;
+  document.querySelector('.hero-ctas .btn-ghost').textContent = h.cta2;
+}
+
+/* ── MODALS ── */
+const modals = {
+  pt: {
+    wasteapp:{tag:'Next Reality — Estágio 2022',title:'WasteApp',role:'Frontend Lead & Backend Logic',body:`<p>WasteApp é uma plataforma digital focada na gestão responsável de resíduos e sustentabilidade ambiental, desenvolvida em parceria com a Quercus.</p><p>Fui responsável pelo <strong>desenvolvimento completo do frontend</strong> — arquitetura de componentes, implementação visual e experiência de utilizador.</p><p>Participei também na lógica de backend, com destaque para a <strong>admin page</strong>, onde implementei gestão de conteúdos, utilizadores e dados.</p><ul><li>Desenvolvimento completo do frontend</li><li>Lógica de backend e admin dashboard</li><li>Integração com APIs</li><li>Foco em usabilidade e performance</li></ul>`,tech:['Angular','TypeScript','SASS','PHP','SQL','REST API'],link:'https://wasteapp.pt',linkLabel:'Visitar wasteapp.pt'},
+    epal:{tag:'Next Reality — Estágio 2022',title:'EPAL H2O Quality',role:'Frontend & Desenvolvimento Criativo',body:`<p>Projeto para a EPAL que permite monitorizar em tempo real a qualidade da água em Lisboa e em todo o país.</p><p>Participei no desenvolvimento do <strong>frontend</strong> e na <strong>vertente criativa</strong>, contribuindo para a experiência visual e interativa da plataforma.</p><ul><li>Desenvolvimento de componentes frontend</li><li>Contribuição criativa para o design da interface</li><li>Foco em acessibilidade e clareza visual</li></ul>`,tech:['Angular','TypeScript','CSS','Design UI','Figma'],link:'https://www.nextreality.com/projetos/epal-h2o-quality',linkLabel:'Ver na Next Reality'},
+    bancobest:{tag:'Next Reality — Estágio 2022',title:'Banco Best',role:'Equipa Criativa & UI Design',body:`<p>A app do Banco Best é um dos projetos de maior escala em que participei, para um dos bancos digitais mais inovadores de Portugal.</p><p>Integrei a <strong>equipa criativa</strong>, participei em sessões de brainstorming e contribuí diretamente para o <strong>UI Design</strong>.</p><ul><li>Brainstorming e ideação criativa</li><li>Contribuição para o UI Design</li><li>Alinhamento com equipas de tecnologia, marketing e produto</li></ul>`,tech:['UI Design','Figma','Design Thinking','Branding'],link:'https://www.nextreality.com/projetos/banco-best',linkLabel:'Ver na Next Reality'},
+    remechido:{tag:'Projeto para cliente',title:'Remechido.com',role:'Design & Desenvolvimento Web',body:`<p>Portfolio de design criativo desenvolvido para um cliente, apresentando projetos visuais, fotografia, animação 3D e trabalhos criativos.</p><ul><li>Desenvolvimento front-end completo</li><li>Design visual e identidade do site</li><li>Curadoria e apresentação de conteúdo criativo</li></ul>`,tech:['HTML','CSS','JavaScript','Design Web'],link:'https://remechido.com',linkLabel:'Visitar remechido.com'},
+    co2:{tag:'Venga Digital — 2024/2025',title:'Calculadora de CO₂',role:'Frontend & Desenvolvimento',body:`<p>Ferramenta web para avaliar e quantificar o impacto ambiental de websites, inserida numa estratégia de desenvolvimento digital sustentável.</p><ul><li>Desenvolvimento frontend da ferramenta</li><li>Análise de métricas de sustentabilidade digital</li><li>Interface acessível para utilizadores não técnicos</li></ul>`,tech:['Angular','TypeScript','SASS'],link:null,linkLabel:null},
+    profolio:{tag:'Projeto Académico — 2019/2022',title:'ProFolio.pt',role:'Desenvolvimento Full Stack',body:`<p>Galeria de arte online construída durante a formação em Gestão de Sistemas Informáticos, como projeto prático de desenvolvimento web full stack.</p><ul><li>Frontend com HTML, CSS e JavaScript</li><li>Backend com PHP e base de dados SQL</li><li>Sistema de autenticação e gestão de utilizadores</li></ul>`,tech:['PHP','HTML','CSS','SQL','ASP'],link:null,linkLabel:null}
+  },
+  en: {
+    wasteapp:{tag:'Next Reality — Internship 2022',title:'WasteApp',role:'Frontend Lead & Backend Logic',body:`<p>WasteApp is a digital platform for responsible waste management and environmental sustainability, developed in partnership with Quercus.</p><p>I was responsible for the <strong>full frontend development</strong> — component architecture, visual implementation and user experience.</p><p>I also worked on backend logic, particularly the <strong>admin dashboard</strong>, handling content, users and data management.</p><ul><li>Complete frontend development</li><li>Backend logic & admin dashboard</li><li>API integration</li><li>Focus on usability and performance</li></ul>`,tech:['Angular','TypeScript','SASS','PHP','SQL','REST API'],link:'https://wasteapp.pt',linkLabel:'Visit wasteapp.pt'},
+    epal:{tag:'Next Reality — Internship 2022',title:'EPAL H2O Quality',role:'Frontend & Creative Development',body:`<p>Project for EPAL enabling citizens to monitor water quality in real time across Lisbon and Portugal.</p><p>I contributed to the <strong>frontend development</strong> and the <strong>creative direction</strong> of the project.</p><ul><li>Frontend component development</li><li>Creative contribution to the UI design</li><li>Focus on accessibility and data clarity</li></ul>`,tech:['Angular','TypeScript','CSS','UI Design','Figma'],link:'https://www.nextreality.com/projetos/epal-h2o-quality',linkLabel:'View on Next Reality'},
+    bancobest:{tag:'Next Reality — Internship 2022',title:'Banco Best',role:'Creative Team & UI Design',body:`<p>The Banco Best app is one of the largest projects I worked on, for one of Portugal's most innovative digital banks.</p><p>I joined the <strong>creative team</strong>, participated in brainstorming sessions and contributed directly to the <strong>UI Design</strong>.</p><ul><li>Brainstorming and creative ideation</li><li>UI Design contributions</li><li>Alignment with technology, marketing and product teams</li></ul>`,tech:['UI Design','Figma','Design Thinking','Branding'],link:'https://www.nextreality.com/projetos/banco-best',linkLabel:'View on Next Reality'},
+    remechido:{tag:'Client project',title:'Remechido.com',role:'Design & Web Development',body:`<p>Creative design portfolio built for a client, showcasing visual projects, photography, 3D animation and creative work.</p><ul><li>Complete front-end development</li><li>Visual design and site identity</li><li>Content curation and creative presentation</li></ul>`,tech:['HTML','CSS','JavaScript','Web Design'],link:'https://remechido.com',linkLabel:'Visit remechido.com'},
+    co2:{tag:'Venga Digital — 2024/2025',title:'CO₂ Calculator',role:'Frontend & Development',body:`<p>Web tool to assess and quantify the environmental impact of websites, part of a sustainable digital development strategy.</p><ul><li>Frontend development of the tool</li><li>Digital sustainability metrics analysis</li><li>Accessible interface for non-technical users</li></ul>`,tech:['Angular','TypeScript','SASS'],link:null,linkLabel:null},
+    profolio:{tag:'Academic Project — 2019/2022',title:'ProFolio.pt',role:'Full Stack Development',body:`<p>Online art gallery built during IT Systems Management training as a practical full stack web development project.</p><ul><li>Frontend with HTML, CSS and JavaScript</li><li>Backend with PHP and SQL database</li><li>Authentication system and user management</li></ul>`,tech:['PHP','HTML','CSS','SQL','ASP'],link:null,linkLabel:null}
+  }
+};
+
+function openModal(id){
+  const d = modals[currentLang][id]; if(!d) return;
+  const tech = d.tech.map(t=>`<span class="modal-tech-tag">${t}</span>`).join('');
+  const link = d.link ? `<a href="${d.link}" target="_blank" class="modal-link">${d.linkLabel} →</a>` : '';
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-tag">${d.tag}</div>
+    <div class="modal-title">${d.title}</div>
+    <div class="modal-role">${d.role}</div>
+    <div class="modal-hr"></div>
+    <div class="modal-body">${d.body}</div>
+    <div class="modal-tech">${tech}</div>
+    ${link}
+  `;    
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeModalOutside(e){
+  if(e.target===document.getElementById('modal-overlay')) closeModal();
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+</script>
 </body>
 </html>
