@@ -164,7 +164,6 @@
     .edu-card:hover { border-color:rgba(168,85,247,0.45); transform:translateY(-4px); }
     .edu-year { font-size:0.78rem; color:var(--purple-light); font-weight:500; letter-spacing:0.08em; margin-bottom:0.4rem; }
     .edu-degree { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:0.2rem; }
-    .edu-school { font-size:0.88rem; color:var(--accent); margin-bottom:0.8rem; }
     .edu-school-link { display:inline-flex; align-items:center; gap:0.35rem; font-size:0.88rem; color:var(--accent); text-decoration:none; transition:color 0.2s, gap 0.2s; margin-bottom:0.8rem; }
     .edu-school-link svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; opacity:0.7; transition:opacity 0.2s, transform 0.2s; flex-shrink:0; }
     .edu-school-link:hover { color:#fff; gap:0.55rem; }
@@ -366,7 +365,6 @@
         <div class="lang-row"><div class="lang-dot" style="background:#a855f7;"></div><span data-i18n="skills.lang2">Inglês &mdash; Fluente</span></div>
         <div class="lang-row"><div class="lang-dot" style="background:#7c3aed;opacity:0.8"></div><span data-i18n="skills.lang3">Francês &mdash; Básico</span></div>
         <div class="lang-row"><div class="lang-dot" style="background:#7c3aed;opacity:0.8"></div><span data-i18n="skills.lang4">Espanhol &mdash; Básico</span></div>
-
       </div>
     </div>
   </div>
@@ -506,7 +504,6 @@
     <p class="contact-intro" data-i18n="contact.intro">Tens um projeto interessante ou uma oportunidade em mente? Estou disponível para colaborações, freelance ou posições full-time. Não hesites em entrar em contacto!</p>
     <div class="contact-links">
 
-      <!-- EMAIL: assembled in JS, never in HTML source -->
       <div class="contact-link protected-field" id="email-field" onclick="revealField('email')" style="cursor:pointer;">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -518,7 +515,6 @@
         </div>
       </div>
 
-      <!-- PHONE: same technique -->
       <div class="contact-link protected-field" id="phone-field" onclick="revealField('phone')" style="cursor:pointer;">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -606,19 +602,11 @@ revEls.forEach(el => revObs.observe(el));
   setInterval(draw, 60);
 })();
 
-/* ── PROTECTED CONTACT FIELDS ──
-   Data split across arrays — never a plain string in source.
-   Bots scraping HTML or JS strings won't easily reconstruct these. */
+/* ── PROTECTED CONTACT FIELDS ── */
 (function(){
-  // Email: parts joined at runtime
   const ep = ['francisco','santana','silva17','@','gmail','.','com'];
-  // Phone: digits stored separately
   const pp = ['+','3','5','1',' ','9','1','2',' ','9','6','5',' ','3','7','7'];
-
-  window._cf = {
-    email: ep.join(''),
-    phone: pp.join('')
-  };
+  window._cf = { email: ep.join(''), phone: pp.join('') };
 })();
 
 function revealField(type) {
@@ -628,11 +616,8 @@ function revealField(type) {
     const field = document.getElementById('email-field');
     if (val.classList.contains('revealed')) return;
     val.textContent = window._cf.email;
-    val.classList.remove('blurred');
-    val.classList.add('revealed');
-    hint.classList.add('hidden');
-    field.classList.add('done');
-    // Make it a real mailto link after reveal
+    val.classList.remove('blurred'); val.classList.add('revealed');
+    hint.classList.add('hidden'); field.classList.add('done');
     field.addEventListener('click', () => { window.location.href = 'mailto:' + window._cf.email; }, { once: true });
   } else if (type === 'phone') {
     const val = document.getElementById('phone-value');
@@ -640,22 +625,13 @@ function revealField(type) {
     const field = document.getElementById('phone-field');
     if (val.classList.contains('revealed')) return;
     val.textContent = window._cf.phone;
-    val.classList.remove('blurred');
-    val.classList.add('revealed');
-    hint.classList.add('hidden');
-    field.classList.add('done');
+    val.classList.remove('blurred'); val.classList.add('revealed');
+    hint.classList.add('hidden'); field.classList.add('done');
     field.addEventListener('click', () => { window.location.href = 'tel:' + window._cf.phone.replace(/\s/g,''); }, { once: true });
   }
 }
 
-// Patch setLang to also update reveal hints
-const _origSetLang = window.setLang || setLang;
-window.setLang = function(lang) {
-  _origSetLang(lang);
-  document.querySelectorAll('.reveal-hint:not(.hidden)').forEach(h => {
-    h.textContent = lang === 'en' ? 'Click to reveal' : 'Clique para revelar';
-  });
-};
+/* ── TRANSLATIONS ── */
 const translations = {
   pt: {
     'nav.about':'Sobre','nav.experience':'Experiência','nav.projects':'Projetos','nav.education':'Formação','nav.contact':'Contacto',
@@ -680,7 +656,7 @@ const translations = {
     'skills.label':'O que sei fazer','skills.title':'Competências Técnicas',
     'skills.g1':'Linguagens','skills.g3':'Ferramentas & Programas','skills.g4':'Áreas de Especialização','skills.g5':'Línguas',
     'skills.t1':'Web Sustentável','skills.t2':'Realidade Aumentada','skills.t3':'Animação 3D','skills.t4':'Fotografia','skills.t5':'Otimização de Código','skills.t6':'Redes',
-    'skills.lang1':'Português — Nativo','skills.lang2':'Inglês — Fluente','skills.lang3':'Francês — Básico','skills.lang4':'Espanhol — Básico','skills.lang5':'Italiano — Básico',
+    'skills.lang1':'Português — Nativo','skills.lang2':'Inglês — Fluente','skills.lang3':'Francês — Básico','skills.lang4':'Espanhol — Básico',
     'proj.label':'O que construí','proj.title':'Projetos','proj.view':'Ver projeto →',
     'proj.wasteapp.desc':'Plataforma de gestão de resíduos e sustentabilidade ambiental. Desenvolvi todo o frontend e lógica de backend, incluindo a admin page.',
     'proj.epal.desc':'App de monitorização da qualidade da água da EPAL. Participei no desenvolvimento frontend e na vertente criativa do projeto.',
@@ -720,7 +696,7 @@ const translations = {
     'skills.label':'What I do','skills.title':'Technical Skills',
     'skills.g1':'Languages','skills.g3':'Tools & Software','skills.g4':'Areas of Expertise','skills.g5':'Languages spoken',
     'skills.t1':'Sustainable Web','skills.t2':'Augmented Reality','skills.t3':'3D Animation','skills.t4':'Photography','skills.t5':'Code Optimisation','skills.t6':'Networking',
-    'skills.lang1':'Portuguese — Native','skills.lang2':'English — Fluent','skills.lang3':'French — Basic','skills.lang4':'Spanish — Basic','skills.lang5':'Italian — Basic',
+    'skills.lang1':'Portuguese — Native','skills.lang2':'English — Fluent','skills.lang3':'French — Basic','skills.lang4':'Spanish — Basic',
     'proj.label':'What I\'ve built','proj.title':'Projects','proj.view':'View project →',
     'proj.wasteapp.desc':'Waste management and environmental sustainability platform. I built the entire frontend and contributed to backend logic, including the admin page.',
     'proj.epal.desc':'EPAL water quality monitoring app. I worked on the frontend and contributed to the creative direction of the project.',
@@ -739,28 +715,112 @@ const translations = {
   }
 };
 
+/* ── GLITCH SCRAMBLE ──
+   Cada elemento recebe um scramble independente: os caracteres vão sendo
+   "locked" da esquerda para a direita enquanto flasham cyan/magenta. */
+const GLITCH_CHARS = 'アイウエカキクケ01#$%&@?!><{}[]ñÑçÇ'.split('');
+
+function scrambleText(el, finalHTML, duration) {
+  const plainFinal = finalHTML.replace(/<[^>]+>/g, '');
+  const totalFrames = Math.ceil(duration / 28);
+  let frame = 0;
+
+  const interval = setInterval(() => {
+    frame++;
+    const progress = frame / totalFrames;
+
+    if (progress >= 1) {
+      clearInterval(interval);
+      // Restore full innerHTML (preserves <strong> etc.)
+      el.innerHTML = finalHTML;
+      el.style.color = '';
+      el.style.textShadow = '';
+      return;
+    }
+
+    const locked = Math.floor(progress * plainFinal.length);
+    let out = '';
+    for (let i = 0; i < plainFinal.length; i++) {
+      if (plainFinal[i] === ' ' || plainFinal[i] === '\n') {
+        out += plainFinal[i];
+      } else if (i < locked) {
+        out += plainFinal[i];
+      } else {
+        out += GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+      }
+    }
+
+    // Chromatic flicker
+    const r = Math.random();
+    if (r < 0.2) {
+      el.style.color = '#0ff';
+      el.style.textShadow = '2px 0 #f0f, -2px 0 #0ff';
+    } else if (r < 0.4) {
+      el.style.color = '#f0f';
+      el.style.textShadow = '-2px 0 #0ff, 2px 0 #f0f';
+    } else if (r < 0.55) {
+      el.style.color = '#fff';
+      el.style.textShadow = '0 0 8px #c084fc';
+    } else {
+      el.style.color = '';
+      el.style.textShadow = '';
+    }
+
+    el.textContent = out;
+  }, 28);
+}
+
+/* ── LANG SWITCHER com glitch ── */
 let currentLang = 'pt';
+let isGlitching = false;
+
 function setLang(lang) {
+  if (lang === currentLang || isGlitching) return;
+  isGlitching = true;
   currentLang = lang;
-  document.getElementById('btn-pt').classList.toggle('active', lang==='pt');
-  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+
+  document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   document.documentElement.lang = lang;
+
+  const heroText = {
+    pt: { badge:'Disponível para novos projetos', sub:'Desenvolvedor Front-End criativo com paixão por transformar ideias em experiências digitais funcionais e visualmente apelativas.', cta1:'Entrar em contacto →', cta2:'Ver projetos' },
+    en: { badge:'Available for new opportunities', sub:'Creative Front-End Developer passionate about turning ideas into functional and visually compelling digital experiences.', cta1:'Get in touch →', cta2:'View projects' }
+  };
+  const matrixText = {
+    pt: '// a construir o futuro, uma linha de cada vez',
+    en: '// building the future, one line at a time'
+  };
+
   const t = translations[lang];
+  const h = heroText[lang];
+
+  // Build job list: [{ el, html }]
+  const jobs = [];
+
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if(t[key] !== undefined) el.innerHTML = t[key];
+    if (t[key] !== undefined) jobs.push({ el, html: t[key] });
   });
-  // Hero (no data-i18n on these to keep it simple)
-  const heroMap = {'.hero-badge':'hero.badge','.hero-sub':'hero.sub'};
-  const heroCta = {'.hero-ctas .btn-primary':'hero.cta1','.hero-ctas .btn-ghost':'hero.cta2'};
-  const heroText = {pt:{badge:'Disponível para novos projetos',sub:'Desenvolvedor Front-End criativo com paixão por transformar ideias em experiências digitais funcionais e visualmente apelativas.',cta1:'Entrar em contacto →',cta2:'Ver projetos'},en:{badge:'Available for new opportunities',sub:'Creative Front-End Developer passionate about turning ideas into functional and visually compelling digital experiences.',cta1:'Get in touch →',cta2:'View projects'}};
-  const matrixText = { pt: '// a construir o futuro, uma linha de cada vez', en: '// building the future, one line at a time' };
-  document.getElementById('matrix-label').textContent = matrixText[lang];
-  const h = heroText[lang];
-  document.querySelector('.hero-badge').textContent = h.badge;
-  document.querySelector('.hero-sub').textContent = h.sub;
-  document.querySelector('.hero-ctas .btn-primary').textContent = h.cta1;
-  document.querySelector('.hero-ctas .btn-ghost').textContent = h.cta2;
+
+  jobs.push({ el: document.querySelector('.hero-badge'),             html: h.badge });
+  jobs.push({ el: document.querySelector('.hero-sub'),               html: h.sub });
+  jobs.push({ el: document.querySelector('.hero-ctas .btn-primary'), html: h.cta1 });
+  jobs.push({ el: document.querySelector('.hero-ctas .btn-ghost'),   html: h.cta2 });
+  jobs.push({ el: document.getElementById('matrix-label'),           html: matrixText[lang] });
+  document.querySelectorAll('.reveal-hint:not(.hidden)').forEach(el => {
+    jobs.push({ el, html: lang === 'en' ? 'Click to reveal' : 'Clique para revelar' });
+  });
+
+  const GLITCH_DURATION = 420; // ms per element
+  const STAGGER = 16;          // ms between elements
+
+  jobs.forEach(({ el, html }, i) => {
+    if (!el) return;
+    setTimeout(() => scrambleText(el, html, GLITCH_DURATION), i * STAGGER);
+  });
+
+  setTimeout(() => { isGlitching = false; }, GLITCH_DURATION + jobs.length * STAGGER + 60);
 }
 
 /* ── MODALS ── */
@@ -795,7 +855,7 @@ function openModal(id){
     <div class="modal-body">${d.body}</div>
     <div class="modal-tech">${tech}</div>
     ${link}
-  `;    
+  `;
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
