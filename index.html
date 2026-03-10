@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Francisco Silva — Front-End Developer & Creative</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
@@ -131,7 +132,14 @@
       white-space:nowrap;
     }
     .btn-cv svg { width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; transition:transform 0.2s; }
-    .btn-cv:hover { background:rgba(148,136,176,0.06); border-color:var(--muted); color:var(--text); transform:translateY(-2px); }
+    .btn-cv {
+      animation: cv-pulse 3s ease-in-out infinite;
+    }
+    @keyframes cv-pulse {
+      0%, 100% { box-shadow: 0 0 6px rgba(192,132,252,0.15); border-color: rgba(148,136,176,0.25); }
+      50%       { box-shadow: 0 0 22px rgba(192,132,252,0.7), 0 0 40px rgba(124,58,237,0.35); border-color: rgba(192,132,252,0.9); }
+    }
+    .btn-cv:hover { background:linear-gradient(135deg,var(--purple),var(--purple-light)); border-color:transparent; color:#fff; transform:translateY(-2px); animation:none; box-shadow: 0 0 50px rgba(124,58,237,0.55); }
     .btn-cv:hover svg { transform:translateY(1px); }
 
     /* ── MATRIX ── */
@@ -371,10 +379,7 @@
       <button class="lang-btn active" id="btn-pt-m" onclick="setLang('pt'); closeMobileMenu()">PT</button>
       <button class="lang-btn"        id="btn-en-m" onclick="setLang('en'); closeMobileMenu()">EN</button>
     </div>
-    <a id="cv-btn-mobile" href="francisco silva (2025).pdf" target="_blank" rel="noopener" class="btn-cv" style="padding:0.5rem 1rem;font-size:0.82rem;">
-      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      <span class="i18n-el" data-i18n="cv.btn">Ver CV</span>
-    </a>
+
   </div>
 </div>
 
@@ -913,7 +918,6 @@ const BLUR_IN_MS  = 350;
 function updateCVButtons(lang) {
   const href = CV_FILES[lang];
   document.getElementById('cv-btn').href = href;
-  document.getElementById('cv-btn-mobile').href = href;
 }
 
 function setLang(lang) {
