@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Francisco Silva — Front-End Developer & Creative</title>
+  <title>Francisco Silva — Full Stack Developer & Creative</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Francisco Silva — Full Stack Developer & Creative" />
+  <meta property="og:description" content="Full Stack Developer with experience in Angular, React, TypeScript, PHP and SQL. Also into photography, 3D and AR." />
+  <meta property="og:image" content="https://xico1920.github.io/cv/preview.png" />
+  <meta property="og:url" content="https://xico1920.github.io/cv/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
@@ -448,7 +454,7 @@
   <div class="timeline reveal">
     <div class="timeline-item">
       <div class="timeline-year">2024 &ndash; 2025</div>
-      <div class="timeline-role i18n-el" data-i18n="exp.job1.role">Desenvolvedor Front-End &amp; Criativo</div>
+      <div class="timeline-role i18n-el" data-i18n="exp.job1.role">Desenvolvedor Full-Stack &amp; Criativo</div>
       <div class="timeline-company">Venga Digital</div>
       <ul class="timeline-desc">
         <li class="i18n-el" data-i18n="exp.job1.li1">Desenvolvimento de websites com foco em eficiência energética e redução da pegada de carbono digital.</li>
@@ -576,6 +582,16 @@
       <div class="project-role-tag i18n-el" data-i18n="proj.co2.role">Frontend &amp; Desenvolvimento</div>
       <p class="project-desc i18n-el" data-i18n="proj.co2.desc">Ferramenta para avaliar o impacto ambiental de websites, com foco em eficiência energética e redução da pegada de carbono digital.</p>
       <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
+    </div>
+    <div class="project-card" onclick="openModal('vault84')">
+      <div class="project-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/></svg></div>
+      <div class="project-name">Vault84</div>
+      <div class="project-role-tag i18n-el" data-i18n="proj.vault84.role">Jogo de Gestão — Vanilla JS</div>
+      <p class="project-desc i18n-el" data-i18n="proj.vault84.desc">Jogo idle de gestão de instalação subterrânea no browser. Gere o reator, extrai minério, neutraliza ameaças. Apenas HTML, CSS e JS puro.</p>
+      <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+        <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
+        <a href="https://xico1920.github.io/Vault84/" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="i18n-el" data-i18n="proj.vault84.play" style="font-size:0.82rem;font-weight:600;color:#fff;background:var(--purple);border:none;border-radius:8px;padding:0.45rem 1rem;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--purple-light)'" onmouseout="this.style.background='var(--purple)'">&#9654; Jogar</a>
+      </div>
     </div>
     <div class="project-card" onclick="openModal('profolio')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
@@ -812,16 +828,16 @@ const translations = {
   pt: {
     'nav.about':'Sobre','nav.experience':'Experiência','nav.projects':'Projetos','nav.education':'Formação','nav.contact':'Contacto',
     'hero.badge':'Disponível para novos projetos',
-    'hero.sub':'Desenvolvedor Front-End criativo com paixão por transformar ideias em experiências digitais funcionais e visualmente apelativas.',
+    'hero.sub':'Desenvolvedor Full-Stack criativo com paixão por transformar ideias em experiências digitais funcionais e visualmente apelativas.',
     'hero.cta1':'Entrar em contacto →','hero.cta2':'Ver projetos','cv.btn':'Ver CV',
     'about.label':'Quem sou','about.title':'Sobre mim',
-    'about.p1':'Sou um desenvolvedor front-end com experiência prática em <strong>HTML, CSS, SASS, TypeScript</strong> e frameworks como <strong>Angular e React</strong>. Aplico design responsivo e otimização de código para criar produtos digitais eficientes e sustentáveis.',
+    'about.p1':'Sou um desenvolvedor full-stack com experiência prática em <strong>HTML, CSS, SASS, TypeScript</strong> e frameworks como <strong>Angular e React</strong>, bem como backend com <strong>PHP e SQL</strong>. Aplico design responsivo e otimização de código para criar produtos digitais eficientes e sustentáveis.',
     'about.p2':'Paralelamente ao desenvolvimento web, trabalho com <strong>fotografia desde 2016</strong> (retratos, produto e eventos) e <strong>animação e renderização 3D com Blender desde 2015</strong>, tendo participado em diversas equipas de animação e pós-produção.',
     'about.p3':'Também tenho experiência em <strong>edição de vídeo e motion design</strong> com Adobe After Effects, bem como em tratamento fotográfico com Lightroom. Valorizo ambientes colaborativos que unam tecnologia, arte e sustentabilidade.',
     'about.stat1':'Anos de fotografia & 3D','about.stat2':'Nomeado MSI Creator Awards','about.stat3':'Realidade Aumentada & Virtual','about.stat4':'Web Design Sustentável',
     'matrix.label':'// a construir o futuro, uma linha de cada vez',
     'exp.label':'Carreira','exp.title':'Experiência Profissional',
-    'exp.job1.role':'Desenvolvedor Front-End & Criativo',
+    'exp.job1.role':'Desenvolvedor Full-Stack & Criativo',
     'exp.job1.li1':'Desenvolvimento de websites com foco em eficiência energética e redução da pegada de carbono digital.',
     'exp.job1.li2':'Otimização de código para minimizar consumo de recursos e melhorar desempenho ambiental.',
     'exp.job1.li3':'Desenvolvimento de uma Calculadora de CO₂ para avaliar o impacto ambiental de websites.',
@@ -847,6 +863,9 @@ const translations = {
     'proj.remechido.desc':'Portfolio de design criativo desenvolvido para um cliente. Inclui fotografia, animação 3D e trabalhos visuais.',
     'proj.co2.role':'Frontend & Desenvolvimento',
     'proj.co2.desc':'Ferramenta para avaliar o impacto ambiental de websites, com foco em eficiência energética e redução da pegada de carbono digital.',
+    'proj.vault84.role':'Jogo de Gestão — Vanilla JS',
+    'proj.vault84.desc':'Jogo idle de gestão de instalação subterrânea no browser. Gere o reator, extrai minério, neutraliza ameaças. Apenas HTML, CSS e JS puro.',
+    'proj.vault84.play':'&#9654; Jogar',
     'proj.profolio.role':'Desenvolvimento Full Stack',
     'proj.profolio.desc':'Galeria de arte online desenvolvida com PHP, HTML, CSS e SQL, como projeto prático de desenvolvimento web.',
     'edu.label':'Percurso académico','edu.title':'Formação','edu.present':'Presente',
@@ -861,16 +880,16 @@ const translations = {
   en: {
     'nav.about':'About','nav.experience':'Experience','nav.projects':'Projects','nav.education':'Education','nav.contact':'Contact',
     'hero.badge':'Available for new opportunities',
-    'hero.sub':'Creative Front-End Developer passionate about turning ideas into functional and visually compelling digital experiences.',
+    'hero.sub':'Creative Full-Stack Developer passionate about turning ideas into functional and visually compelling digital experiences.',
     'hero.cta1':'Get in touch →','hero.cta2':'View projects','cv.btn':'View CV',
     'about.label':'Who I am','about.title':'About me',
-    'about.p1':'I\'m a front-end developer with hands-on experience in <strong>HTML, CSS, SASS, TypeScript</strong> and frameworks like <strong>Angular and React</strong>. I apply responsive design and code optimisation to build efficient, sustainable digital products.',
+    'about.p1':'I\'m a full-stack developer with hands-on experience in <strong>HTML, CSS, SASS, TypeScript</strong> and frameworks like <strong>Angular and React</strong>, as well as backend with <strong>PHP and SQL</strong>. I apply responsive design and code optimisation to build efficient, sustainable digital products.',
     'about.p2':'Alongside web development, I\'ve been working with <strong>photography since 2016</strong> (portraits, product and events) and <strong>3D animation & rendering with Blender since 2015</strong>, collaborating with animation and post-production teams.',
     'about.p3':'I also have experience in <strong>video editing and motion design</strong> with Adobe After Effects, and photo post-production with Lightroom. I value collaborative environments that blend technology, art and sustainability.',
     'about.stat1':'Years of photography & 3D','about.stat2':'MSI Creator Awards nominee','about.stat3':'Augmented & Virtual Reality','about.stat4':'Sustainable Web Design',
     'matrix.label':'// building the future, one line at a time',
     'exp.label':'Career','exp.title':'Professional Experience',
-    'exp.job1.role':'Front-End Developer & Creative',
+    'exp.job1.role':'Full-Stack Developer & Creative',
     'exp.job1.li1':'Built websites focused on energy efficiency and reducing digital carbon footprint.',
     'exp.job1.li2':'Code optimisation to minimise resource consumption and improve environmental performance.',
     'exp.job1.li3':'Developed a CO₂ Calculator to assess the environmental impact of websites.',
@@ -896,6 +915,9 @@ const translations = {
     'proj.remechido.desc':'Creative design portfolio built for a client. Features photography, 3D animation and visual work.',
     'proj.co2.role':'Frontend & Development',
     'proj.co2.desc':'Web tool to assess the environmental impact of websites, focused on energy efficiency and reducing digital carbon footprint.',
+    'proj.vault84.role':'Management Game — Vanilla JS',
+    'proj.vault84.desc':'Browser-based idle facility management game. Keep the reactor online, mine ore, neutralize threats. Pure HTML, CSS and JS — no frameworks.',
+    'proj.vault84.play':'&#9654; Play',
     'proj.profolio.role':'Full Stack Development',
     'proj.profolio.desc':'Online art gallery built with PHP, HTML, CSS and SQL as a practical web development project.',
     'edu.label':'Academic background','edu.title':'Education','edu.present':'Present',
@@ -967,6 +989,7 @@ const modals = {
     bancobest:{tag:'Next Reality — Estágio 2022',title:'Banco Best',role:'Equipa Criativa & UI Design',body:`<p>A app do Banco Best é um dos projetos de maior escala em que participei, para um dos bancos digitais mais inovadores de Portugal.</p><p>Integrei a <strong>equipa criativa</strong>, participei em sessões de brainstorming e contribuí diretamente para o <strong>UI Design</strong>.</p><ul><li>Brainstorming e ideação criativa</li><li>Contribuição para o UI Design</li><li>Alinhamento com equipas de tecnologia, marketing e produto</li></ul>`,tech:['UI Design','Figma','Design Thinking','Branding'],link:'https://www.nextreality.com/projetos/banco-best',linkLabel:'Ver na Next Reality'},
     remechido:{tag:'Projeto para cliente',title:'Remechido.com',role:'Design & Desenvolvimento Web',body:`<p>Portfolio de design criativo desenvolvido para um cliente, apresentando projetos visuais, fotografia, animação 3D e trabalhos criativos.</p><ul><li>Desenvolvimento front-end completo</li><li>Design visual e identidade do site</li><li>Curadoria e apresentação de conteúdo criativo</li></ul>`,tech:['HTML','CSS','JavaScript','Design Web'],link:'https://remechido.com',linkLabel:'Visitar remechido.com'},
     co2:{tag:'Venga Digital — 2024/2025',title:'Calculadora de CO₂',role:'Frontend & Desenvolvimento',body:`<p>Ferramenta web para avaliar e quantificar o impacto ambiental de websites, inserida numa estratégia de desenvolvimento digital sustentável.</p><ul><li>Desenvolvimento frontend da ferramenta</li><li>Análise de métricas de sustentabilidade digital</li><li>Interface acessível para utilizadores não técnicos</li></ul>`,tech:['Angular','TypeScript','SASS'],link:null,linkLabel:null},
+    vault84:{tag:'Projeto Pessoal — 2024/2025',title:'Vault84',role:'Jogo de Gestão — Vanilla JS',body:`<p>Vault84 é um jogo idle de gestão de instalação subterrânea que corre inteiramente no browser, sem instalação nem backend.</p><p>O jogador assume o papel de Overseer de uma instalação em colapso, gerindo oito departamentos operacionais: reator, mineração, refinaria, tratamento de água, armazém, segurança, oficina e música sintetizada.</p><ul><li>Desenvolvido com Vanilla JavaScript puro (ES6 modules)</li><li>Interface CRT retrofuturista em CSS</li><li>Minijogos com Canvas 2D API</li><li>Trilha sonora gerada via Web Audio API</li><li>Sistema de save/load com localStorage</li><li>Three.js para modelos 3D procedurais</li></ul>`,tech:['JavaScript','HTML','CSS','Three.js','Web Audio API','Canvas 2D'],link:'https://github.com/xico1920/Vault84',linkLabel:'Ver no GitHub'},
     profolio:{tag:'Projeto Académico — 2019/2022',title:'ProFolio.pt',role:'Desenvolvimento Full Stack',body:`<p>Galeria de arte online construída durante a formação em Gestão de Sistemas Informáticos, como projeto prático de desenvolvimento web full stack.</p><ul><li>Frontend com HTML, CSS e JavaScript</li><li>Backend com PHP e base de dados SQL</li><li>Sistema de autenticação e gestão de utilizadores</li></ul>`,tech:['PHP','HTML','CSS','SQL','ASP'],link:null,linkLabel:null}
   },
   en: {
@@ -975,6 +998,7 @@ const modals = {
     bancobest:{tag:'Next Reality — Internship 2022',title:'Banco Best',role:'Creative Team & UI Design',body:`<p>The Banco Best app is one of the largest projects I worked on, for one of Portugal's most innovative digital banks.</p><p>I joined the <strong>creative team</strong>, participated in brainstorming sessions and contributed directly to the <strong>UI Design</strong>.</p><ul><li>Brainstorming and creative ideation</li><li>UI Design contributions</li><li>Alignment with technology, marketing and product teams</li></ul>`,tech:['UI Design','Figma','Design Thinking','Branding'],link:'https://www.nextreality.com/projetos/banco-best',linkLabel:'View on Next Reality'},
     remechido:{tag:'Client project',title:'Remechido.com',role:'Design & Web Development',body:`<p>Creative design portfolio built for a client, showcasing visual projects, photography, 3D animation and creative work.</p><ul><li>Complete front-end development</li><li>Visual design and site identity</li><li>Content curation and creative presentation</li></ul>`,tech:['HTML','CSS','JavaScript','Web Design'],link:'https://remechido.com',linkLabel:'Visit remechido.com'},
     co2:{tag:'Venga Digital — 2024/2025',title:'CO₂ Calculator',role:'Frontend & Development',body:`<p>Web tool to assess and quantify the environmental impact of websites, part of a sustainable digital development strategy.</p><ul><li>Frontend development of the tool</li><li>Digital sustainability metrics analysis</li><li>Accessible interface for non-technical users</li></ul>`,tech:['Angular','TypeScript','SASS'],link:null,linkLabel:null},
+    vault84:{tag:'Personal Project — 2024/2025',title:'Vault84',role:'Management Game — Vanilla JS',body:`<p>Vault84 is a browser-based idle facility management game that runs entirely in the browser — no install, no build tools, no backend.</p><p>The player takes on the role of Overseer of a failing underground facility, managing eight operational departments: reactor, mining, refinery, water treatment, smart storage, security, workshop, and synthesized music.</p><ul><li>Built with pure Vanilla JavaScript (ES6 modules)</li><li>Retrofuturistic CRT interface in CSS</li><li>Minigames using the Canvas 2D API</li><li>Synthesized soundtrack via Web Audio API</li><li>Save/load system with localStorage</li><li>Three.js for procedural 3D models</li></ul>`,tech:['JavaScript','HTML','CSS','Three.js','Web Audio API','Canvas 2D'],link:'https://github.com/xico1920/Vault84',linkLabel:'View on GitHub'},
     profolio:{tag:'Academic Project — 2019/2022',title:'ProFolio.pt',role:'Full Stack Development',body:`<p>Online art gallery built during IT Systems Management training as a practical full stack web development project.</p><ul><li>Frontend with HTML, CSS and JavaScript</li><li>Backend with PHP and SQL database</li><li>Authentication system and user management</li></ul>`,tech:['PHP','HTML','CSS','SQL','ASP'],link:null,linkLabel:null}
   }
 };
