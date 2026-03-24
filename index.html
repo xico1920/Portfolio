@@ -260,6 +260,13 @@
     .edu-school-link:hover svg { opacity:1; transform:translate(2px,-2px); }
     .edu-topics { display:flex; flex-wrap:wrap; gap:0.4rem; }
     .edu-tag { font-size:0.75rem; padding:0.2rem 0.65rem; border-radius:100px; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); color:var(--muted); }
+    .edu-subsection-title { font-family:'Syne',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:3rem; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.6rem; }
+    .edu-subsection-title::after { content:''; flex:1; height:1px; background:var(--border); }
+    .cert-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.4rem 1.8rem; transition:border-color 0.3s,transform 0.3s; display:flex; flex-direction:column; gap:0.25rem; }
+    .cert-card:hover { border-color:rgba(168,85,247,0.45); transform:translateY(-4px); }
+    .cert-name { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:#fff; line-height:1.35; }
+    .cert-issuer { font-size:0.82rem; color:var(--accent); }
+    .cert-date { font-size:0.75rem; color:var(--muted); letter-spacing:0.04em; }
 
     /* ── CONTACT ── */
     #contact { background:var(--bg); }
@@ -667,17 +674,30 @@
         <span class="edu-tag i18n-el" data-i18n="edu.ai">Inteligência Artificial</span>
       </div>
     </div>
-    <div class="edu-card">
-      <div class="edu-year">2025</div>
-      <div class="edu-degree">Extended Reality (XR)</div>
-      <a href="https://www.virtualinnovationconsortium.com" target="_blank" rel="noopener" class="edu-school-link">
-        Virtual Innovation Consortium (VIC)
-        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <div class="edu-topics">
-        <span class="edu-tag i18n-el" data-i18n="edu.ar">Realidade Aumentada</span>
-        <span class="edu-tag i18n-el" data-i18n="edu.vr">Realidade Virtual</span>
-        <span class="edu-tag i18n-el" data-i18n="edu.proto">Prototipagem XR</span>
+  </div>
+
+  <div class="reveal">
+    <div class="edu-subsection-title i18n-el" data-i18n="edu.cert.label">Certificações &amp; Workshops</div>
+    <div class="edu-grid" style="margin-top:1rem;">
+      <div class="cert-card">
+        <div class="cert-name">Cybersecurity Summit</div>
+        <div class="cert-issuer">ISTEC</div>
+        <div class="cert-date i18n-el" data-i18n="edu.cert.mar2026">Mar 2026</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-name">Extended Reality (XR), AR, VR, Gamification &amp; AI Innovation Training</div>
+        <div class="cert-issuer">Virtual Innovation Consortium</div>
+        <div class="cert-date i18n-el" data-i18n="edu.cert.nov2025">Nov 2025</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-name">Cybersecurity Threats, Vulnerabilities &amp; Digital Risk Management</div>
+        <div class="cert-issuer">ISTEC</div>
+        <div class="cert-date i18n-el" data-i18n="edu.cert.out2024">Out 2024</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-name">De Web2 to Web3: Promises of Decentralized Technology</div>
+        <div class="cert-issuer">Goethe-Institut e.V.</div>
+        <div class="cert-date i18n-el" data-i18n="edu.cert.mar2024">Mar 2024</div>
       </div>
     </div>
   </div>
@@ -887,6 +907,8 @@ const translations = {
     'proj.profolio.role':'Desenvolvimento Full Stack',
     'proj.profolio.desc':'Galeria de arte online desenvolvida com PHP, HTML, CSS e SQL, como projeto prático de desenvolvimento web.',
     'edu.label':'Percurso académico','edu.title':'Formação','edu.present':'Presente',
+    'edu.cert.label':'Certificações & Workshops',
+    'edu.cert.mar2026':'Mar 2026','edu.cert.nov2025':'Nov 2025','edu.cert.out2024':'Out 2024','edu.cert.mar2024':'Mar 2024',
     'edu.d1':'Gestão de Sistemas Informáticos e Programação','edu.d2':'Design e Desenvolvimento Web','edu.d3':'Engenharia Informática',
     'edu.net':'Redes','edu.webdesign':'Design Web','edu.webprog':'Programação Web','edu.marketing':'Marketing Digital',
     'edu.nets':'Redes e Comunicações','edu.algo':'Algoritmos','edu.prog':'Programação','edu.ai':'Inteligência Artificial',
@@ -941,6 +963,8 @@ const translations = {
     'proj.profolio.role':'Full Stack Development',
     'proj.profolio.desc':'Online art gallery built with PHP, HTML, CSS and SQL as a practical web development project.',
     'edu.label':'Academic background','edu.title':'Education','edu.present':'Present',
+    'edu.cert.label':'Certifications & Workshops',
+    'edu.cert.mar2026':'Mar 2026','edu.cert.nov2025':'Nov 2025','edu.cert.out2024':'Oct 2024','edu.cert.mar2024':'Mar 2024',
     'edu.d1':'IT Systems Management & Programming','edu.d2':'Web Design & Development','edu.d3':'Computer Engineering',
     'edu.net':'Networking','edu.webdesign':'Web Design','edu.webprog':'Web Programming','edu.marketing':'Digital Marketing',
     'edu.nets':'Networks & Communications','edu.algo':'Algorithms','edu.prog':'Programming','edu.ai':'Artificial Intelligence',
