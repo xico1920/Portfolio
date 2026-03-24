@@ -48,6 +48,15 @@
       filter: blur(6px);
       transform: scale(0.97);
     }
+    nav .i18n-el, .mobile-nav .i18n-el {
+      transition: opacity 0.35s ease;
+      will-change: opacity;
+    }
+    nav .i18n-el.lang-out, .mobile-nav .i18n-el.lang-out {
+      opacity: 0;
+      filter: none;
+      transform: none;
+    }
 
     /* ── NAV ── */
     nav {
