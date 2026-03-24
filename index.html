@@ -679,22 +679,22 @@
   <div class="reveal">
     <div class="edu-subsection-title i18n-el" data-i18n="edu.cert.label">Certificações &amp; Workshops</div>
     <div class="edu-grid" style="margin-top:1rem;">
-      <div class="cert-card">
+      <div class="cert-card" onclick="openCertModal('cybersummit')" style="cursor:pointer;">
         <div class="cert-name">Cybersecurity Summit</div>
         <div class="cert-issuer">ISTEC</div>
         <div class="cert-date i18n-el" data-i18n="edu.cert.mar2026">Mar 2026</div>
       </div>
-      <div class="cert-card">
+      <div class="cert-card" onclick="openCertModal('xrvic')" style="cursor:pointer;">
         <div class="cert-name">Extended Reality (XR), AR, VR, Gamification &amp; AI Innovation Training</div>
         <div class="cert-issuer">Virtual Innovation Consortium</div>
         <div class="cert-date i18n-el" data-i18n="edu.cert.nov2025">Nov 2025</div>
       </div>
-      <div class="cert-card">
+      <div class="cert-card" onclick="openCertModal('cyberthreats')" style="cursor:pointer;">
         <div class="cert-name">Cybersecurity Threats, Vulnerabilities &amp; Digital Risk Management</div>
         <div class="cert-issuer">ISTEC</div>
         <div class="cert-date i18n-el" data-i18n="edu.cert.out2024">Out 2024</div>
       </div>
-      <div class="cert-card">
+      <div class="cert-card" onclick="openCertModal('web3')" style="cursor:pointer;">
         <div class="cert-name">De Web2 to Web3: Promises of Decentralized Technology</div>
         <div class="cert-issuer">Goethe-Institut e.V.</div>
         <div class="cert-date i18n-el" data-i18n="edu.cert.mar2024">Mar 2024</div>
@@ -1048,6 +1048,36 @@ const modals = {
     profolio:{tag:'Academic Project — 2019/2022',title:'ProFolio.pt',role:'Full Stack Development',body:`<p>Online art gallery built during IT Systems Management training as a practical full stack web development project.</p><ul><li>Frontend with HTML, CSS and JavaScript</li><li>Backend with PHP and SQL database</li><li>Authentication system and user management</li></ul>`,tech:['PHP','HTML','CSS','SQL','ASP'],link:null,linkLabel:null}
   }
 };
+
+const certModals = {
+  pt: {
+    cybersummit:{tag:'ISTEC Lisboa — Mar 2026',title:'Cybersecurity Summit',issuer:'ISTEC — Instituto Superior de Tecnologias Avançadas',body:`<p>Colóquio académico e profissional organizado pelo ISTEC Lisboa, reunindo especialistas em cibersegurança, forças de segurança e líderes da indústria para debater ameaças contemporâneas e boas práticas de defesa digital.</p><ul><li>Investigação criminal e abordagens das autoridades ao cibercrime</li><li>Boas práticas de cibersegurança e defesa operacional</li><li>A revolução da Inteligência Artificial em cibersegurança</li><li>Gestão de SOC (Security Operations Center) e resposta a incidentes</li><li>Segurança de redes empresariais</li></ul><p>Oradores de referência: Polícia Judiciária (UNCCT), EDP e Palo Alto Networks.</p>`,link:'https://www.istec.pt',linkLabel:'Visitar ISTEC'},
+    xrvic:{tag:'Virtual Innovation Consortium — Nov 2025',title:'XR, AR, VR, Gamification & AI Innovation Training',issuer:'Virtual Innovation Consortium (VIC) — Financiado pela EU',body:`<p>Programa avançado de formação financiado pela União Europeia (grant DIGITAL-2024-ADVANCED-DIGITAL-07-KEYCAPACITY), criado para colmatar o défice europeu de competências em tecnologias imersivas XR.</p><p>Coordenado pelo ISTEC Lisboa, com 10 instituições parceiras europeias incluindo o Politecnico di Milano. Distinguido com o <strong>STEP Seal</strong> para projetos altamente inovadores.</p><ul><li>Fundamentos de XR: Realidade Virtual (VR), Aumentada (AR) e Mista (MR)</li><li>Gamification e design de jogos sérios em ambientes imersivos</li><li>Integração de IA em tecnologias imersivas</li><li>Design de metaverso e espaços XR sociais</li><li>Robótica social</li><li>Aplicações XR em saúde, educação, arquitetura e entretenimento</li></ul>`,link:'https://vic-eu.com',linkLabel:'Visitar VIC'},
+    cyberthreats:{tag:'ISTEC Lisboa — Out 2024',title:'Cybersecurity Threats, Vulnerabilities & Digital Risk Management',issuer:'ISTEC — Instituto Superior de Tecnologias Avançadas',body:`<p>Formação em identificação, gestão e resposta a ameaças e riscos digitais, integrada nos programas académicos do ISTEC Lisboa e reconhecida pelo Ministério da Ciência e Tecnologia de Portugal.</p><ul><li>Conceitos de segurança digital e princípios de arquitetura segura</li><li>Identificação e análise de ameaças</li><li>Técnicas de avaliação de vulnerabilidades</li><li>Sistemas de deteção e prevenção de intrusões (IDS/IPS)</li><li>Resposta a incidentes e recuperação</li><li>Forense digital e análise forense de redes</li><li>Auditoria de segurança, políticas e compliance (GDPR)</li><li>Criptografia e ethical hacking</li></ul>`,link:'https://www.istec.pt',linkLabel:'Visitar ISTEC'},
+    web3:{tag:'Goethe-Institut Lisboa — Mar 2024',title:'De Web2 to Web3: Promises of Decentralized Technology',issuer:'Goethe-Institut e.V. & Makers in Little Lisbon',body:`<p>Workshop gratuito realizado no Goethe-Institut Lisboa, integrado na série <strong>Web3Expressão</strong> — um programa bienal do projeto <em>ART meets TECH</em> presente em 18 institutos Goethe europeus, dirigido a artistas e criativos.</p><ul><li>A transição da infraestrutura da Web2 para a Web3</li><li>Tecnologia blockchain: mecânica, complexidade e potencial</li><li>Propriedade de dados e controlo do utilizador em sistemas descentralizados</li><li>Implicações sociais dos sistemas descentralizados</li><li>Segurança digital e transparência em Web3</li><li>NFTs, DAOs e o impacto na criação e propriedade artística</li></ul>`,link:'https://www.goethe.de/ins/pt/en/kul/sup/web.html',linkLabel:'Visitar Goethe-Institut'},
+  },
+  en: {
+    cybersummit:{tag:'ISTEC Lisboa — Mar 2026',title:'Cybersecurity Summit',issuer:'ISTEC — Instituto Superior de Tecnologias Avançadas',body:`<p>Academic and professional colloquium organised by ISTEC Lisboa, bringing together cybersecurity specialists, law enforcement, and industry leaders to discuss contemporary threats and digital defence best practices.</p><ul><li>Cybercrime investigation and law enforcement approaches</li><li>Cybersecurity best practices and operational defence</li><li>The revolution of Artificial Intelligence in cybersecurity</li><li>SOC (Security Operations Center) management and incident response</li><li>Enterprise network security</li></ul><p>Key speakers from: Polícia Judiciária (UNCCT), EDP and Palo Alto Networks.</p>`,link:'https://www.istec.pt',linkLabel:'Visit ISTEC'},
+    xrvic:{tag:'Virtual Innovation Consortium — Nov 2025',title:'XR, AR, VR, Gamification & AI Innovation Training',issuer:'Virtual Innovation Consortium (VIC) — EU Funded',body:`<p>Advanced training programme funded by the European Union (grant DIGITAL-2024-ADVANCED-DIGITAL-07-KEYCAPACITY), designed to close Europe's skills gap in immersive XR technologies.</p><p>Coordinated by ISTEC Lisboa, with 10 European partner institutions including Politecnico di Milano. Recipient of the <strong>STEP Seal</strong> for highly innovative projects.</p><ul><li>XR fundamentals: Virtual Reality (VR), Augmented Reality (AR) and Mixed Reality (MR)</li><li>Gamification and serious game design in immersive environments</li><li>AI integration in immersive technologies</li><li>Metaverse design and social XR spaces</li><li>Social robotics</li><li>XR applications in healthcare, education, architecture and entertainment</li></ul>`,link:'https://vic-eu.com',linkLabel:'Visit VIC'},
+    cyberthreats:{tag:'ISTEC Lisboa — Oct 2024',title:'Cybersecurity Threats, Vulnerabilities & Digital Risk Management',issuer:'ISTEC — Instituto Superior de Tecnologias Avançadas',body:`<p>Training in identifying, managing and responding to digital threats and risks, integrated into ISTEC Lisboa's accredited academic programmes and recognised by Portugal's Ministry of Science and Technology.</p><ul><li>Digital security concepts and secure architecture principles</li><li>Threat identification and analysis</li><li>Vulnerability assessment techniques</li><li>Intrusion detection and prevention systems (IDS/IPS)</li><li>Incident response and recovery</li><li>Digital forensics and network forensic analysis</li><li>Security auditing, policies and compliance (GDPR)</li><li>Cryptography and ethical hacking</li></ul>`,link:'https://www.istec.pt',linkLabel:'Visit ISTEC'},
+    web3:{tag:'Goethe-Institut Lisboa — Mar 2024',title:'De Web2 to Web3: Promises of Decentralized Technology',issuer:'Goethe-Institut e.V. & Makers in Little Lisbon',body:`<p>Free workshop held at Goethe-Institut Lisbon, part of the <strong>Web3Expressão</strong> series — a biweekly programme from the <em>ART meets TECH</em> initiative running across 18 European Goethe-Institutes, aimed at artists and creatives.</p><ul><li>The transition from Web2 to Web3 internet infrastructure</li><li>Blockchain technology: mechanics, complexity and potential</li><li>Data ownership and user control in decentralised systems</li><li>Societal implications of decentralised systems</li><li>Digital security and transparency in Web3</li><li>NFTs, DAOs and their impact on artistic creation and ownership</li></ul>`,link:'https://www.goethe.de/ins/pt/en/kul/sup/web.html',linkLabel:'Visit Goethe-Institut'},
+  }
+};
+
+function openCertModal(id){
+  const d = certModals[currentLang][id]; if(!d) return;
+  const link = d.link ? `<a href="${d.link}" target="_blank" class="modal-link">${d.linkLabel} →</a>` : '';
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-tag">${d.tag}</div>
+    <div class="modal-title">${d.title}</div>
+    <div class="modal-role">${d.issuer}</div>
+    <div class="modal-hr"></div>
+    <div class="modal-body">${d.body}</div>
+    ${link}
+  `;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
 function openModal(id){
   const d = modals[currentLang][id]; if(!d) return;
