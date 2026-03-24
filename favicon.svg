@@ -1,6 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#080810"/>
-  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle"
-        font-family="Georgia, serif" font-weight="700" font-size="14"
-        fill="#c084fc" letter-spacing="-0.5">FS</text>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <!-- Dark background -->
+  <rect width="32" height="32" rx="9" fill="#080810"/>
+  <!-- F — horizontal bars + vertical -->
+  <rect x="7" y="7" width="9" height="2.5" rx="1.2" fill="url(#g)"/>
+  <rect x="7" y="12.5" width="7" height="2.5" rx="1.2" fill="url(#g)"/>
+  <rect x="7" y="7" width="2.5" height="11" rx="1.2" fill="url(#g)"/>
+  <!-- S — drawn as two arcs via path -->
+  <path d="M19.5 8.5 Q24.5 7.5 24.5 11.5 Q24.5 15 19.5 15.5 Q14.5 16 14.5 20.5 Q14.5 24.5 20 24" 
+        fill="none" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"/>
 </svg>
