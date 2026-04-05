@@ -362,6 +362,219 @@
       .stat-card { padding:1.1rem; }
       .stat-num { font-size:1.6rem; }
     }
+
+    /* ══ THEME TOGGLE UI ══ */
+    .theme-toggle { position:relative; margin-left:0.25rem; flex-shrink:0; }
+    .theme-btn { display:flex; align-items:center; gap:0.4rem; background:rgba(124,58,237,0.1); border:1px solid var(--border); border-radius:8px; padding:0.35rem 0.65rem; cursor:pointer; color:var(--muted); font-size:0.75rem; font-weight:600; letter-spacing:0.04em; transition:color 0.2s; white-space:nowrap; font-family:'DM Sans',sans-serif; }
+    .theme-btn:hover { color:var(--accent); }
+    .theme-btn-icon { width:13px; height:13px; flex-shrink:0; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .theme-btn-arrow { width:9px; height:9px; flex-shrink:0; stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s; }
+    .theme-dropdown { position:absolute; top:calc(100% + 8px); right:0; background:#13121e; border:1px solid rgba(168,85,247,0.3); border-radius:10px; padding:0.4rem; min-width:165px; opacity:0; pointer-events:none; transform:translateY(-6px); transition:opacity 0.2s ease,transform 0.2s ease; z-index:200; box-shadow:0 8px 32px rgba(0,0,0,0.4); }
+    .theme-dropdown.open { opacity:1; pointer-events:all; transform:translateY(0); }
+    .theme-option { display:flex; align-items:center; gap:0.65rem; padding:0.5rem 0.75rem; border-radius:6px; cursor:pointer; font-size:0.8rem; color:#9488b0; transition:background 0.15s,color 0.15s; white-space:nowrap; font-family:'DM Sans',sans-serif; user-select:none; }
+    .theme-option:hover { background:rgba(124,58,237,0.12); color:#e2d9f3; }
+    .theme-option.active { color:#c084fc; font-weight:600; }
+    .theme-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; display:inline-block; }
+    .theme-dot-default { background:linear-gradient(135deg,#7c3aed,#c084fc); }
+    .theme-dot-win98 { background:#c0c0c0; border:1px solid #808080; border-radius:2px !important; }
+    .theme-dot-xp { background:linear-gradient(135deg,#4b7fd8,#245edb); }
+    .theme-dot-frutiger { background:linear-gradient(135deg,#4db8ff,#2d9cdb); border-radius:50% !important; }
+
+    /* ══ THEME: WIN98 ══ */
+    body.theme-win98 { --bg:#c0c0c0; --bg2:#d4d0c8; --purple:#000080; --purple-light:#1084d0; --purple-glow:#000080; --accent:#000080; --text:#000; --muted:#333; --border:#808080; --card:#d4d0c8; background:#c0c0c0; }
+    body.theme-win98 * { font-family:Tahoma,'MS Sans Serif',Arial,sans-serif !important; border-radius:0 !important; }
+    body.theme-win98::before, body.theme-win98 .orb { display:none !important; }
+    body.theme-win98 #matrix-section { display:none; }
+    body.theme-win98 #about, body.theme-win98 #skills, body.theme-win98 #experience, body.theme-win98 #projects, body.theme-win98 #education, body.theme-win98 #contact { background:#c0c0c0; }
+    body.theme-win98 nav { background:linear-gradient(90deg,#000080,#1084d0); border-bottom:2px solid #000; backdrop-filter:none; }
+    body.theme-win98 .nav-logo { color:#fff; }
+    body.theme-win98 .nav-links a { color:#fff; }
+    body.theme-win98 .nav-links a:hover { color:#ffff80; }
+    body.theme-win98 .lang-toggle { background:#d4d0c8; border:none; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
+    body.theme-win98 .lang-btn { color:#000; }
+    body.theme-win98 .lang-btn.active { background:#000080; color:#fff; }
+    body.theme-win98 .theme-btn { background:#d4d0c8; border:none; color:#000; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
+    body.theme-win98 .theme-btn:hover { color:#000080; }
+    body.theme-win98 .theme-dropdown { background:#d4d0c8; border:2px solid #000; box-shadow:3px 3px 0 #000; }
+    body.theme-win98 .theme-option { color:#000; }
+    body.theme-win98 .theme-option:hover { background:#000080; color:#fff; }
+    body.theme-win98 .theme-option.active { color:#000080; }
+    body.theme-win98 .section-title { color:#000; font-size:clamp(1.4rem,3.5vw,2rem); }
+    body.theme-win98 .section-label { color:#000080; }
+    body.theme-win98 .divider { background:#000080; }
+    body.theme-win98 .hero-name { color:#000; font-size:clamp(2.2rem,6vw,4rem); }
+    body.theme-win98 .hero-name span { -webkit-text-fill-color:#000080 !important; background:none !important; }
+    body.theme-win98 .hero-badge { color:#000080; border-color:#808080; background:#d4d0c8; }
+    body.theme-win98 .hero-sub { color:#333; }
+    body.theme-win98 .btn-primary, body.theme-win98 .btn-ghost, body.theme-win98 .btn-cv { background:#d4d0c8; color:#000; border:none; animation:none !important; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
+    body.theme-win98 .btn-primary:hover, body.theme-win98 .btn-ghost:hover, body.theme-win98 .btn-cv:hover { background:#d4d0c8; color:#000080; transform:none; box-shadow:inset 1px 1px 0 #000,inset -1px -1px 0 #fff,inset 2px 2px 0 #808080,inset -2px -2px 0 #dfdfdf; }
+    body.theme-win98 .stat-card, body.theme-win98 .timeline-item, body.theme-win98 .skill-group, body.theme-win98 .project-card, body.theme-win98 .edu-card, body.theme-win98 .cert-card, body.theme-win98 .contact-link { background:#d4d0c8; border:none; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
+    body.theme-win98 .stat-card:hover, body.theme-win98 .timeline-item:hover, body.theme-win98 .skill-group:hover, body.theme-win98 .project-card:hover, body.theme-win98 .edu-card:hover, body.theme-win98 .cert-card:hover, body.theme-win98 .contact-link:hover { transform:none !important; }
+    body.theme-win98 .stat-num { color:#000080; }
+    body.theme-win98 .timeline-role, body.theme-win98 .edu-degree, body.theme-win98 .cert-name, body.theme-win98 .project-name { color:#000; }
+    body.theme-win98 .timeline-company, body.theme-win98 .cert-issuer, body.theme-win98 .edu-school-link, body.theme-win98 .project-role-tag { color:#000080; }
+    body.theme-win98 .timeline-year, body.theme-win98 .edu-year { color:#000080; }
+    body.theme-win98 .timeline::before { background:#000080; }
+    body.theme-win98 .timeline-item::before { background:#000080; box-shadow:none; border-color:#c0c0c0; }
+    body.theme-win98 .tag, body.theme-win98 .modal-tech-tag, body.theme-win98 .edu-tag, body.theme-win98 .award-badge { background:#d4d0c8; border:1px solid #808080; color:#000; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff; }
+    body.theme-win98 .skill-group-title { color:#000080; }
+    body.theme-win98 .project-btn { color:#000080; }
+    body.theme-win98 .project-card::before { display:none; }
+    body.theme-win98 .contact-icon { background:#d4d0c8; border:1px solid #808080; }
+    body.theme-win98 .contact-icon svg { stroke:#000080; }
+    body.theme-win98 .contact-link-text strong { color:#000080; }
+    body.theme-win98 .modal { background:#d4d0c8; border:none; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf,4px 4px 0 #000; }
+    body.theme-win98 .modal-overlay { background:rgba(0,0,0,0.5); backdrop-filter:none; }
+    body.theme-win98 .modal-tag { display:block; background:linear-gradient(90deg,#000080,#1084d0); color:#fff; margin:-2rem -2rem 1.2rem -2rem; padding:0.35rem 0.7rem; font-size:0.82rem; letter-spacing:0; text-transform:none; font-weight:700; }
+    body.theme-win98 .modal-title { color:#000; }
+    body.theme-win98 .modal-role { color:#000080; }
+    body.theme-win98 .modal-hr { background:#808080; }
+    body.theme-win98 .modal-body { color:#333; }
+    body.theme-win98 .modal-body strong { color:#000; }
+    body.theme-win98 .modal-link { background:#d4d0c8; color:#000080; border:none; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
+    body.theme-win98 .modal-close { background:#d4d0c8; border:none; color:#000; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
+    body.theme-win98 footer { background:#c0c0c0; border-top:2px solid #808080; }
+    body.theme-win98 footer .logo { color:#000080; }
+    body.theme-win98 footer p { color:#333; }
+    body.theme-win98 .edu-subsection-title { color:#000; }
+    body.theme-win98 .edu-subsection-title::after { background:#808080; }
+    body.theme-win98 .mobile-nav { background:rgba(192,192,192,0.98); border-bottom:2px solid #000; backdrop-filter:none; }
+    body.theme-win98 .mobile-nav a { color:#000; border-bottom-color:#808080; }
+    body.theme-win98 .mobile-nav-bottom { border-top-color:#808080; }
+
+    /* ══ THEME: WINDOWS XP ══ */
+    body.theme-xp { --bg:#ece9d8; --bg2:#f5f3ec; --purple:#2254d3; --purple-light:#4b7fd8; --purple-glow:#2254d3; --accent:#2254d3; --text:#1a1a1a; --muted:#555; --border:rgba(34,84,211,0.2); --card:#fff; background:#ece9d8; }
+    body.theme-xp * { font-family:Tahoma,Arial,sans-serif !important; }
+    body.theme-xp::before { display:none !important; }
+    body.theme-xp .orb { display:none !important; }
+    body.theme-xp #matrix-section { display:none; }
+    body.theme-xp #about, body.theme-xp #skills { background:#f5f3ec; }
+    body.theme-xp nav { background:linear-gradient(180deg,#3a7bd5 0%,#2254d3 60%,#1a40a8 100%); border-bottom:2px solid #1a3080; backdrop-filter:none; }
+    body.theme-xp .nav-logo { color:#fff; text-shadow:1px 1px 2px rgba(0,0,0,0.4); }
+    body.theme-xp .nav-links a { color:#d8e8ff; }
+    body.theme-xp .nav-links a:hover { color:#fff; }
+    body.theme-xp .lang-toggle { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); }
+    body.theme-xp .lang-btn { color:#d8e8ff; }
+    body.theme-xp .lang-btn.active { background:rgba(255,255,255,0.25); color:#fff; }
+    body.theme-xp .theme-btn { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); color:#d8e8ff; }
+    body.theme-xp .theme-btn:hover { color:#fff; }
+    body.theme-xp .theme-dropdown { background:#fff; border:1px solid #7fa8c8; box-shadow:2px 2px 8px rgba(0,0,0,0.2); }
+    body.theme-xp .theme-option { color:#333; }
+    body.theme-xp .theme-option:hover { background:#d4e4f7; color:#000; }
+    body.theme-xp .theme-option.active { color:#2254d3; font-weight:600; }
+    body.theme-xp .section-title { color:#1a1a1a; }
+    body.theme-xp .section-label { color:#2254d3; }
+    body.theme-xp .divider { background:linear-gradient(90deg,#2254d3,#4b7fd8); }
+    body.theme-xp .hero-name { color:#1a1a1a; }
+    body.theme-xp .hero-name span { -webkit-text-fill-color:transparent !important; background:linear-gradient(135deg,#2254d3,#4b7fd8) !important; -webkit-background-clip:text !important; background-clip:text !important; }
+    body.theme-xp .hero-badge { color:#2254d3; border-color:rgba(34,84,211,0.35); background:rgba(34,84,211,0.06); }
+    body.theme-xp .hero-sub { color:#555; }
+    body.theme-xp .btn-primary { background:linear-gradient(180deg,#5a9de4 0%,#2d71d7 45%,#1e55c4 51%,#3a80de 100%); box-shadow:0 1px 3px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.4); animation:none; border:1px solid #1a3fa0; color:#fff; }
+    body.theme-xp .btn-primary:hover { opacity:0.92; transform:none; }
+    body.theme-xp .btn-ghost { color:#2254d3; border-color:rgba(34,84,211,0.4); }
+    body.theme-xp .btn-ghost:hover { background:rgba(34,84,211,0.06); transform:none; }
+    body.theme-xp .btn-cv { color:#2254d3; border-color:rgba(34,84,211,0.3); animation:none; }
+    body.theme-xp .btn-cv:hover { background:linear-gradient(180deg,#5a9de4,#1e55c4); color:#fff; transform:none; border-color:transparent; }
+    body.theme-xp .stat-card, body.theme-xp .timeline-item, body.theme-xp .skill-group, body.theme-xp .project-card, body.theme-xp .edu-card, body.theme-xp .cert-card, body.theme-xp .contact-link { background:#fff; border:1px solid #b8d0e8; box-shadow:1px 1px 4px rgba(0,0,100,0.08); }
+    body.theme-xp .project-card::before { background:linear-gradient(90deg,#2254d3,#4b7fd8); }
+    body.theme-xp .stat-num { color:#2254d3; }
+    body.theme-xp .timeline-role, body.theme-xp .edu-degree, body.theme-xp .cert-name, body.theme-xp .project-name { color:#1a1a1a; }
+    body.theme-xp .timeline-company, body.theme-xp .cert-issuer, body.theme-xp .edu-school-link, body.theme-xp .project-role-tag { color:#2254d3; }
+    body.theme-xp .timeline-year, body.theme-xp .edu-year { color:#4b7fd8; }
+    body.theme-xp .timeline::before { background:linear-gradient(180deg,#2254d3,transparent); }
+    body.theme-xp .timeline-item::before { background:#4b7fd8; box-shadow:0 0 8px rgba(75,127,216,0.5); border-color:#ece9d8; }
+    body.theme-xp .tag, body.theme-xp .edu-tag, body.theme-xp .modal-tech-tag, body.theme-xp .award-badge { background:rgba(34,84,211,0.07); border-color:rgba(34,84,211,0.2); color:#1a1a1a; }
+    body.theme-xp .skill-group-title { color:#2254d3; }
+    body.theme-xp .project-btn { color:#2254d3; }
+    body.theme-xp .contact-icon { background:rgba(34,84,211,0.1); border-color:rgba(34,84,211,0.2); }
+    body.theme-xp .contact-icon svg { stroke:#2254d3; }
+    body.theme-xp .contact-link-text strong { color:#2254d3; }
+    body.theme-xp .modal { background:#fff; border:1px solid #b8d0e8; box-shadow:0 8px 32px rgba(0,0,100,0.15); }
+    body.theme-xp .modal-overlay { backdrop-filter:blur(4px); background:rgba(30,50,120,0.4); }
+    body.theme-xp .modal-tag { display:block; background:linear-gradient(180deg,#3a7bd5 0%,#2254d3 60%,#1a40a8 100%); color:#fff; margin:-2rem -2rem 1.2rem -2rem; padding:0.4rem 0.7rem; font-size:0.82rem; letter-spacing:0; text-transform:none; font-weight:700; text-shadow:1px 1px 2px rgba(0,0,0,0.3); }
+    body.theme-xp .modal-title, body.theme-xp .modal-body strong { color:#1a1a1a; }
+    body.theme-xp .modal-role { color:#2254d3; }
+    body.theme-xp .modal-body { color:#555; }
+    body.theme-xp .modal-hr { background:rgba(34,84,211,0.15); }
+    body.theme-xp .modal-link { background:linear-gradient(180deg,#5a9de4,#1e55c4); box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+    body.theme-xp .modal-close { background:#f5f3ec; border:1px solid #b8d0e8; color:#333; }
+    body.theme-xp .modal-close:hover { background:#d4e4f7; color:#2254d3; }
+    body.theme-xp footer { background:#ece9d8; border-top:1px solid #b8d0e8; }
+    body.theme-xp footer .logo { color:#2254d3; }
+    body.theme-xp footer p { color:#555; }
+    body.theme-xp .edu-subsection-title { color:#555; }
+    body.theme-xp .edu-subsection-title::after { background:rgba(34,84,211,0.2); }
+    body.theme-xp .mobile-nav { background:rgba(236,233,216,0.98); backdrop-filter:none; border-bottom:1px solid #b8d0e8; }
+    body.theme-xp .mobile-nav a { color:#1a1a1a; border-bottom-color:rgba(34,84,211,0.15); }
+
+    /* ══ THEME: FRUTIGER AERO ══ */
+    body.theme-frutiger { --bg:transparent; --bg2:transparent; --purple:#0078d4; --purple-light:#00a8e8; --purple-glow:#00c8ff; --accent:#0078d4; --text:#0a2840; --muted:#2d5a7a; --border:rgba(0,120,212,0.2); --card:rgba(255,255,255,0.55); background:linear-gradient(160deg,#87ceeb 0%,#b8e4f7 30%,#ddf0fc 60%,#f0faff 100%) fixed; }
+    body.theme-frutiger * { font-family:'Segoe UI',system-ui,sans-serif !important; }
+    body.theme-frutiger::before { display:none !important; }
+    body.theme-frutiger .orb1 { background:radial-gradient(circle,rgba(0,168,232,0.2) 0%,transparent 70%); }
+    body.theme-frutiger .orb2 { background:radial-gradient(circle,rgba(0,200,255,0.15) 0%,transparent 70%); }
+    body.theme-frutiger #about { background:rgba(200,235,255,0.4); }
+    body.theme-frutiger #skills { background:rgba(220,242,255,0.3); }
+    body.theme-frutiger #experience, body.theme-frutiger #projects, body.theme-frutiger #education, body.theme-frutiger #contact { background:rgba(200,235,255,0.2); }
+    body.theme-frutiger nav { background:rgba(0,100,200,0.78); backdrop-filter:blur(20px); border-bottom:1px solid rgba(120,200,255,0.3); box-shadow:0 2px 20px rgba(0,100,200,0.2); }
+    body.theme-frutiger .nav-logo { color:#fff; }
+    body.theme-frutiger .nav-links a { color:rgba(220,240,255,0.9); }
+    body.theme-frutiger .nav-links a:hover { color:#fff; }
+    body.theme-frutiger .lang-toggle { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); }
+    body.theme-frutiger .lang-btn { color:rgba(220,240,255,0.9); }
+    body.theme-frutiger .lang-btn.active { background:rgba(255,255,255,0.3); color:#fff; }
+    body.theme-frutiger .theme-btn { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); color:rgba(220,240,255,0.9); }
+    body.theme-frutiger .theme-btn:hover { color:#fff; }
+    body.theme-frutiger .theme-dropdown { background:rgba(220,242,255,0.95); backdrop-filter:blur(20px); border:1px solid rgba(0,160,255,0.3); box-shadow:0 8px 32px rgba(0,100,200,0.15); }
+    body.theme-frutiger .theme-option { color:#0a2840; }
+    body.theme-frutiger .theme-option:hover { background:rgba(0,120,212,0.12); color:#003060; }
+    body.theme-frutiger .theme-option.active { color:#0078d4; }
+    body.theme-frutiger .section-title { color:#0a2840; }
+    body.theme-frutiger .section-label { color:#0078d4; }
+    body.theme-frutiger .divider { background:linear-gradient(90deg,#0078d4,#00a8e8); }
+    body.theme-frutiger .hero-name { color:#0a2840; }
+    body.theme-frutiger .hero-name span { background:linear-gradient(135deg,#0078d4,#00c8ff) !important; -webkit-background-clip:text !important; background-clip:text !important; }
+    body.theme-frutiger .hero-badge { color:#0078d4; border-color:rgba(0,120,212,0.4); background:rgba(0,120,212,0.08); }
+    body.theme-frutiger .hero-sub { color:#2d5a7a; }
+    body.theme-frutiger .btn-primary { background:linear-gradient(135deg,#0099e8,#0060c0); box-shadow:0 4px 20px rgba(0,120,212,0.35),inset 0 1px 0 rgba(255,255,255,0.3); animation:none; }
+    body.theme-frutiger .btn-primary:hover { box-shadow:0 6px 28px rgba(0,120,212,0.5); transform:translateY(-2px); }
+    body.theme-frutiger .btn-ghost { color:#0078d4; border-color:rgba(0,120,212,0.35); }
+    body.theme-frutiger .btn-ghost:hover { background:rgba(0,120,212,0.08); border-color:#0078d4; }
+    body.theme-frutiger .btn-cv { color:#0078d4; border-color:rgba(0,120,212,0.3); animation:none; }
+    body.theme-frutiger .btn-cv:hover { background:linear-gradient(135deg,#0099e8,#0060c0); color:#fff; border-color:transparent; }
+    body.theme-frutiger .stat-card, body.theme-frutiger .timeline-item, body.theme-frutiger .skill-group, body.theme-frutiger .project-card, body.theme-frutiger .edu-card, body.theme-frutiger .cert-card, body.theme-frutiger .contact-link { background:rgba(255,255,255,0.55); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.8); box-shadow:0 4px 20px rgba(0,100,200,0.1),inset 0 1px 0 rgba(255,255,255,0.9); }
+    body.theme-frutiger .project-card::before { background:linear-gradient(90deg,#0078d4,#00a8e8); }
+    body.theme-frutiger .stat-num { color:#0078d4; }
+    body.theme-frutiger .timeline-role, body.theme-frutiger .edu-degree, body.theme-frutiger .cert-name, body.theme-frutiger .project-name { color:#0a2840; }
+    body.theme-frutiger .timeline-company, body.theme-frutiger .cert-issuer, body.theme-frutiger .edu-school-link, body.theme-frutiger .project-role-tag { color:#0078d4; }
+    body.theme-frutiger .timeline-year, body.theme-frutiger .edu-year { color:#00a8e8; }
+    body.theme-frutiger .timeline::before { background:linear-gradient(180deg,#0078d4,transparent); }
+    body.theme-frutiger .timeline-item::before { background:#00a8e8; box-shadow:0 0 12px rgba(0,168,232,0.6); border-color:transparent; }
+    body.theme-frutiger .tag, body.theme-frutiger .edu-tag, body.theme-frutiger .modal-tech-tag, body.theme-frutiger .award-badge { background:rgba(0,120,212,0.1); border-color:rgba(0,120,212,0.2); color:#0a2840; }
+    body.theme-frutiger .skill-group-title { color:#0078d4; }
+    body.theme-frutiger .project-btn { color:#0078d4; }
+    body.theme-frutiger .contact-icon { background:rgba(0,120,212,0.15); border-color:rgba(0,120,212,0.2); }
+    body.theme-frutiger .contact-icon svg { stroke:#0078d4; }
+    body.theme-frutiger .contact-link-text strong { color:#0078d4; }
+    body.theme-frutiger .modal { background:rgba(230,245,255,0.92); backdrop-filter:blur(20px); border:1px solid rgba(0,160,255,0.3); box-shadow:0 16px 48px rgba(0,100,200,0.2); }
+    body.theme-frutiger .modal-overlay { background:rgba(0,60,120,0.3); backdrop-filter:blur(8px); }
+    body.theme-frutiger .modal-tag { display:block; background:linear-gradient(135deg,#0099e8,#0060c0); color:#fff; margin:-2rem -2rem 1.2rem -2rem; padding:0.4rem 0.7rem; font-size:0.82rem; letter-spacing:0; text-transform:none; font-weight:600; box-shadow:0 2px 8px rgba(0,100,200,0.2); }
+    body.theme-frutiger .modal-title, body.theme-frutiger .modal-body strong { color:#0a2840; }
+    body.theme-frutiger .modal-role { color:#0078d4; }
+    body.theme-frutiger .modal-body { color:#2d5a7a; }
+    body.theme-frutiger .modal-hr { background:rgba(0,120,212,0.15); }
+    body.theme-frutiger .modal-link { background:linear-gradient(135deg,#0099e8,#0060c0); box-shadow:0 4px 16px rgba(0,120,212,0.3); }
+    body.theme-frutiger .modal-close { background:rgba(0,120,212,0.1); border:1px solid rgba(0,120,212,0.2); color:#0a2840; }
+    body.theme-frutiger .modal-close:hover { background:rgba(0,120,212,0.2); color:#0078d4; }
+    body.theme-frutiger footer { background:rgba(0,80,180,0.7); backdrop-filter:blur(20px); border-top:1px solid rgba(120,200,255,0.3); }
+    body.theme-frutiger footer .logo { color:#fff; }
+    body.theme-frutiger footer p { color:rgba(220,240,255,0.8); }
+    body.theme-frutiger .edu-subsection-title { color:#2d5a7a; }
+    body.theme-frutiger .edu-subsection-title::after { background:rgba(0,120,212,0.2); }
+    body.theme-frutiger .matrix-label { color:rgba(0,168,232,0.6); }
+    body.theme-frutiger .mobile-nav { background:rgba(210,238,255,0.96); backdrop-filter:blur(20px); border-bottom:1px solid rgba(0,160,255,0.2); }
+    body.theme-frutiger .mobile-nav a { color:#0a2840; border-bottom-color:rgba(0,120,212,0.15); }
+    body.theme-frutiger .mobile-nav-bottom { border-top-color:rgba(0,120,212,0.15); }
   </style>
 </head>
 <body>
@@ -380,6 +593,21 @@
       <div class="lang-toggle">
         <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
         <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </li>
+    <li>
+      <div class="theme-toggle" id="theme-toggle">
+        <button class="theme-btn" onclick="toggleThemeDropdown()">
+          <svg class="theme-btn-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <span id="theme-label">Default</span>
+          <svg class="theme-btn-arrow" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="theme-dropdown" id="theme-dropdown">
+          <div class="theme-option active" data-theme="default" onclick="setTheme('default')"><span class="theme-dot theme-dot-default"></span> Default</div>
+          <div class="theme-option" data-theme="win98" onclick="setTheme('win98')"><span class="theme-dot theme-dot-win98"></span> Windows 98</div>
+          <div class="theme-option" data-theme="xp" onclick="setTheme('xp')"><span class="theme-dot theme-dot-xp"></span> Windows XP</div>
+          <div class="theme-option" data-theme="frutiger" onclick="setTheme('frutiger')"><span class="theme-dot theme-dot-frutiger"></span> Frutiger Aero</div>
+        </div>
       </div>
     </li>
   </ul>
@@ -401,7 +629,19 @@
       <button class="lang-btn active" id="btn-pt-m" onclick="setLang('pt'); closeMobileMenu()">PT</button>
       <button class="lang-btn"        id="btn-en-m" onclick="setLang('en'); closeMobileMenu()">EN</button>
     </div>
-
+    <div class="theme-toggle" id="theme-toggle-m">
+      <button class="theme-btn" onclick="toggleThemeDropdownM()">
+        <svg class="theme-btn-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span id="theme-label-m">Default</span>
+        <svg class="theme-btn-arrow" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+      </button>
+      <div class="theme-dropdown" id="theme-dropdown-m" style="right:auto;left:0;">
+        <div class="theme-option active" data-theme="default" onclick="setTheme('default'); closeMobileMenu()"><span class="theme-dot theme-dot-default"></span> Default</div>
+        <div class="theme-option" data-theme="win98" onclick="setTheme('win98'); closeMobileMenu()"><span class="theme-dot theme-dot-win98"></span> Windows 98</div>
+        <div class="theme-option" data-theme="xp" onclick="setTheme('xp'); closeMobileMenu()"><span class="theme-dot theme-dot-xp"></span> Windows XP</div>
+        <div class="theme-option" data-theme="frutiger" onclick="setTheme('frutiger'); closeMobileMenu()"><span class="theme-dot theme-dot-frutiger"></span> Frutiger Aero</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1103,6 +1343,45 @@ function closeModalOutside(e){
   if(e.target === document.getElementById('modal-overlay')) closeModal();
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+// ── THEME SWITCHER ──
+const themeNames = { default:'Default', win98:'Win 98', xp:'Win XP', frutiger:'Frutiger' };
+
+function setTheme(theme) {
+  document.body.classList.remove('theme-win98','theme-xp','theme-frutiger');
+  if (theme !== 'default') document.body.classList.add('theme-' + theme);
+  localStorage.setItem('cv-theme', theme);
+  document.querySelectorAll('.theme-option').forEach(el => {
+    el.classList.toggle('active', el.dataset.theme === theme);
+  });
+  document.querySelectorAll('#theme-label, #theme-label-m').forEach(el => {
+    el.textContent = themeNames[theme] || 'Default';
+  });
+  document.getElementById('theme-dropdown').classList.remove('open');
+  const dm = document.getElementById('theme-dropdown-m');
+  if (dm) dm.classList.remove('open');
+}
+
+function toggleThemeDropdown() {
+  document.getElementById('theme-dropdown').classList.toggle('open');
+}
+function toggleThemeDropdownM() {
+  document.getElementById('theme-dropdown-m').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#theme-toggle')) document.getElementById('theme-dropdown').classList.remove('open');
+  if (!e.target.closest('#theme-toggle-m')) { const dm = document.getElementById('theme-dropdown-m'); if(dm) dm.classList.remove('open'); }
+});
+
+(function(){
+  const saved = localStorage.getItem('cv-theme') || 'default';
+  if (saved !== 'default') {
+    document.body.classList.add('theme-' + saved);
+    document.querySelectorAll('#theme-label, #theme-label-m').forEach(el => el.textContent = themeNames[saved] || 'Default');
+    document.querySelectorAll('.theme-option').forEach(el => el.classList.toggle('active', el.dataset.theme === saved));
+  }
+})();
 </script>
 </body>
 </html>
