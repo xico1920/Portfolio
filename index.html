@@ -10,7 +10,11 @@
   <meta property="og:description" content="Full Stack Developer with experience in Angular, React, TypeScript, PHP and SQL. Also into photography, 3D and AR." />
   <meta property="og:image" content="https://xico1920.github.io/Portfolio/preview.png" />
   <meta property="og:url" content="https://xico1920.github.io/Portfolio/" />
+  <meta name="description" content="Francisco Silva — Full Stack Developer com experiência em Angular, React, TypeScript, PHP e SQL. Também em fotografia, 3D e AR." />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="alternate" hreflang="pt" href="https://xico1920.github.io/Portfolio/" />
+  <link rel="alternate" hreflang="en" href="https://xico1920.github.io/Portfolio/" />
+  <link rel="alternate" hreflang="x-default" href="https://xico1920.github.io/Portfolio/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
@@ -38,10 +42,9 @@
       pointer-events: none; z-index: 9999; opacity: 0.35;
     }
 
-    /* ── LANG TRANSITION ── */
+    /* ── LANG TRANSITION — DEFAULT ── */
     .i18n-el {
       transition: opacity 0.35s ease, filter 0.35s ease, transform 0.35s ease;
-      will-change: filter, opacity, transform;
     }
     .i18n-el.lang-out {
       opacity: 0;
@@ -50,12 +53,63 @@
     }
     nav .i18n-el, .mobile-nav .i18n-el {
       transition: opacity 0.35s ease;
-      will-change: opacity;
     }
     nav .i18n-el.lang-out, .mobile-nav .i18n-el.lang-out {
       opacity: 0;
       filter: none;
       transform: none;
+    }
+
+    /* ── LANG TRANSITION — WIN98: CRT colapsa em linha e volta ── */
+    body.theme-win98 .i18n-el {
+      transition: opacity 0.09s ease 0.04s, filter 0.06s ease, transform 0.12s cubic-bezier(0.55,0,1,0.45);
+    }
+    body.theme-win98 .i18n-el.lang-out {
+      opacity: 0;
+      filter: brightness(7) blur(0.5px);
+      transform: scaleY(0.02) scaleX(1.12);
+    }
+    body.theme-win98 nav .i18n-el, body.theme-win98 .mobile-nav .i18n-el {
+      transition: opacity 0.09s ease, filter 0.06s ease, transform 0.12s cubic-bezier(0.55,0,1,0.45);
+    }
+    body.theme-win98 nav .i18n-el.lang-out, body.theme-win98 .mobile-nav .i18n-el.lang-out {
+      opacity: 0; filter: brightness(7); transform: scaleY(0.02) scaleX(1.12);
+    }
+
+    /* ── LANG TRANSITION — XP: slide horizontal estilo janela ── */
+    /* OUT desliza para a direita; IN entra da esquerda com spring */
+    body.theme-xp .i18n-el {
+      transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    body.theme-xp .i18n-el.lang-out {
+      opacity: 0;
+      filter: none;
+      transform: translateX(24px) scaleX(0.82);
+    }
+    body.theme-xp nav .i18n-el, body.theme-xp .mobile-nav .i18n-el {
+      transition: opacity 0.2s ease, transform 0.24s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    body.theme-xp nav .i18n-el.lang-out, body.theme-xp .mobile-nav .i18n-el.lang-out {
+      opacity: 0; filter: none; transform: translateX(16px) scaleX(0.85);
+    }
+
+    /* ── LANG TRANSITION — FRUTIGER: dissolve subaquático ── */
+    /* OUT afunda e dissolve em luz azul saturada; IN sobe com blur a limpar */
+    body.theme-frutiger .i18n-el {
+      transition: opacity 0.44s ease,
+                  filter   0.4s ease,
+                  transform 0.52s cubic-bezier(0.22,1.2,0.36,1);
+    }
+    body.theme-frutiger .i18n-el.lang-out {
+      opacity: 0;
+      filter: blur(9px) brightness(1.8) saturate(3) hue-rotate(15deg);
+      transform: translateY(18px) scale(0.84);
+    }
+    body.theme-frutiger nav .i18n-el, body.theme-frutiger .mobile-nav .i18n-el {
+      transition: opacity 0.38s ease, filter 0.35s ease, transform 0.42s cubic-bezier(0.22,1.2,0.36,1);
+    }
+    body.theme-frutiger nav .i18n-el.lang-out, body.theme-frutiger .mobile-nav .i18n-el.lang-out {
+      opacity: 0; filter: blur(6px) brightness(1.6) saturate(2.5); transform: translateY(10px);
     }
 
     /* ── NAV ── */
@@ -90,7 +144,7 @@
       transition:opacity 0.25s ease, transform 0.25s ease;
       pointer-events:none;
     }
-    .mobile-nav.open { opacity:1; transform:translateY(0); pointer-events:all; }
+    .mobile-nav.open { opacity:1; transform:translateY(0); pointer-events:auto; }
     .mobile-nav a { color:var(--muted); text-decoration:none; font-size:1rem; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; padding:0.9rem 0; border-bottom:1px solid var(--border); transition:color 0.2s; }
     .mobile-nav a:last-of-type { border-bottom:none; }
     .mobile-nav a:hover { color:var(--accent); }
@@ -228,7 +282,7 @@
 
     /* ── MODAL ── */
     .modal-overlay { position:fixed; inset:0; z-index:500; background:rgba(5,5,12,0.82); backdrop-filter:blur(14px); display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; pointer-events:none; transition:opacity 0.35s ease; }
-    .modal-overlay.open { opacity:1; pointer-events:all; }
+    .modal-overlay.open { opacity:1; pointer-events:auto; }
     .modal { background:#13121e; border:1px solid rgba(168,85,247,0.3); border-radius:20px; max-width:620px; width:100%; max-height:88vh; overflow-y:auto; padding:2rem; position:relative; transform:translateY(30px) scale(0.97); transition:transform 0.35s ease; scrollbar-width:thin; scrollbar-color:rgba(124,58,237,0.3) transparent; }
     .modal-overlay.open .modal { transform:translateY(0) scale(1); }
     .modal-close { position:absolute; top:1.2rem; right:1.2rem; background:rgba(124,58,237,0.12); border:1px solid var(--border); border-radius:8px; width:36px;height:36px; display:flex;align-items:center;justify-content:center; cursor:pointer; color:var(--muted); font-size:1rem; transition:background 0.2s,color 0.2s; }
@@ -363,6 +417,59 @@
       .stat-num { font-size:1.6rem; }
     }
 
+    /* ══ MODAL LOADERS ══ */
+    @keyframes ml-spin { to { transform:rotate(360deg); } }
+    @keyframes ml-98-marquee { from { background-position:0 0; } to { background-position:30px 0; } }
+    @keyframes ml-xp-marquee { from { background-position:0 0; } to { background-position:-40px 0; } }
+    @keyframes ml-dot-fade { 0%,100%{opacity:.15} 50%{opacity:1} }
+    .modal-loader-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:180px; gap:1rem; }
+
+    /* Default — purple ring on dark modal (#13121e) */
+    .ml-default { width:40px; height:40px; border-radius:50%; border:3px solid rgba(124,58,237,0.15); border-top-color:#7c3aed; border-right-color:#a855f7; animation:ml-spin 0.8s linear infinite; }
+
+    /* Win98 — bar directly on gray modal (#d4d0c8), no nested dialog */
+    .ml-win98-lbl { font:bold 11px Tahoma,'MS Sans Serif',Arial,sans-serif; color:#000; margin-bottom:8px; text-align:center; letter-spacing:0.02em; }
+    .ml-win98-bar { width:220px; height:16px; background:#c0c0c0; border:2px solid; border-color:#808080 #fff #fff #808080; overflow:hidden; }
+    .ml-win98-fill {
+      height:100%;
+      background:repeating-linear-gradient(90deg, #000080 0px, #000080 11px, #c0c0c0 11px, #c0c0c0 13px);
+      background-size:30px 100%;
+      animation:ml-98-marquee 0.38s steps(1) infinite;
+      width:100%;
+    }
+
+    /* Win XP — white modal (#fff), XP-blue label, green marquee bar */
+    .ml-xp-lbl { font:bold 12px Tahoma,Arial,sans-serif; color:#2254d3; margin-bottom:10px; text-align:center; }
+    .ml-xp-bar-outer { width:220px; height:14px; background:#e8f0fa; border:1px solid #b8d0e8; border-radius:0; overflow:hidden; }
+    .ml-xp-bar-inner {
+      height:100%;
+      background:repeating-linear-gradient(90deg, #3dbd3d 0px, #3dbd3d 14px, transparent 14px, transparent 18px);
+      background-size:40px 100%;
+      width:100%;
+      animation:ml-xp-marquee 0.5s linear infinite;
+    }
+
+    /* Frutiger — 12 dots on glass modal (rgba(230,245,255,0.92)), Frutiger-blue */
+    .ml-w7 { position:relative; width:52px; height:52px; }
+    .ml-w7 span {
+      position:absolute; width:7px; height:7px; border-radius:50%; background:#0078d4;
+      top:50%; left:50%; margin:-3.5px 0 0 -3.5px;
+      animation:ml-dot-fade 1.2s linear infinite;
+      transform-origin:0 0;
+    }
+    .ml-w7 span:nth-child(1)  { transform:rotate(  0deg) translateY(-22px); animation-delay:  0ms; }
+    .ml-w7 span:nth-child(2)  { transform:rotate( 30deg) translateY(-22px); animation-delay: 100ms; }
+    .ml-w7 span:nth-child(3)  { transform:rotate( 60deg) translateY(-22px); animation-delay: 200ms; }
+    .ml-w7 span:nth-child(4)  { transform:rotate( 90deg) translateY(-22px); animation-delay: 300ms; }
+    .ml-w7 span:nth-child(5)  { transform:rotate(120deg) translateY(-22px); animation-delay: 400ms; }
+    .ml-w7 span:nth-child(6)  { transform:rotate(150deg) translateY(-22px); animation-delay: 500ms; }
+    .ml-w7 span:nth-child(7)  { transform:rotate(180deg) translateY(-22px); animation-delay: 600ms; }
+    .ml-w7 span:nth-child(8)  { transform:rotate(210deg) translateY(-22px); animation-delay: 700ms; }
+    .ml-w7 span:nth-child(9)  { transform:rotate(240deg) translateY(-22px); animation-delay: 800ms; }
+    .ml-w7 span:nth-child(10) { transform:rotate(270deg) translateY(-22px); animation-delay: 900ms; }
+    .ml-w7 span:nth-child(11) { transform:rotate(300deg) translateY(-22px); animation-delay:1000ms; }
+    .ml-w7 span:nth-child(12) { transform:rotate(330deg) translateY(-22px); animation-delay:1100ms; }
+
     /* ══ THEME TOGGLE UI ══ */
     .theme-toggle { position:relative; margin-left:0.25rem; flex-shrink:0; }
     .theme-btn { display:flex; align-items:center; gap:0.4rem; background:rgba(124,58,237,0.1); border:1px solid var(--border); border-radius:8px; padding:0.35rem 0.65rem; cursor:pointer; color:var(--muted); font-size:0.75rem; font-weight:600; letter-spacing:0.04em; transition:color 0.2s; white-space:nowrap; font-family:'DM Sans',sans-serif; }
@@ -384,7 +491,10 @@
     body.theme-win98 { --bg:#c0c0c0; --bg2:#d4d0c8; --purple:#000080; --purple-light:#1084d0; --purple-glow:#000080; --accent:#000080; --text:#000; --muted:#333; --border:#808080; --card:#d4d0c8; background:#c0c0c0; }
     body.theme-win98 * { font-family:Tahoma,'MS Sans Serif',Arial,sans-serif !important; border-radius:0 !important; }
     body.theme-win98::before, body.theme-win98 .orb { display:none !important; }
-    body.theme-win98 #matrix-section { display:none; }
+    body.theme-win98 #matrix-section { background:#111; }
+    body.theme-win98 .matrix-fade.top { background:linear-gradient(to bottom,#d4d0c8,transparent); }
+    body.theme-win98 .matrix-fade.bot { background:linear-gradient(to top,#c0c0c0,transparent); }
+    body.theme-win98 .matrix-label { display:none; }
     body.theme-win98 #about, body.theme-win98 #skills, body.theme-win98 #experience, body.theme-win98 #projects, body.theme-win98 #education, body.theme-win98 #contact { background:#c0c0c0; }
     body.theme-win98 nav { background:linear-gradient(90deg,#000080,#1084d0); border-bottom:2px solid #000; backdrop-filter:none; }
     body.theme-win98 .nav-logo { color:#fff; }
@@ -405,7 +515,13 @@
     body.theme-win98 .hero-name { color:#000; font-size:clamp(2.2rem,6vw,4rem); }
     body.theme-win98 .hero-name span { -webkit-text-fill-color:#000080 !important; background:none !important; }
     body.theme-win98 .hero-badge { color:#000080; border-color:#808080; background:#d4d0c8; }
-    body.theme-win98 .hero-sub { color:#333; }
+    body.theme-win98 .hero-sub { color:#222; }
+    body.theme-win98 .timeline-desc { color:#222; }
+    body.theme-win98 .about-text p { color:#222; }
+    body.theme-win98 .project-desc { color:#222; }
+    body.theme-win98 .stat-label { color:#333; }
+    body.theme-win98 .contact-link-text span { color:#222; }
+    body.theme-win98 .lang-row { color:#000; }
     body.theme-win98 .btn-primary, body.theme-win98 .btn-ghost, body.theme-win98 .btn-cv { background:#d4d0c8; color:#000; border:none; animation:none !important; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
     body.theme-win98 .btn-primary:hover, body.theme-win98 .btn-ghost:hover, body.theme-win98 .btn-cv:hover { background:#d4d0c8; color:#000080; transform:none; box-shadow:inset 1px 1px 0 #000,inset -1px -1px 0 #fff,inset 2px 2px 0 #808080,inset -2px -2px 0 #dfdfdf; }
     body.theme-win98 .stat-card, body.theme-win98 .timeline-item, body.theme-win98 .skill-group, body.theme-win98 .project-card, body.theme-win98 .edu-card, body.theme-win98 .cert-card, body.theme-win98 .contact-link { background:#d4d0c8; border:none; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
@@ -441,13 +557,25 @@
     body.theme-win98 .mobile-nav { background:rgba(192,192,192,0.98); border-bottom:2px solid #000; backdrop-filter:none; }
     body.theme-win98 .mobile-nav a { color:#000; border-bottom-color:#808080; }
     body.theme-win98 .mobile-nav-bottom { border-top-color:#808080; }
+    /* Win98 section contrast */
+    body.theme-win98 #about, body.theme-win98 #skills { background:#d4d0c8; }
+    body.theme-win98 #experience, body.theme-win98 #projects, body.theme-win98 #education, body.theme-win98 #contact { background:#c0c0c0; }
+    body.theme-win98 .section-title::before { content:''; display:inline-block; width:4px; height:1em; background:#000080; margin-right:0.5rem; vertical-align:middle; }
+    body.theme-win98 .divider { background:#000080; height:2px; }
+    body.theme-win98 .project-icon { background:#d4d0c8; border:1px solid #808080; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff; }
+    body.theme-win98 .project-icon svg { stroke:#000080; }
+    body.theme-win98 .hero-badge { padding:0.2rem 0.6rem; background:#d4d0c8; }
+    body.theme-win98 .about-text p strong { color:#000080; }
 
     /* ══ THEME: WINDOWS XP ══ */
-    body.theme-xp { --bg:#ece9d8; --bg2:#f5f3ec; --purple:#2254d3; --purple-light:#4b7fd8; --purple-glow:#2254d3; --accent:#2254d3; --text:#1a1a1a; --muted:#555; --border:rgba(34,84,211,0.2); --card:#fff; background:#ece9d8; }
+    body.theme-xp { --bg:#ece9d8; --bg2:#f5f3ec; --purple:#2254d3; --purple-light:#4b7fd8; --purple-glow:#2254d3; --accent:#2254d3; --text:#1a1a1a; --muted:#444; --border:rgba(34,84,211,0.2); --card:#fff; background:#ece9d8; }
     body.theme-xp * { font-family:Tahoma,Arial,sans-serif !important; }
     body.theme-xp::before { display:none !important; }
     body.theme-xp .orb { display:none !important; }
-    body.theme-xp #matrix-section { display:none; }
+    body.theme-xp #matrix-section { background:transparent; }
+    body.theme-xp .matrix-fade.top { background:linear-gradient(to bottom,#f5f3ec,transparent); }
+    body.theme-xp .matrix-fade.bot { background:linear-gradient(to top,#ece9d8,transparent); }
+    body.theme-xp .matrix-label { color:rgba(34,84,211,0.45); }
     body.theme-xp #about, body.theme-xp #skills { background:#f5f3ec; }
     body.theme-xp nav { background:linear-gradient(180deg,#3a7bd5 0%,#2254d3 60%,#1a40a8 100%); border-bottom:2px solid #1a3080; backdrop-filter:none; }
     body.theme-xp .nav-logo { color:#fff; text-shadow:1px 1px 2px rgba(0,0,0,0.4); }
@@ -480,7 +608,13 @@
     body.theme-xp .stat-num { color:#2254d3; }
     body.theme-xp .timeline-role, body.theme-xp .edu-degree, body.theme-xp .cert-name, body.theme-xp .project-name { color:#1a1a1a; }
     body.theme-xp .timeline-company, body.theme-xp .cert-issuer, body.theme-xp .edu-school-link, body.theme-xp .project-role-tag { color:#2254d3; }
-    body.theme-xp .timeline-year, body.theme-xp .edu-year { color:#4b7fd8; }
+    body.theme-xp .timeline-year, body.theme-xp .edu-year { color:#1e4eb3; }
+    body.theme-xp .timeline-desc { color:#333; }
+    body.theme-xp .about-text p { color:#3a3a3a; }
+    body.theme-xp .project-desc { color:#3a3a3a; }
+    body.theme-xp .stat-label { color:#444; }
+    body.theme-xp .contact-link-text span { color:#3a3a3a; }
+    body.theme-xp .lang-row { color:#1a1a1a; }
     body.theme-xp .timeline::before { background:linear-gradient(180deg,#2254d3,transparent); }
     body.theme-xp .timeline-item::before { background:#4b7fd8; box-shadow:0 0 8px rgba(75,127,216,0.5); border-color:#ece9d8; }
     body.theme-xp .tag, body.theme-xp .edu-tag, body.theme-xp .modal-tech-tag, body.theme-xp .award-badge { background:rgba(34,84,211,0.07); border-color:rgba(34,84,211,0.2); color:#1a1a1a; }
@@ -506,9 +640,21 @@
     body.theme-xp .edu-subsection-title::after { background:rgba(34,84,211,0.2); }
     body.theme-xp .mobile-nav { background:rgba(236,233,216,0.98); backdrop-filter:none; border-bottom:1px solid #b8d0e8; }
     body.theme-xp .mobile-nav a { color:#1a1a1a; border-bottom-color:rgba(34,84,211,0.15); }
+    /* XP card top bar + icon fix */
+    body.theme-xp .timeline-item, body.theme-xp .skill-group, body.theme-xp .edu-card, body.theme-xp .cert-card, body.theme-xp .stat-card { border-top:3px solid #4b7fd8; }
+    body.theme-xp .contact-link { border-left:3px solid #4b7fd8; }
+    body.theme-xp .project-icon { background:linear-gradient(135deg,rgba(34,84,211,0.12),rgba(75,127,216,0.08)); border-color:rgba(34,84,211,0.25); }
+    body.theme-xp .project-icon svg { stroke:#2254d3; }
+    body.theme-xp #about { background:#f5f3ec; }
+    body.theme-xp #skills { background:#ece9d8; }
+    body.theme-xp #experience { background:#f5f3ec; }
+    body.theme-xp #projects { background:#ece9d8; }
+    body.theme-xp #education { background:#f5f3ec; }
+    body.theme-xp #contact { background:#ece9d8; }
+    body.theme-xp .about-text p strong { color:#2254d3; }
 
     /* ══ THEME: FRUTIGER AERO ══ */
-    body.theme-frutiger { --bg:transparent; --bg2:transparent; --purple:#0078d4; --purple-light:#00a8e8; --purple-glow:#00c8ff; --accent:#0078d4; --text:#0a2840; --muted:#2d5a7a; --border:rgba(0,120,212,0.2); --card:rgba(255,255,255,0.55); background:linear-gradient(160deg,#87ceeb 0%,#b8e4f7 30%,#ddf0fc 60%,#f0faff 100%) fixed; }
+    body.theme-frutiger { --bg:transparent; --bg2:transparent; --purple:#0078d4; --purple-light:#00a8e8; --purple-glow:#00c8ff; --accent:#0069b8; --text:#082030; --muted:#1e4a6a; --border:rgba(0,120,212,0.22); --card:rgba(255,255,255,0.72); background:linear-gradient(160deg,#87ceeb 0%,#b8e4f7 30%,#ddf0fc 60%,#f0faff 100%) fixed; }
     body.theme-frutiger * { font-family:'Segoe UI',system-ui,sans-serif !important; }
     body.theme-frutiger::before { display:none !important; }
     body.theme-frutiger .orb1 { background:radial-gradient(circle,rgba(0,168,232,0.2) 0%,transparent 70%); }
@@ -535,23 +681,29 @@
     body.theme-frutiger .hero-name { color:#0a2840; }
     body.theme-frutiger .hero-name span { background:linear-gradient(135deg,#0078d4,#00c8ff) !important; -webkit-background-clip:text !important; background-clip:text !important; }
     body.theme-frutiger .hero-badge { color:#0078d4; border-color:rgba(0,120,212,0.4); background:rgba(0,120,212,0.08); }
-    body.theme-frutiger .hero-sub { color:#2d5a7a; }
+    body.theme-frutiger .hero-sub { color:#1e4a6a; }
     body.theme-frutiger .btn-primary { background:linear-gradient(135deg,#0099e8,#0060c0); box-shadow:0 4px 20px rgba(0,120,212,0.35),inset 0 1px 0 rgba(255,255,255,0.3); animation:none; }
     body.theme-frutiger .btn-primary:hover { box-shadow:0 6px 28px rgba(0,120,212,0.5); transform:translateY(-2px); }
     body.theme-frutiger .btn-ghost { color:#0078d4; border-color:rgba(0,120,212,0.35); }
     body.theme-frutiger .btn-ghost:hover { background:rgba(0,120,212,0.08); border-color:#0078d4; }
     body.theme-frutiger .btn-cv { color:#0078d4; border-color:rgba(0,120,212,0.3); animation:none; }
     body.theme-frutiger .btn-cv:hover { background:linear-gradient(135deg,#0099e8,#0060c0); color:#fff; border-color:transparent; }
-    body.theme-frutiger .stat-card, body.theme-frutiger .timeline-item, body.theme-frutiger .skill-group, body.theme-frutiger .project-card, body.theme-frutiger .edu-card, body.theme-frutiger .cert-card, body.theme-frutiger .contact-link { background:rgba(255,255,255,0.55); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.8); box-shadow:0 4px 20px rgba(0,100,200,0.1),inset 0 1px 0 rgba(255,255,255,0.9); }
+    body.theme-frutiger .stat-card, body.theme-frutiger .timeline-item, body.theme-frutiger .skill-group, body.theme-frutiger .project-card, body.theme-frutiger .edu-card, body.theme-frutiger .cert-card, body.theme-frutiger .contact-link { background:rgba(255,255,255,0.72); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,0.85); box-shadow:0 4px 24px rgba(0,80,160,0.12),inset 0 1px 0 rgba(255,255,255,0.95); }
     body.theme-frutiger .project-card::before { background:linear-gradient(90deg,#0078d4,#00a8e8); }
     body.theme-frutiger .stat-num { color:#0078d4; }
     body.theme-frutiger .timeline-role, body.theme-frutiger .edu-degree, body.theme-frutiger .cert-name, body.theme-frutiger .project-name { color:#0a2840; }
     body.theme-frutiger .timeline-company, body.theme-frutiger .cert-issuer, body.theme-frutiger .edu-school-link, body.theme-frutiger .project-role-tag { color:#0078d4; }
-    body.theme-frutiger .timeline-year, body.theme-frutiger .edu-year { color:#00a8e8; }
+    body.theme-frutiger .timeline-year, body.theme-frutiger .edu-year { color:#005d94; }
+    body.theme-frutiger .timeline-desc { color:#1e4a6a; }
+    body.theme-frutiger .about-text p { color:#1e4a6a; }
+    body.theme-frutiger .project-desc { color:#1e4a6a; }
+    body.theme-frutiger .stat-label { color:#1e4a6a; }
+    body.theme-frutiger .contact-link-text span { color:#1e4a6a; }
+    body.theme-frutiger .lang-row { color:#082030; }
     body.theme-frutiger .timeline::before { background:linear-gradient(180deg,#0078d4,transparent); }
     body.theme-frutiger .timeline-item::before { background:#00a8e8; box-shadow:0 0 12px rgba(0,168,232,0.6); border-color:transparent; }
     body.theme-frutiger .tag, body.theme-frutiger .edu-tag, body.theme-frutiger .modal-tech-tag, body.theme-frutiger .award-badge { background:rgba(0,120,212,0.1); border-color:rgba(0,120,212,0.2); color:#0a2840; }
-    body.theme-frutiger .skill-group-title { color:#0078d4; }
+    body.theme-frutiger .skill-group-title { color:#005d94; }
     body.theme-frutiger .project-btn { color:#0078d4; }
     body.theme-frutiger .contact-icon { background:rgba(0,120,212,0.15); border-color:rgba(0,120,212,0.2); }
     body.theme-frutiger .contact-icon svg { stroke:#0078d4; }
@@ -561,7 +713,7 @@
     body.theme-frutiger .modal-tag { display:block; background:linear-gradient(135deg,#0099e8,#0060c0); color:#fff; margin:-2rem -2rem 1.2rem -2rem; padding:0.4rem 0.7rem; font-size:0.82rem; letter-spacing:0; text-transform:none; font-weight:600; box-shadow:0 2px 8px rgba(0,100,200,0.2); }
     body.theme-frutiger .modal-title, body.theme-frutiger .modal-body strong { color:#0a2840; }
     body.theme-frutiger .modal-role { color:#0078d4; }
-    body.theme-frutiger .modal-body { color:#2d5a7a; }
+    body.theme-frutiger .modal-body { color:#1e4a6a; }
     body.theme-frutiger .modal-hr { background:rgba(0,120,212,0.15); }
     body.theme-frutiger .modal-link { background:linear-gradient(135deg,#0099e8,#0060c0); box-shadow:0 4px 16px rgba(0,120,212,0.3); }
     body.theme-frutiger .modal-close { background:rgba(0,120,212,0.1); border:1px solid rgba(0,120,212,0.2); color:#0a2840; }
@@ -575,6 +727,71 @@
     body.theme-frutiger .mobile-nav { background:rgba(210,238,255,0.96); backdrop-filter:blur(20px); border-bottom:1px solid rgba(0,160,255,0.2); }
     body.theme-frutiger .mobile-nav a { color:#0a2840; border-bottom-color:rgba(0,120,212,0.15); }
     body.theme-frutiger .mobile-nav-bottom { border-top-color:rgba(0,120,212,0.15); }
+    /* Frutiger icon + orb fix */
+    body.theme-frutiger .project-icon { background:linear-gradient(135deg,rgba(0,120,212,0.18),rgba(0,168,232,0.1)); border-color:rgba(0,160,255,0.35); }
+    body.theme-frutiger .project-icon svg { stroke:#0078d4; }
+    body.theme-frutiger .orb1 { background:radial-gradient(circle,rgba(0,168,232,0.35) 0%,transparent 70%); }
+    body.theme-frutiger .orb2 { background:radial-gradient(circle,rgba(0,120,212,0.25) 0%,transparent 70%); }
+    body.theme-frutiger .about-text p strong { color:#0078d4; }
+    body.theme-frutiger .lang-row { color:#0a2840; }
+    body.theme-frutiger .section-title { text-shadow:0 1px 8px rgba(0,120,212,0.15); }
+
+    /* ── SCROLL SPY ── */
+    .nav-links a.nav-active { color:var(--accent); }
+    body.theme-win98 .nav-links a.nav-active { color:#ffff80; }
+    body.theme-xp .nav-links a.nav-active { color:#fff; font-weight:600; }
+    body.theme-frutiger .nav-links a.nav-active { color:#fff; }
+
+    /* ── FOCUS VISIBLE ── */
+    :focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:4px; }
+    .project-card:focus-visible, .cert-card:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:16px; }
+    .contact-link.protected-field:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:12px; }
+    body.theme-win98 :focus-visible { outline:2px dotted #000080; outline-offset:2px; border-radius:0; }
+    body.theme-xp :focus-visible { outline:2px solid #2254d3; outline-offset:3px; }
+    body.theme-frutiger :focus-visible { outline:2px solid #0078d4; outline-offset:3px; }
+
+    /* ── BACK TO TOP ── */
+    .back-top { position:fixed; bottom:1.8rem; right:1.8rem; z-index:200; width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,var(--purple),var(--purple-light)); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transform:translateY(12px); transition:opacity 0.3s,transform 0.3s,box-shadow 0.3s; box-shadow:0 4px 18px rgba(124,58,237,0.4); }
+    .back-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .back-top:hover { box-shadow:0 6px 28px rgba(124,58,237,0.6); transform:translateY(-2px); }
+    .back-top svg { width:16px; height:16px; stroke:#fff; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    body.theme-win98 .back-top { background:#d4d0c8; border-radius:0 !important; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
+    body.theme-win98 .back-top:hover { transform:none; }
+    body.theme-win98 .back-top svg { stroke:#000080; }
+    body.theme-xp .back-top { background:linear-gradient(180deg,#5a9de4,#1e55c4); box-shadow:0 2px 8px rgba(0,0,100,0.3),inset 0 1px 0 rgba(255,255,255,0.4); border:1px solid #1a3fa0; }
+    body.theme-frutiger .back-top { background:linear-gradient(135deg,#0099e8,#0060c0); box-shadow:0 4px 16px rgba(0,120,212,0.4); }
+
+    /* ── COPY BUTTON ── */
+    .copy-btn { font-size:0.72rem; padding:0.2rem 0.65rem; border-radius:6px; background:rgba(124,58,237,0.1); border:1px solid var(--border); color:var(--accent); cursor:pointer; transition:background 0.2s,color 0.2s; margin-top:0.3rem; display:inline-block; font-family:'DM Sans',sans-serif; }
+    .copy-btn:hover { background:rgba(124,58,237,0.2); }
+    .copy-btn.copied { color:#4ade80; border-color:rgba(74,222,128,0.3); background:rgba(74,222,128,0.08); }
+    body.theme-win98 .copy-btn { background:#d4d0c8; border:1px solid #808080; color:#000080; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff; border-radius:0 !important; }
+    body.theme-win98 .copy-btn.copied { color:#006400; }
+    body.theme-xp .copy-btn { background:rgba(34,84,211,0.07); border-color:rgba(34,84,211,0.25); color:#2254d3; }
+    body.theme-xp .copy-btn.copied { color:#226622; }
+    body.theme-frutiger .copy-btn { background:rgba(0,120,212,0.1); border-color:rgba(0,120,212,0.25); color:#0078d4; }
+    body.theme-frutiger .copy-btn.copied { color:#005a00; }
+
+    /* ── PLAY BUTTON (Vault84) ── */
+    .play-btn { font-size:0.82rem; font-weight:600; color:#fff; background:var(--purple); border:none; border-radius:8px; padding:0.45rem 1rem; text-decoration:none; transition:background 0.2s; cursor:pointer; }
+    .play-btn:hover { background:var(--purple-light); }
+    body.theme-win98 .play-btn { background:#000080; color:#fff; box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf; }
+    body.theme-win98 .play-btn:hover { background:#1084d0; }
+    body.theme-xp .play-btn { background:linear-gradient(180deg,#5a9de4,#1e55c4); border:1px solid #1a3fa0; }
+    body.theme-xp .play-btn:hover { opacity:0.9; }
+    body.theme-frutiger .play-btn { background:linear-gradient(135deg,#0099e8,#0060c0); }
+    body.theme-frutiger .play-btn:hover { background:linear-gradient(135deg,#00b0f0,#0078d4); }
+
+    /* ── PREFERS-REDUCED-MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      #matrix-canvas { opacity: 0; }
+      .orb { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -597,7 +814,7 @@
     </li>
     <li>
       <div class="theme-toggle" id="theme-toggle">
-        <button class="theme-btn" onclick="toggleThemeDropdown()">
+        <button class="theme-btn" onclick="toggleThemeDropdown('theme-dropdown')">
           <svg class="theme-btn-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           <span id="theme-label">Default</span>
           <svg class="theme-btn-arrow" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
@@ -630,7 +847,7 @@
       <button class="lang-btn"        id="btn-en-m" onclick="setLang('en'); closeMobileMenu()">EN</button>
     </div>
     <div class="theme-toggle" id="theme-toggle-m">
-      <button class="theme-btn" onclick="toggleThemeDropdownM()">
+      <button class="theme-btn" onclick="toggleThemeDropdown('theme-dropdown-m')">
         <svg class="theme-btn-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <span id="theme-label-m">Default</span>
         <svg class="theme-btn-arrow" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
@@ -657,7 +874,7 @@
       <a href="#contact" class="btn-primary i18n-el" data-i18n="hero.cta1">Entrar em contacto &rarr;</a>
       <a href="#projects" class="btn-ghost i18n-el" data-i18n="hero.cta2">Ver projetos</a>
       <!-- CV button — o href é trocado via JS quando muda a língua -->
-      <a id="cv-btn" href="Francisco Silva (2025).pdf" target="_blank" rel="noopener" class="btn-cv">
+      <a id="cv-btn" href="Francisco Silva (2025).pdf" target="_blank" rel="noopener noreferrer" class="btn-cv">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         <span class="i18n-el" data-i18n="cv.btn">Ver CV</span>
       </a>
@@ -758,7 +975,7 @@
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">Frameworks &amp; Libs</div>
+      <div class="skill-group-title i18n-el" data-i18n="skills.g2">Frameworks &amp; Libs</div>
       <div class="skill-tags">
         <span class="tag">Angular</span><span class="tag">PrimeNG</span><span class="tag">React</span><span class="tag">Responsive Design</span>
       </div>
@@ -780,7 +997,7 @@
         <span class="tag i18n-el" data-i18n="skills.t4">Fotografia</span>
         <span class="tag">Motion Design</span>
         <span class="tag i18n-el" data-i18n="skills.t5">Otimização de Código</span>
-        <span class="tag">IA</span>
+        <span class="tag i18n-el" data-i18n="skills.ia">IA</span>
         <span class="tag i18n-el" data-i18n="skills.t6">Redes</span>
       </div>
     </div>
@@ -804,59 +1021,59 @@
     <div class="divider"></div>
   </div>
   <div class="projects-grid reveal">
-    <div class="project-card" onclick="openModal('wasteapp')">
+    <div class="project-card" role="button" tabindex="0" onclick="openModal('wasteapp')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
       <div class="project-name">WasteApp</div>
-      <div class="project-role-tag">Frontend Lead &amp; Backend</div>
+      <div class="project-role-tag i18n-el" data-i18n="proj.wasteapp.role">Frontend Lead &amp; Backend</div>
       <p class="project-desc i18n-el" data-i18n="proj.wasteapp.desc">Plataforma de gestão de resíduos e sustentabilidade ambiental. Desenvolvi todo o frontend e lógica de backend, incluindo a admin page.</p>
       <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
     </div>
-    <div class="project-card" onclick="openModal('epal')">
+    <div class="project-card" role="button" tabindex="0" onclick="openModal('epal')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="project-name">EPAL H2O Quality</div>
       <div class="project-role-tag i18n-el" data-i18n="proj.epal.role">Frontend &amp; Criativo</div>
       <p class="project-desc i18n-el" data-i18n="proj.epal.desc">App de monitorização da qualidade da água da EPAL. Participei no desenvolvimento frontend e na vertente criativa do projeto.</p>
       <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
     </div>
-    <div class="project-card" onclick="openModal('bancobest')">
+    <div class="project-card" role="button" tabindex="0" onclick="openModal('bancobest')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
       <div class="project-name">Banco Best</div>
       <div class="project-role-tag i18n-el" data-i18n="proj.bancobest.role">Equipa Criativa &amp; UI Design</div>
       <p class="project-desc i18n-el" data-i18n="proj.bancobest.desc">Nova app do Banco Best. Integrei a equipa criativa, participei em brainstorming e contribuí diretamente para o desenho da interface.</p>
       <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
     </div>
-    <div class="project-card" onclick="openModal('remechido')">
+    <div class="project-card" role="button" tabindex="0" onclick="openModal('remechido')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></div>
       <div class="project-name">Remechido.com</div>
       <div class="project-role-tag i18n-el" data-i18n="proj.remechido.role">Design &amp; Desenvolvimento</div>
       <p class="project-desc i18n-el" data-i18n="proj.remechido.desc">Portfolio de design criativo desenvolvido para um cliente. Inclui fotografia, animação 3D e trabalhos visuais.</p>
       <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
     </div>
-    <div class="project-card" onclick="openModal('co2')">
+    <div class="project-card" role="button" tabindex="0" onclick="openModal('co2')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-      <div class="project-name">Calculadora de CO&#8322;</div>
+      <div class="project-name i18n-el" data-i18n="proj.co2.name">Calculadora de CO&#8322;</div>
       <div class="project-role-tag i18n-el" data-i18n="proj.co2.role">Frontend &amp; Desenvolvimento</div>
       <p class="project-desc i18n-el" data-i18n="proj.co2.desc">Ferramenta para avaliar o impacto ambiental de websites, com foco em eficiência energética e redução da pegada de carbono digital.</p>
       <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
     </div>
-    <div class="project-card" onclick="openModal('bauntia')">
+    <div class="project-card" role="button" tabindex="0" onclick="openModal('bauntia')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
       <div class="project-name">Bauntia</div>
       <div class="project-role-tag i18n-el" data-i18n="proj.bauntia.role">Website Corporativo — Full Stack</div>
       <p class="project-desc i18n-el" data-i18n="proj.bauntia.desc">Website completo para empresa de multimédia imobiliária. Incluiu página de equipa, about, pricing e integração com Stripe para pagamentos.</p>
       <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
     </div>
-    <div class="project-card" onclick="openModal('vault84')">
+    <div class="project-card" role="button" tabindex="0" onclick="openModal('vault84')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/></svg></div>
       <div class="project-name">Vault84</div>
       <div class="project-role-tag i18n-el" data-i18n="proj.vault84.role">Jogo de Gestão — Vanilla JS</div>
       <p class="project-desc i18n-el" data-i18n="proj.vault84.desc">Jogo idle de gestão de instalação subterrânea no browser. Gere o reator, extrai minério, neutraliza ameaças. Apenas HTML, CSS e JS puro.</p>
       <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
         <button class="project-btn i18n-el" data-i18n="proj.view">Ver projeto &rarr;</button>
-        <a href="https://xico1920.github.io/Vault84/" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="i18n-el" data-i18n="proj.vault84.play" style="font-size:0.82rem;font-weight:600;color:#fff;background:var(--purple);border:none;border-radius:8px;padding:0.45rem 1rem;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--purple-light)'" onmouseout="this.style.background='var(--purple)'">&#9654; Jogar</a>
+        <a href="https://xico1920.github.io/Vault84/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="play-btn i18n-el" data-i18n="proj.vault84.play">&#9654; Jogar</a>
       </div>
     </div>
-    <div class="project-card" onclick="openModal('profolio')">
+    <div class="project-card" role="button" tabindex="0" onclick="openModal('profolio')">
       <div class="project-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
       <div class="project-name">ProFolio.pt</div>
       <div class="project-role-tag i18n-el" data-i18n="proj.profolio.role">Desenvolvimento Full Stack</div>
@@ -877,7 +1094,7 @@
     <div class="edu-card">
       <div class="edu-year">2019 &ndash; 2022</div>
       <div class="edu-degree i18n-el" data-i18n="edu.d1">Gestão de Sistemas Informáticos e Programação</div>
-      <a href="https://www.esmoita.pt" target="_blank" rel="noopener" class="edu-school-link">
+      <a href="https://www.esmoita.pt" target="_blank" rel="noopener noreferrer" class="edu-school-link">
         Escola Secundária da Moita
         <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
@@ -889,7 +1106,7 @@
     <div class="edu-card">
       <div class="edu-year">2023 &ndash; 2024</div>
       <div class="edu-degree i18n-el" data-i18n="edu.d2">Design e Desenvolvimento Web</div>
-      <a href="https://www.lsd.pt" target="_blank" rel="noopener" class="edu-school-link">
+      <a href="https://www.lsd.pt" target="_blank" rel="noopener noreferrer" class="edu-school-link">
         Lisbon School of Design
         <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
@@ -903,7 +1120,7 @@
     <div class="edu-card">
       <div class="edu-year">2024 &ndash; <span class="i18n-el" data-i18n="edu.present">Presente</span></div>
       <div class="edu-degree i18n-el" data-i18n="edu.d3">Engenharia Informática</div>
-      <a href="https://www.istec.pt" target="_blank" rel="noopener" class="edu-school-link">
+      <a href="https://www.istec.pt" target="_blank" rel="noopener noreferrer" class="edu-school-link">
         ISTEC Lisboa
         <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
@@ -919,22 +1136,22 @@
   <div class="reveal">
     <div class="edu-subsection-title i18n-el" data-i18n="edu.cert.label">Certificações &amp; Workshops</div>
     <div class="edu-grid" style="margin-top:1rem;">
-      <div class="cert-card" onclick="openCertModal('cybersummit')" style="cursor:pointer;">
+      <div class="cert-card" role="button" tabindex="0" onclick="openCertModal('cybersummit')" style="cursor:pointer;">
         <div class="cert-name">Cybersecurity Summit</div>
         <div class="cert-issuer">ISTEC</div>
         <div class="cert-date i18n-el" data-i18n="edu.cert.mar2026">Mar 2026</div>
       </div>
-      <div class="cert-card" onclick="openCertModal('xrvic')" style="cursor:pointer;">
+      <div class="cert-card" role="button" tabindex="0" onclick="openCertModal('xrvic')" style="cursor:pointer;">
         <div class="cert-name">Extended Reality (XR), AR, VR, Gamification &amp; AI Innovation Training</div>
         <div class="cert-issuer">Virtual Innovation Consortium</div>
         <div class="cert-date i18n-el" data-i18n="edu.cert.nov2025">Nov 2025</div>
       </div>
-      <div class="cert-card" onclick="openCertModal('cyberthreats')" style="cursor:pointer;">
+      <div class="cert-card" role="button" tabindex="0" onclick="openCertModal('cyberthreats')" style="cursor:pointer;">
         <div class="cert-name">Cybersecurity Threats, Vulnerabilities &amp; Digital Risk Management</div>
         <div class="cert-issuer">ISTEC</div>
         <div class="cert-date i18n-el" data-i18n="edu.cert.out2024">Out 2024</div>
       </div>
-      <div class="cert-card" onclick="openCertModal('web3')" style="cursor:pointer;">
+      <div class="cert-card" role="button" tabindex="0" onclick="openCertModal('web3')" style="cursor:pointer;">
         <div class="cert-name">De Web2 to Web3: Promises of Decentralized Technology</div>
         <div class="cert-issuer">Goethe-Institut e.V.</div>
         <div class="cert-date i18n-el" data-i18n="edu.cert.mar2024">Mar 2024</div>
@@ -953,7 +1170,7 @@
   <div class="contact-wrapper reveal">
     <p class="contact-intro i18n-el" data-i18n="contact.intro">Tens um projeto fixe ou uma oportunidade em mente? Estou disponível para colaborações, freelance, part-time ou full-time — fala comigo, adorava ouvir!</p>
     <div class="contact-links">
-      <div class="contact-link protected-field" id="email-field" onclick="revealField('email')" style="cursor:pointer;">
+      <div class="contact-link protected-field" id="email-field" role="button" tabindex="0" aria-label="Revelar email" onclick="revealField('email')" style="cursor:pointer;">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
@@ -963,12 +1180,12 @@
           <span class="reveal-hint i18n-el" id="email-hint" data-i18n="contact.reveal">Clique para revelar</span>
         </div>
       </div>
-      <div class="contact-link protected-field" id="phone-field" onclick="revealField('phone')" style="cursor:pointer;">
+      <div class="contact-link protected-field" id="phone-field" role="button" tabindex="0" aria-label="Revelar telefone" onclick="revealField('phone')" style="cursor:pointer;">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
         <div class="contact-link-text">
-          <strong>Telefone</strong>
+          <strong class="i18n-el" data-i18n="contact.phone.label">Telefone</strong>
           <span class="protected-value blurred" id="phone-value">&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</span>
           <span class="reveal-hint i18n-el" id="phone-hint" data-i18n="contact.reveal">Clique para revelar</span>
         </div>
@@ -1000,6 +1217,11 @@
   <p>&copy; 2026 &middot; Costa da Caparica, Almada</p>
 </footer>
 
+<!-- BACK TO TOP -->
+<button class="back-top" id="back-top" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
   <div class="modal" id="modal-box">
@@ -1026,34 +1248,216 @@ const revObs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 revEls.forEach(el => revObs.observe(el));
 
-/* ── MATRIX ── */
+/* ── MATRIX / CANVAS ANIMATIONS ── */
 (function(){
   const canvas = document.getElementById('matrix-canvas');
   const ctx    = canvas.getContext('2d');
-  const chars  = 'アイウエオカキクケコabcdefghijklmnopqrstuvwxyz0123456789{}[]();=></#@'.split('');
+
+  /* DEFAULT: matrix rain */
+  const chars = 'アイウエオカキクケコabcdefghijklmnopqrstuvwxyz0123456789{}[]();=></#@'.split('');
   let cols, drops;
-  function resize(){
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    cols  = Math.floor(canvas.width / 16);
-    drops = Array(cols).fill(1);
+
+  /* FRUTIGER: bubbles */
+  let bubbles = [];
+  function initBubbles(){
+    bubbles = Array.from({length:28}, ()=>({
+      x: Math.random()*(canvas.width||800),
+      y: Math.random()*(canvas.height||160),
+      r: 5 + Math.random()*20,
+      speed: 0.25 + Math.random()*0.7,
+      wobble: Math.random()*Math.PI*2,
+      wobbleSpeed: 0.012 + Math.random()*0.018,
+      opacity: 0.35 + Math.random()*0.55
+    }));
   }
+  function drawBubble(b){
+    ctx.save();
+    ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    const g=ctx.createRadialGradient(b.x-b.r*0.35,b.y-b.r*0.35,b.r*0.05,b.x,b.y,b.r);
+    g.addColorStop(0,  `rgba(255,255,255,${b.opacity*0.75})`);
+    g.addColorStop(0.35,`rgba(190,235,255,${b.opacity*0.25})`);
+    g.addColorStop(1,  `rgba(0,168,232,${b.opacity*0.08})`);
+    ctx.fillStyle=g; ctx.fill();
+    ctx.strokeStyle=`rgba(80,190,255,${b.opacity*0.55})`; ctx.lineWidth=1; ctx.stroke();
+    ctx.beginPath(); ctx.arc(b.x-b.r*0.32,b.y-b.r*0.32,b.r*0.18,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${b.opacity*0.8})`; ctx.fill();
+    ctx.restore();
+  }
+  function drawFrutiger(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(const b of bubbles){
+      b.y-=b.speed; b.x+=Math.sin(b.wobble)*0.45; b.wobble+=b.wobbleSpeed;
+      if(b.y+b.r<0){ b.y=canvas.height+b.r; b.x=Math.random()*canvas.width; }
+      drawBubble(b);
+    }
+  }
+
+  /* WIN98: progress bar + dialog */
+  let pbProgress=0, pbState='filling', pbTimer=0, pbStepIdx=0;
+  const pbSteps={
+    pt:['A carregar Francisco Silva.exe','A inicializar módulos','A montar projetos','A estabelecer ligação','Instalação concluída'],
+    en:['Loading Francisco Silva.exe','Initialising portfolio modules','Mounting project assets','Connecting to the internet','Setup complete']
+  };
+  function initDos(){ pbProgress=0; pbState='filling'; pbTimer=0; pbStepIdx=0; }
+
+  function drawWin98Bevel(x,y,w,h,raised=true){
+    const lt=raised?'#fff':'#808080', rb=raised?'#808080':'#fff';
+    const lt2=raised?'#dfdfdf':'#000', rb2=raised?'#000':'#dfdfdf';
+    ctx.fillStyle=lt;  ctx.fillRect(x,y,w,1); ctx.fillRect(x,y,1,h);
+    ctx.fillStyle=rb;  ctx.fillRect(x,y+h-1,w,1); ctx.fillRect(x+w-1,y,1,h);
+    ctx.fillStyle=lt2; ctx.fillRect(x+1,y+1,w-2,1); ctx.fillRect(x+1,y+1,1,h-2);
+    ctx.fillStyle=rb2; ctx.fillRect(x+1,y+h-2,w-2,1); ctx.fillRect(x+w-2,y+1,1,h-2);
+  }
+
+  function drawDialog(W,H){
+    const dw=Math.min(340,W*0.6), dh=120;
+    const dx=(W-dw)/2, dy=(H-dh)/2;
+    /* shadow */
+    ctx.fillStyle='rgba(0,0,0,0.25)'; ctx.fillRect(dx+4,dy+4,dw,dh);
+    /* body */
+    ctx.fillStyle='#d4d0c8'; ctx.fillRect(dx,dy,dw,dh);
+    drawWin98Bevel(dx,dy,dw,dh,true);
+    /* title bar */
+    const tg=ctx.createLinearGradient(dx,dy,dx+dw,dy);
+    tg.addColorStop(0,'#000080'); tg.addColorStop(1,'#1084d0');
+    ctx.fillStyle=tg; ctx.fillRect(dx+2,dy+2,dw-4,20);
+    ctx.font='bold 11px Tahoma,Arial,sans-serif';
+    ctx.fillStyle='#fff'; ctx.textAlign='left';
+    ctx.fillText('Portfolio Setup', dx+8, dy+15);
+    /* × button */
+    ctx.fillStyle='#d4d0c8'; ctx.fillRect(dx+dw-20,dy+4,16,16);
+    drawWin98Bevel(dx+dw-20,dy+4,16,16,true);
+    ctx.fillStyle='#000'; ctx.font='bold 11px Tahoma';
+    ctx.textAlign='center'; ctx.fillText('×',dx+dw-12,dy+15);
+    /* icon — info circle */
+    ctx.beginPath(); ctx.arc(dx+28,dy+60,12,0,Math.PI*2);
+    ctx.fillStyle='#000080'; ctx.fill();
+    ctx.fillStyle='#fff'; ctx.font='bold 13px serif';
+    ctx.textAlign='center'; ctx.fillText('i',dx+28,dy+65);
+    /* message — lang aware */
+    const isPT = (typeof currentLang!=='undefined' ? currentLang : 'pt')==='pt';
+    const l1 = isPT ? 'Francisco Silva instalado com sucesso.' : 'Francisco Silva installed successfully.';
+    const l2 = isPT ? 'Aviso: pode causar websites viciantes.' : 'Warning: may cause addictive websites.';
+    ctx.fillStyle='#000'; ctx.font='12px Tahoma,Arial,sans-serif';
+    ctx.textAlign='left';
+    ctx.fillText(l1, dx+50, dy+54);
+    ctx.fillText(l2, dx+50, dy+70);
+    /* OK button */
+    const bx=dx+dw/2-30, bby=dy+dh-30;
+    ctx.fillStyle='#d4d0c8'; ctx.fillRect(bx,bby,60,20);
+    drawWin98Bevel(bx,bby,60,20,true);
+    ctx.fillStyle='#000'; ctx.font='12px Tahoma,Arial,sans-serif';
+    ctx.textAlign='center'; ctx.fillText('OK',bx+30,bby+14);
+    ctx.textAlign='left';
+  }
+
+  function drawDOS(){
+    const W=canvas.width, H=canvas.height;
+    ctx.fillStyle='#c0c0c0'; ctx.fillRect(0,0,W,H);
+    pbTimer++;
+
+    if(pbState==='filling'){
+      pbProgress+=0.0035;
+      if(pbProgress>=1){ pbProgress=1; pbState='dialog'; pbTimer=0; }
+      const steps=pbSteps[typeof currentLang!=='undefined'?currentLang:'pt'];
+      pbStepIdx=Math.min(Math.floor(pbProgress*steps.length),steps.length-1);
+    } else if(pbState==='dialog' && pbTimer>140){
+      pbState='reset'; pbTimer=0;
+    } else if(pbState==='reset' && pbTimer>20){
+      initDos();
+    }
+
+    if(pbState==='dialog'){ drawDialog(W,H); return; }
+
+    const bw=Math.min(360,W*0.55), bh=18;
+    const bx=(W-bw)/2, by=H/2;
+    /* label */
+    ctx.font='12px Tahoma,Arial,sans-serif'; ctx.fillStyle='#000'; ctx.textAlign='center';
+    const steps=pbSteps[typeof currentLang!=='undefined'?currentLang:'pt'];
+    ctx.fillText(steps[pbStepIdx]+'...', W/2, by-12);
+    /* bar */
+    ctx.fillStyle='#808080'; ctx.fillRect(bx-2,by-2,bw+4,bh+4);
+    ctx.fillStyle='#fff';    ctx.fillRect(bx-1,by-1,bw+2,bh+2);
+    ctx.fillStyle='#000';    ctx.fillRect(bx,by,bw,bh);
+    const blockW=15,gap=2,totalBlocks=Math.floor((bw-4)/(blockW+gap));
+    const filled=Math.round(pbProgress*totalBlocks);
+    for(let i=0;i<totalBlocks;i++){
+      const x=bx+2+i*(blockW+gap);
+      ctx.fillStyle=i<filled?'#000080':'#111'; ctx.fillRect(x,by+2,blockW,bh-4);
+      if(i<filled){ ctx.fillStyle='rgba(255,255,255,0.12)'; ctx.fillRect(x,by+2,blockW,(bh-4)/2); }
+    }
+    ctx.font='11px Tahoma,Arial,sans-serif'; ctx.fillStyle='#fff'; ctx.textAlign='center';
+    ctx.fillText(Math.round(pbProgress*100)+'%', W/2, by+bh-4);
+    ctx.textAlign='left';
+  }
+
+  /* XP: Luna waves */
+  let waveOff=0;
+  function drawXP(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    waveOff+=0.025;
+    const waves=[
+      {col:'rgba(74,127,216,0.22)',amp:18,freq:0.012,phase:0},
+      {col:'rgba(34,84,211,0.16)', amp:13,freq:0.018,phase:1.4},
+      {col:'rgba(90,157,228,0.13)',amp:10,freq:0.009,phase:2.8},
+      {col:'rgba(180,210,255,0.1)',amp:22,freq:0.007,phase:0.7},
+    ];
+    for(const w of waves){
+      ctx.beginPath(); ctx.strokeStyle=w.col; ctx.lineWidth=2;
+      for(let x=0;x<=canvas.width;x+=2){
+        const y=canvas.height/2+Math.sin(x*w.freq+waveOff+w.phase)*w.amp+Math.sin(x*0.03+waveOff*1.4)*6;
+        x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+  }
+
+  function resize(){
+    canvas.width=canvas.offsetWidth; canvas.height=canvas.offsetHeight;
+    cols=Math.floor(canvas.width/16); drops=Array(cols).fill(1);
+    initBubbles(); initDos();
+  }
+
   function draw(){
-    ctx.fillStyle = 'rgba(8,8,16,0.18)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    const b=document.body;
+    if(b.classList.contains('theme-frutiger')){ drawFrutiger(); return; }
+    if(b.classList.contains('theme-win98'))   { drawDOS();      return; }
+    if(b.classList.contains('theme-xp'))      { drawXP();       return; }
+    ctx.fillStyle='rgba(8,8,16,0.18)'; ctx.fillRect(0,0,canvas.width,canvas.height);
     for(let i=0;i<cols;i++){
-      const ch    = chars[Math.floor(Math.random()*chars.length)];
-      const alpha = 0.25 + Math.random()*0.55;
-      ctx.font      = '13px JetBrains Mono, monospace';
-      ctx.fillStyle = `rgba(74,222,128,${alpha})`;
-      ctx.fillText(ch, i*16, drops[i]*16);
-      if(drops[i]*16 > canvas.height && Math.random()>0.975) drops[i]=0;
+      const ch=chars[Math.floor(Math.random()*chars.length)];
+      const alpha=0.25+Math.random()*0.55;
+      ctx.font='13px JetBrains Mono, monospace';
+      ctx.fillStyle=`rgba(74,222,128,${alpha})`;
+      ctx.fillText(ch,i*16,drops[i]*16);
+      if(drops[i]*16>canvas.height&&Math.random()>0.975) drops[i]=0;
       drops[i]++;
     }
   }
+
   resize();
-  window.addEventListener('resize', resize);
-  setInterval(draw, 60);
+
+  // Debounced resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  });
+
+  // Pause animation when canvas is off-screen
+  let animVisible = true;
+  new IntersectionObserver(entries => {
+    animVisible = entries[0].isIntersecting;
+  }, { threshold: 0 }).observe(canvas);
+
+  // requestAnimationFrame loop — auto-pauses in background tabs
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    (function loop() {
+      if (animVisible) draw();
+      requestAnimationFrame(loop);
+    })();
+  }
 })();
 
 /* ── PROTECTED CONTACT ── */
@@ -1064,25 +1468,19 @@ revEls.forEach(el => revObs.observe(el));
 })();
 
 function revealField(type) {
-  if (type === 'email') {
-    const val = document.getElementById('email-value');
-    const hint = document.getElementById('email-hint');
-    const field = document.getElementById('email-field');
-    if (val.classList.contains('revealed')) return;
-    val.textContent = window._cf.email;
-    val.classList.remove('blurred'); val.classList.add('revealed');
-    hint.classList.add('hidden'); field.classList.add('done');
-    field.addEventListener('click', () => { window.location.href = 'mailto:' + window._cf.email; }, { once: true });
-  } else {
-    const val = document.getElementById('phone-value');
-    const hint = document.getElementById('phone-hint');
-    const field = document.getElementById('phone-field');
-    if (val.classList.contains('revealed')) return;
-    val.textContent = window._cf.phone;
-    val.classList.remove('blurred'); val.classList.add('revealed');
-    hint.classList.add('hidden'); field.classList.add('done');
-    field.addEventListener('click', () => { window.location.href = 'tel:' + window._cf.phone.replace(/\s/g,''); }, { once: true });
-  }
+  const isEmail = type === 'email';
+  const val   = document.getElementById(isEmail ? 'email-value' : 'phone-value');
+  const hint  = document.getElementById(isEmail ? 'email-hint'  : 'phone-hint');
+  const field = document.getElementById(isEmail ? 'email-field' : 'phone-field');
+  if (val.classList.contains('revealed')) return;
+  const raw = isEmail ? window._cf.email : window._cf.phone;
+  val.textContent = raw;
+  val.classList.remove('blurred'); val.classList.add('revealed');
+  hint.classList.add('hidden'); field.classList.add('done');
+  const copyLbl = currentLang === 'pt' ? 'Copiar' : 'Copy';
+  hint.insertAdjacentHTML('afterend', `<button class="copy-btn" onclick="event.stopPropagation();copyField('${raw}',this)">${copyLbl}</button>`);
+  const href = isEmail ? 'mailto:' + raw : 'tel:' + raw.replace(/\s/g,'');
+  field.addEventListener('click', () => { window.location.href = href; }, { once:true });
 }
 
 /* ── MOBILE MENU ── */
@@ -1126,10 +1524,12 @@ const translations = {
     'exp.job3.li1':'Venda e atendimento ao cliente de equipamentos informáticos.',
     'exp.job3.li2':'Gestão de armazém, produtos e reposição de artigos.',
     'skills.label':'O que sei fazer','skills.title':'Competências Técnicas',
-    'skills.g1':'Linguagens','skills.g3':'Ferramentas & Programas','skills.g4':'Áreas de Especialização','skills.g5':'Línguas',
-    'skills.t1':'Web Sustentável','skills.t2':'Realidade Aumentada','skills.t3':'Animação 3D','skills.t4':'Fotografia','skills.t5':'Otimização de Código','skills.t6':'Redes',
+    'skills.g1':'Linguagens','skills.g2':'Frameworks & Libs','skills.g3':'Ferramentas & Programas','skills.g4':'Áreas de Especialização','skills.g5':'Línguas',
+    'skills.t1':'Web Sustentável','skills.t2':'Realidade Aumentada','skills.t3':'Animação 3D','skills.t4':'Fotografia','skills.t5':'Otimização de Código','skills.t6':'Redes','skills.ia':'IA',
     'skills.lang1':'Português — Nativo','skills.lang2':'Inglês — Fluente','skills.lang3':'Francês — Básico','skills.lang4':'Espanhol — Básico',
     'proj.label':'O que construí','proj.title':'Projetos','proj.view':'Ver projeto →',
+    'proj.wasteapp.role':'Frontend Lead & Backend',
+    'proj.co2.name':'Calculadora de CO₂',
     'proj.epal.role':'Frontend & Criativo',
     'proj.wasteapp.desc':'Plataforma de gestão de resíduos e sustentabilidade ambiental. Desenvolvi todo o frontend e lógica de backend, incluindo a admin page.',
     'proj.epal.desc':'App de monitorização da qualidade da água da EPAL. Participei no desenvolvimento frontend e na vertente criativa do projeto.',
@@ -1153,6 +1553,7 @@ const translations = {
     'edu.net':'Redes','edu.webdesign':'Design Web','edu.webprog':'Programação Web','edu.marketing':'Marketing Digital',
     'edu.nets':'Redes e Comunicações','edu.algo':'Algoritmos','edu.prog':'Programação','edu.ai':'Inteligência Artificial',
     'edu.ar':'Realidade Aumentada','edu.vr':'Realidade Virtual','edu.proto':'Prototipagem XR',
+    'contact.phone.label':'Telefone',
     'contact.label':'Vamos falar','contact.title':'Contacto',
     'contact.intro':'Tens um projeto fixe ou uma oportunidade em mente? Estou disponível para colaborações, freelance, part-time ou full-time — fala comigo, adorava ouvir!',
     'contact.reveal':'Clique para revelar',
@@ -1182,10 +1583,12 @@ const translations = {
     'exp.job3.li1':'Sales and customer service for IT equipment.',
     'exp.job3.li2':'Warehouse management, stock control and product restocking.',
     'skills.label':'What I do','skills.title':'Technical Skills',
-    'skills.g1':'Languages','skills.g3':'Tools & Software','skills.g4':'Areas of Expertise','skills.g5':'Languages spoken',
-    'skills.t1':'Sustainable Web','skills.t2':'Augmented Reality','skills.t3':'3D Animation','skills.t4':'Photography','skills.t5':'Code Optimisation','skills.t6':'Networking',
+    'skills.g1':'Languages','skills.g2':'Frameworks & Libs','skills.g3':'Tools & Software','skills.g4':'Areas of Expertise','skills.g5':'Languages spoken',
+    'skills.t1':'Sustainable Web','skills.t2':'Augmented Reality','skills.t3':'3D Animation','skills.t4':'Photography','skills.t5':'Code Optimisation','skills.t6':'Networking','skills.ia':'AI',
     'skills.lang1':'Portuguese — Native','skills.lang2':'English — Fluent','skills.lang3':'French — Basic','skills.lang4':'Spanish — Basic',
     'proj.label':'What I\'ve built','proj.title':'Projects','proj.view':'View project →',
+    'proj.wasteapp.role':'Frontend Lead & Backend',
+    'proj.co2.name':'CO₂ Calculator',
     'proj.epal.role':'Frontend & Creative',
     'proj.wasteapp.desc':'Waste management and environmental sustainability platform. I built the entire frontend and contributed to backend logic, including the admin page.',
     'proj.epal.desc':'EPAL water quality monitoring app. I worked on the frontend and contributed to the creative direction of the project.',
@@ -1209,6 +1612,7 @@ const translations = {
     'edu.net':'Networking','edu.webdesign':'Web Design','edu.webprog':'Web Programming','edu.marketing':'Digital Marketing',
     'edu.nets':'Networks & Communications','edu.algo':'Algorithms','edu.prog':'Programming','edu.ai':'Artificial Intelligence',
     'edu.ar':'Augmented Reality','edu.vr':'Virtual Reality','edu.proto':'XR Prototyping',
+    'contact.phone.label':'Phone',
     'contact.label':'Let\'s talk','contact.title':'Contact',
     'contact.intro':'Got a cool project or opportunity in mind? I\'m open to collaborations, freelance, part-time or full-time — just reach out, I\'d love to hear from you!',
     'contact.reveal':'Click to reveal',
@@ -1230,6 +1634,7 @@ function setLang(lang) {
   if (lang === currentLang || isTransiting) return;
   isTransiting = true;
   currentLang  = lang;
+  localStorage.setItem('cv-lang', lang);
 
   // Update lang toggle buttons (desktop + mobile)
   ['btn-pt','btn-pt-m'].forEach(id => document.getElementById(id).classList.toggle('active', lang === 'pt'));
@@ -1238,6 +1643,11 @@ function setLang(lang) {
 
   const els = document.querySelectorAll('.i18n-el');
   els.forEach(el => el.classList.add('lang-out'));
+
+  const b = document.body;
+  const outMs = b.classList.contains('theme-win98') ? 110
+              : b.classList.contains('theme-xp')    ? 220
+              : BLUR_OUT_MS;
 
   setTimeout(() => {
     const t = translations[lang];
@@ -1262,7 +1672,7 @@ function setLang(lang) {
         setTimeout(() => { isTransiting = false; }, BLUR_IN_MS);
       });
     });
-  }, BLUR_OUT_MS);
+  }, outMs);
 }
 
 /* ── MODALS ── */
@@ -1304,45 +1714,118 @@ const certModals = {
   }
 };
 
+function getModalLoader(){
+  const b = document.body;
+  const isPT = currentLang === 'pt';
+  const waitTxt = isPT ? 'Por favor aguarde...' : 'Please wait...';
+  if(b.classList.contains('theme-win98'))
+    return `<div class="modal-loader-wrap"><div class="ml-win98-lbl">${waitTxt}</div><div class="ml-win98-bar"><div class="ml-win98-fill"></div></div></div>`;
+  if(b.classList.contains('theme-xp'))
+    return `<div class="modal-loader-wrap"><div class="ml-xp-lbl">${waitTxt}</div><div class="ml-xp-bar-outer"><div class="ml-xp-bar-inner"></div></div></div>`;
+  if(b.classList.contains('theme-frutiger'))
+    return `<div class="modal-loader-wrap"><div class="ml-w7"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>`;
+  return `<div class="modal-loader-wrap"><div class="ml-default"></div></div>`;
+}
+
+function getLoaderDelay(){
+  const b = document.body;
+  if(b.classList.contains('theme-win98')) return 520;
+  if(b.classList.contains('theme-xp') || b.classList.contains('theme-frutiger')) return 400;
+  return 350;
+}
+
 function openCertModal(id){
   const d = certModals[currentLang][id]; if(!d) return;
-  const link = d.link ? `<a href="${d.link}" target="_blank" class="modal-link">${d.linkLabel} →</a>` : '';
-  document.getElementById('modal-content').innerHTML = `
-    <div class="modal-tag">${d.tag}</div>
-    <div class="modal-title">${d.title}</div>
-    <div class="modal-role">${d.issuer}</div>
-    <div class="modal-hr"></div>
-    <div class="modal-body">${d.body}</div>
-    ${link}
-  `;
-  document.getElementById('modal-overlay').classList.add('open');
+  const mc = document.getElementById('modal-content');
+  mc.innerHTML = getModalLoader();
+  modalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    const link = d.link ? `<a href="${d.link}" target="_blank" class="modal-link">${d.linkLabel} →</a>` : '';
+    mc.innerHTML = `
+      <div class="modal-tag">${d.tag}</div>
+      <div class="modal-title">${d.title}</div>
+      <div class="modal-role">${d.issuer}</div>
+      <div class="modal-hr"></div>
+      <div class="modal-body">${d.body}</div>
+      ${link}
+    `;
+  }, getLoaderDelay());
 }
 
 function openModal(id){
   const d = modals[currentLang][id]; if(!d) return;
-  const tech = d.tech.map(t=>`<span class="modal-tech-tag">${t}</span>`).join('');
-  const link = d.link ? `<a href="${d.link}" target="_blank" class="modal-link">${d.linkLabel} →</a>` : '';
-  document.getElementById('modal-content').innerHTML = `
-    <div class="modal-tag">${d.tag}</div>
-    <div class="modal-title">${d.title}</div>
-    <div class="modal-role">${d.role}</div>
-    <div class="modal-hr"></div>
-    <div class="modal-body">${d.body}</div>
-    <div class="modal-tech">${tech}</div>
-    ${link}
-  `;
-  document.getElementById('modal-overlay').classList.add('open');
+  const mc = document.getElementById('modal-content');
+  mc.innerHTML = getModalLoader();
+  modalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    const tech = d.tech.map(t=>`<span class="modal-tech-tag">${t}</span>`).join('');
+    const link = d.link ? `<a href="${d.link}" target="_blank" class="modal-link">${d.linkLabel} →</a>` : '';
+    mc.innerHTML = `
+      <div class="modal-tag">${d.tag}</div>
+      <div class="modal-title">${d.title}</div>
+      <div class="modal-role">${d.role}</div>
+      <div class="modal-hr"></div>
+      <div class="modal-body">${d.body}</div>
+      <div class="modal-tech">${tech}</div>
+      ${link}
+    `;
+  }, getLoaderDelay());
 }
+const modalOverlay = document.getElementById('modal-overlay');
 function closeModal(){
-  document.getElementById('modal-overlay').classList.remove('open');
+  modalOverlay.classList.remove('open');
   document.body.style.overflow = '';
 }
 function closeModalOutside(e){
-  if(e.target === document.getElementById('modal-overlay')) closeModal();
+  if(e.target === modalOverlay) closeModal();
 }
-document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') {
+    closeModal();
+    document.getElementById('theme-dropdown').classList.remove('open');
+    document.getElementById('theme-dropdown-m').classList.remove('open');
+    closeMobileMenu();
+  }
+});
+
+// ── SCROLL SPY ──
+(function(){
+  const navIds = ['about','experience','skills','projects','education','contact'];
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (link) link.classList.toggle('nav-active', e.isIntersecting);
+    });
+  }, { rootMargin:'-20% 0px -70% 0px', threshold:0 });
+  navIds.forEach(id => { const el = document.getElementById(id); if(el) spy.observe(el); });
+})();
+
+// ── BACK TO TOP ──
+(function(){
+  const btn = document.getElementById('back-top');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  }, { passive:true });
+})();
+
+// ── COPY TO CLIPBOARD ──
+function copyField(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = currentLang === 'pt' ? 'Copiado!' : 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ── KEYBOARD SUPPORT for role=button divs ──
+document.querySelectorAll('.project-card[role="button"], .cert-card[role="button"], .contact-link.protected-field[role="button"]').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+  });
+});
 
 // ── THEME SWITCHER ──
 const themeNames = { default:'Default', win98:'Win 98', xp:'Win XP', frutiger:'Frutiger' };
@@ -1357,30 +1840,30 @@ function setTheme(theme) {
   document.querySelectorAll('#theme-label, #theme-label-m').forEach(el => {
     el.textContent = themeNames[theme] || 'Default';
   });
-  document.getElementById('theme-dropdown').classList.remove('open');
-  const dm = document.getElementById('theme-dropdown-m');
-  if (dm) dm.classList.remove('open');
+  ['theme-dropdown','theme-dropdown-m'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.classList.remove('open');
+  });
 }
 
-function toggleThemeDropdown() {
-  document.getElementById('theme-dropdown').classList.toggle('open');
-}
-function toggleThemeDropdownM() {
-  document.getElementById('theme-dropdown-m').classList.toggle('open');
+function toggleThemeDropdown(id) {
+  document.getElementById(id).classList.toggle('open');
 }
 
 document.addEventListener('click', function(e) {
-  if (!e.target.closest('#theme-toggle')) document.getElementById('theme-dropdown').classList.remove('open');
-  if (!e.target.closest('#theme-toggle-m')) { const dm = document.getElementById('theme-dropdown-m'); if(dm) dm.classList.remove('open'); }
+  if (!e.target.closest('#theme-toggle'))   document.getElementById('theme-dropdown').classList.remove('open');
+  if (!e.target.closest('#theme-toggle-m')) document.getElementById('theme-dropdown-m').classList.remove('open');
+  if (!e.target.closest('#mobile-nav') && !e.target.closest('#hamburger')) closeMobileMenu();
 });
 
 (function(){
-  const saved = localStorage.getItem('cv-theme') || 'default';
-  if (saved !== 'default') {
-    document.body.classList.add('theme-' + saved);
-    document.querySelectorAll('#theme-label, #theme-label-m').forEach(el => el.textContent = themeNames[saved] || 'Default');
-    document.querySelectorAll('.theme-option').forEach(el => el.classList.toggle('active', el.dataset.theme === saved));
+  const savedTheme = localStorage.getItem('cv-theme') || 'default';
+  if (savedTheme !== 'default') {
+    document.body.classList.add('theme-' + savedTheme);
+    document.querySelectorAll('#theme-label, #theme-label-m').forEach(el => el.textContent = themeNames[savedTheme] || 'Default');
+    document.querySelectorAll('.theme-option').forEach(el => el.classList.toggle('active', el.dataset.theme === savedTheme));
   }
+  const savedLang = localStorage.getItem('cv-lang');
+  if (savedLang && savedLang !== 'pt') setLang(savedLang);
 })();
 </script>
 </body>
